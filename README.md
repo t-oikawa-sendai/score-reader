@@ -27,6 +27,29 @@ Phase 1（複数 MusicXML 比較と比較レポート生成）の詳細設計・
 - [docs/project/DEVELOPMENT_PHASES.md](docs/project/DEVELOPMENT_PHASES.md) — Phase 1 と将来検討事項の境界
 - [docs/project/OPEN_ISSUES.md](docs/project/OPEN_ISSUES.md) — 未確定事項
 
+### 作業ルール
+
+- [SKILL.md](SKILL.md) — Cursor 等へ作業を依頼する際に、作業開始前に読み込ませる作業ルール
+
+`SKILL.md` は、実装仕様書ではありません。
+設計、実装、修正、検証、commit 前確認、push 前確認で守るべきルールをまとめた文書です。
+
+Cursor へ作業を依頼する際は、最初にリポジトリルートの `SKILL.md` を読み込ませてください。
+あわせて、正本となる基本設計書と補助文書も確認させてください。
+
+```text
+SKILL.md
+  └─ 作業時のルール、禁止事項、停止条件
+
+docs/design/SCORE_READER_BASIC_DESIGN.md
+  └─ 設計判断の正本
+
+docs/project/
+  └─ 対象範囲、フェーズ境界、未確定事項
+```
+
+`SKILL.md` と基本設計書が矛盾する場合は、基本設計書を優先し、作業を停止してください。
+
 ### 移行元資料
 
 - [docs/design/MULTI_OMR_BASIC_DESIGN.md](docs/design/MULTI_OMR_BASIC_DESIGN.md) — 複数 OMR 比較に関する先行基本設計（参考資料）
@@ -60,6 +83,7 @@ MusicXML の内部整合性が正常でも、原本 PDF と異なる場合があ
 score-reader/
 ├── README.md
 ├── SKILL.md
+├── LICENSE
 ├── .gitignore
 │
 ├── docs/
