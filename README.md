@@ -1,89 +1,45 @@
 # score-reader
 
-## プロジェクト概要
+## 目的
 
-`score-reader` は、同一の原本 PDF から生成された複数の OMR 変換結果を比較し、人間が確認すべき箇所を絞り込むための **設計・検証プロジェクト** です。
+`score-reader` は、楽譜 PDF を MusicXML へ変換する OMR（Optical Music Recognition）の出力を検証・活用し、人間が確認すべき箇所を絞り込むことを目指すプロジェクトです。
 
-- 単一 OMR の認識結果をそのまま採用しない
-- 複数 OMR の比較と MusicXML 内部の整合性検査を併用する
-- 推測による自動補完を避け、要確認箇所を明示する
-- 原本 PDF を正本として保持する
+- 単一 OMR の認識結果をそのまま完成版として扱わない
+- OMR 出力の内部整合性を機械的に検査する
+- 複数 OMR 結果の比較により、確認対象を不一致箇所・高リスク箇所に集中させる
+- 推測による自動補完を避け、原本 PDF を正本として保持する
 
-## 現在の位置づけ
+現時点で、楽譜 PDF から完成版 MusicXML を完全自動生成することは目的としません。生成された MusicXML の完成度を高め、人間による確認・修正の負荷を削減することを目指します。
 
-**本リポジトリは現在、基本設計段階です。**
-
-Phase 1（複数 MusicXML 比較と比較レポート生成）の詳細設計・正式実装は未着手です。リポジトリの最優先事項は、設計方針と文書構造の明確化です。
-
-## 複数OMR比較構想について
-
-- 現在の CLI は単一 MusicXML の検証を対象とする。
-- 将来構想として、同一 PDF から生成した複数 MusicXML を比較し、要確認箇所を抽出する。
-- 想定フローは、複数 OMR で MusicXML を作成し、score-reader で比較レポートを出し、人間が原本 PDF と照合して修正する形である。
-- 第 1 次開発では、MusicXML の自動修正・書き戻しは行わない。
-- score-reader は、正解を自動決定するツールではなく、人間確認の対象を絞るための支援ツールである。
-
-## 文書
-
-### 基本設計（正本）
-
-- [docs/design/SCORE_READER_BASIC_DESIGN.md](docs/design/SCORE_READER_BASIC_DESIGN.md) — プロジェクトの基本設計に関する正本
-
-### 補助文書
-
-- [docs/project/PROJECT_SCOPE.md](docs/project/PROJECT_SCOPE.md) — 対象範囲、対象外、変更範囲
-- [docs/project/DEVELOPMENT_PHASES.md](docs/project/DEVELOPMENT_PHASES.md) — Phase 1 と将来検討事項の境界
-- [docs/project/OPEN_ISSUES.md](docs/project/OPEN_ISSUES.md) — 未確定事項
-
-### 作業ルール
-
-- [SKILL.md](SKILL.md) — Cursor 等へ作業を依頼する際に、作業開始前に読み込ませる作業ルール
-
-`SKILL.md` は、実装仕様書ではありません。
-設計、実装、修正、検証、commit 前確認、push 前確認で守るべきルールをまとめた文書です。
-
-Cursor へ作業を依頼する際は、最初にリポジトリルートの `SKILL.md` を読み込ませてください。
-あわせて、正本となる基本設計書と補助文書も確認させてください。
+## システム概要
 
 ```text
-SKILL.md
-  └─ 作業時のルール、禁止事項、停止条件
-
-docs/design/SCORE_READER_BASIC_DESIGN.md
-  └─ 設計判断の正本
-
-docs/project/
-  └─ 対象範囲、フェーズ境界、未確定事項
+原本 PDF
+  ↓
+OMR サービス（1 種類以上）→ MusicXML
+  ↓
+score-reader（検査・比較の支援）
+  ↓
+人間が原本 PDF と照合し、MuseScore 等で修正
 ```
 
-`SKILL.md` と基本設計書が矛盾する場合は、基本設計書を優先し、作業を停止してください。
+| 要素 | 現状 |
+|------|------|
+| OMR 変換 | 外部サービスまたは外部ツールが担当（例: Newzik） |
+| 検査 | `prototype/src/verify_score.py` による単一 MusicXML の構造検査（技術検証用プロトタイプ） |
+| 最終判断 | 人間が原本 PDF と照合して行う |
 
-### 移行元資料
+MusicXML の内部整合性が正常でも、原本 PDF と異なる場合があります。最終的な正確性は、原本 PDF との目視照合で担保してください。
 
-- [docs/design/MULTI_OMR_BASIC_DESIGN.md](docs/design/MULTI_OMR_BASIC_DESIGN.md) — 複数 OMR 比較に関する先行基本設計（参考資料）
+## 文書案内
 
-## 現行 Python ソースについて
+| 文書 | 内容 |
+|------|------|
+| [docs/design/MULTI_OMR_BASIC_DESIGN.md](docs/design/MULTI_OMR_BASIC_DESIGN.md) | OMR サービスの概要、精度・誤認識傾向、複数 OMR 比較が必要な理由 |
+| [docs/design/SCORE_READER_BASIC_DESIGN.md](docs/design/SCORE_READER_BASIC_DESIGN.md) | `verify_score.py` プロトタイプのプログラム仕様書 |
+| [SKILL.md](SKILL.md) | Cursor 等へ作業を依頼する際の作業ルール（変更時は別途指示） |
 
-`prototype/src/verify_score.py` は、単一 MusicXML の構造検査が技術的に可能かを確認するための **技術検証用プロトタイプ** です。
-
-- 正式完成版ではない
-- 現段階では改修対象としない
-- 詳細設計後に、再利用、置換、廃止のいずれとするか判断する
-
-現行ソースは技術検証用プロトタイプである。詳細説明の整理は後工程で行う。
-
-## 原本 PDF との照合について
-
-MusicXML の内部整合性が正常でも、原本 PDF と異なる場合があります。**最終的な正確性は、原本 PDF との目視照合で担保してください。**
-
-本プロジェクトは、確認すべき箇所を絞り込むことを目的とし、原本 PDF の内容を自動で確定することは Phase 1 の対象外です。
-
-## 著作権・セキュリティ
-
-- **著作権保護された譜面を GitHub へ登録しない**
-- GitHub 上のテスト素材は、パブリックドメインに限定する
-- API キー、トークン、秘密鍵、個人情報をソース、ログ、Git 管理対象へ含めない
-- 外部 OMR サービスへ譜面を送信する場合は、利用規約と著作権条件を確認する
+Cursor 等へ作業を依頼する際は、最初に [SKILL.md](SKILL.md) を読み込ませ、上記設計文書も確認させてください。
 
 ## リポジトリ構成
 
@@ -93,21 +49,21 @@ score-reader/
 ├── SKILL.md
 ├── LICENSE
 ├── .gitignore
-│
 ├── docs/
-│   ├── design/
-│   │   ├── SCORE_READER_BASIC_DESIGN.md
-│   │   └── MULTI_OMR_BASIC_DESIGN.md   # 移行元の参考資料
-│   │
-│   └── project/
-│       ├── PROJECT_SCOPE.md
-│       ├── DEVELOPMENT_PHASES.md
-│       └── OPEN_ISSUES.md
-│
+│   └── design/
+│       ├── MULTI_OMR_BASIC_DESIGN.md
+│       └── SCORE_READER_BASIC_DESIGN.md
 └── prototype/
     ├── src/
-    │   └── verify_score.py             # 技術検証用プロトタイプ
+    │   └── verify_score.py
     ├── tests/
-    │   └── *.musicxml                  # テスト素材
+    │   └── *.musicxml
     └── requirements.txt
 ```
+
+## 著作権・セキュリティ
+
+- 著作権保護された譜面を GitHub へ登録しない
+- GitHub 上のテスト素材はパブリックドメインに限定する
+- API キー、トークン、秘密鍵、個人情報をソース、ログ、Git 管理対象へ含めない
+- 外部 OMR サービスへ譜面を送信する場合は、利用規約と著作権条件を確認する
