@@ -1,19 +1,16 @@
 #!/usr/bin/env python3
-"""
-score-reader: MusicXML 正確性検証ツール
--------------------------------------------------
-OMR(画像→MusicXML変換)後のデータを「推測せず、書いてある通りに」読み、
-誤りが混入しやすい箇所を機械的に検査する。
-
-設計原則:
-  - 推測しない。読めない箇所は黙殺せず WARNING として列挙する。
-  - 移調楽器は記音(written)と実音(sounding)を区別して報告する。
-  - 拍子と各小節の音価合計を検算し、不一致を異常として検出する。
-
-使い方:
-  python3 verify_score.py <input.musicxml>          # 人間可読(デフォルト)
-  python3 verify_score.py <input.musicxml> --json   # 構造化JSON出力
-"""
+# SPDX-License-Identifier: MIT
+# Program Name: verify_score.py
+# Language:     Python 3
+# Function:     MusicXML 内部整合性検査 CLI（Prototype）
+# Created:      2026-06-04
+# Last Updated: 2026-06-22
+# Author:       Takashi Oikawa
+# AI:           Cursor
+# Memo:         OMR 出力 MusicXML を推測せず読み取り、誤りが混入しやすい箇所を機械的に検査する。
+#               読めない箇所は黙殺せず WARNING として列挙する。移調楽器は記音と実音を区別して報告する。
+#               拍子と小節音価を検算し不一致を検出する。人間可読出力と JSON 出力に対応する。
+#               Prototype / 検証支援ツール。正式完成版ではない。music21 10.3.0 依存。
 import sys
 import json
 import argparse

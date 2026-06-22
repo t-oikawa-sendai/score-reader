@@ -1,0 +1,82 @@
+NOTICE
+======
+
+score-reader
+Copyright (c) 2026 Takashi Oikawa
+
+This product includes software and data developed by third parties.
+The following notices are required by the licenses of those third-party
+components.
+
+-------------------------------------------------------------------------------
+music21
+-------------------------------------------------------------------------------
+
+score-reader depends on music21 (version 10.3.0).
+
+  Project : music21 — A Toolkit for Computer-Aided Musical Analysis
+  URL     : https://web.mit.edu/music21/
+  License : BSD 3-Clause License
+
+When redistributing score-reader or any derivative work, you must retain
+the music21 copyright notice, the list of conditions below, and the
+disclaimer that follows — as required by the BSD 3-Clause License.
+
+  Copyright (c) 2006-2024, The music21 Project Authors
+  All rights reserved.
+
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions are met:
+
+  1. Redistributions of source code must retain the above copyright notice,
+     this list of conditions and the following disclaimer.
+
+  2. Redistributions in binary form must reproduce the above copyright notice,
+     this list of conditions and the following disclaimer in the documentation
+     and/or other materials provided with the distribution.
+
+  3. Neither the name of the music21 project nor the names of its contributors
+     may be used to endorse or promote products derived from this software
+     without specific prior written permission.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+  ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+  LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+  SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+  INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+  CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+  POSSIBILITY OF SUCH DAMAGE.
+
+Note: The exact copyright year range and list of authors for music21 10.3.0
+should be confirmed against the official music21 repository
+(https://github.com/cuthbertLab/music21) before redistribution.
+
+-------------------------------------------------------------------------------
+Test Materials (prototype/tests/*.musicxml)
+-------------------------------------------------------------------------------
+
+The MusicXML files under prototype/tests/ are derived from the BWV 66
+(Johann Sebastian Bach, 1685–1750) chorale. Bach's compositions are in the
+public domain as the copyright protection period has expired.
+
+The specific MusicXML encodings in this repository were generated or derived
+using music21. Because music21 itself is distributed under the BSD 3-Clause
+License (see above), any encoding produced by or distributed with music21 may
+carry music21's license obligations.
+
+Action required before redistribution:
+  - Confirm whether the specific .musicxml files in prototype/tests/ are
+    directly sourced from the music21 corpus or were independently generated.
+  - If music21 corpus files are included, ensure the music21 BSD 3-Clause
+    attribution notice is preserved.
+  - If independently generated from public-domain source material, confirm
+    that no proprietary encoding or notation software imposes additional
+    restrictions.
+
+This confirmation has not been completed as of the initial repository setup.
+It is tracked as an open issue (05_ARCHITECTURE_DESIGN.md TBD-005 /
+06_OPERATION_AND_HANDOFF.md TBD-005).

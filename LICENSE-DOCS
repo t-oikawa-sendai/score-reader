@@ -1,0 +1,45 @@
+Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
+
+Scope of Application
+---------------------
+This license applies ONLY to the following documentation and work-rule files
+in this repository:
+
+  - README.md
+  - SKILL.md
+  - docs/design/README.md
+  - docs/design/01_REQUEST_DEFINITION.md
+  - docs/design/02_REQUIREMENTS_DEFINITION.md
+  - docs/design/03_DATA_AND_SECURITY_DESIGN.md
+  - docs/design/04_UI_AND_FLOW_DESIGN.md
+  - docs/design/05_ARCHITECTURE_DESIGN.md
+  - docs/design/06_OPERATION_AND_HANDOFF.md
+  - docs/design/legacy/MULTI_OMR_BASIC_DESIGN.md
+  - docs/design/legacy/SCORE_READER_BASIC_DESIGN.md
+
+Source code is licensed separately under the MIT License (see LICENSE-CODE).
+Test materials in prototype/tests/ are derived from public-domain sources;
+see NOTICE for music21-related attribution obligations.
+
+License Text
+-------------
+The full text of the Creative Commons Attribution-NonCommercial-ShareAlike
+4.0 International license is available at:
+
+  https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode
+
+The legacy LICENSE file in the repository root also contains the CC BY-NC-SA
+4.0 full text and is retained for historical reference during the transition
+from a single-license structure to this split-license structure.
+
+Summary of Key Conditions
+---------------------------
+- Attribution  : You must give appropriate credit to the original author
+                 (Takashi Oikawa), provide a link to the license, and indicate
+                 if changes were made.
+- NonCommercial: You may not use the material for commercial purposes.
+- ShareAlike   : If you remix, transform, or build upon the material, you must
+                 distribute your contributions under the same license
+                 (CC BY-NC-SA 4.0).
+
+This is a human-readable summary of (and not a substitute for) the license.

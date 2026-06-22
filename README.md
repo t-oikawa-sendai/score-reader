@@ -35,9 +35,16 @@ MusicXML の内部整合性が正常でも、原本 PDF と異なる場合があ
 
 | 文書 | 内容 |
 |------|------|
-| [docs/design/MULTI_OMR_BASIC_DESIGN.md](docs/design/MULTI_OMR_BASIC_DESIGN.md) | OMR サービスの概要、精度・誤認識傾向、複数 OMR 比較が必要な理由 |
-| [docs/design/SCORE_READER_BASIC_DESIGN.md](docs/design/SCORE_READER_BASIC_DESIGN.md) | `verify_score.py` プロトタイプのプログラム仕様書 |
-| [SKILL.md](SKILL.md) | Cursor 等へ作業を依頼する際の作業ルール（変更時は別途指示） |
+| [docs/design/README.md](docs/design/README.md) | 設計文書インデックス・プロジェクト全体方針 |
+| [docs/design/01_REQUEST_DEFINITION.md](docs/design/01_REQUEST_DEFINITION.md) | 要求定義 |
+| [docs/design/02_REQUIREMENTS_DEFINITION.md](docs/design/02_REQUIREMENTS_DEFINITION.md) | 要件定義 |
+| [docs/design/03_DATA_AND_SECURITY_DESIGN.md](docs/design/03_DATA_AND_SECURITY_DESIGN.md) | データ・セキュリティ設計 |
+| [docs/design/04_UI_AND_FLOW_DESIGN.md](docs/design/04_UI_AND_FLOW_DESIGN.md) | UI・フロー設計（CLI 操作・業務フロー） |
+| [docs/design/05_ARCHITECTURE_DESIGN.md](docs/design/05_ARCHITECTURE_DESIGN.md) | アーキテクチャ設計 |
+| [docs/design/06_OPERATION_AND_HANDOFF.md](docs/design/06_OPERATION_AND_HANDOFF.md) | 運用・引き継ぎ設計 |
+| [SKILL.md](SKILL.md) | Cursor 等へ作業を依頼する際の作業ルール |
+
+旧設計書（`docs/design/legacy/`）は Legacy Source として保持しています。標準設計文書への移行済みのため、正本として参照しないでください。
 
 Cursor 等へ作業を依頼する際は、最初に [SKILL.md](SKILL.md) を読み込ませ、上記設計文書も確認させてください。
 
@@ -47,19 +54,43 @@ Cursor 等へ作業を依頼する際は、最初に [SKILL.md](SKILL.md) を読
 score-reader/
 ├── README.md
 ├── SKILL.md
-├── LICENSE
+├── LICENSE           ← 旧一律ライセンス（CC BY-NC-SA 4.0）。移行経緯として保持
+├── LICENSE-CODE      ← ソースコード用ライセンス（MIT License）
+├── LICENSE-DOCS      ← 設計文書用ライセンス（CC BY-NC-SA 4.0）
+├── NOTICE            ← サードパーティライセンス表示（music21 BSD-3-Clause 等）
 ├── .gitignore
 ├── docs/
 │   └── design/
-│       ├── MULTI_OMR_BASIC_DESIGN.md
-│       └── SCORE_READER_BASIC_DESIGN.md
+│       ├── README.md
+│       ├── 01_REQUEST_DEFINITION.md
+│       ├── 02_REQUIREMENTS_DEFINITION.md
+│       ├── 03_DATA_AND_SECURITY_DESIGN.md
+│       ├── 04_UI_AND_FLOW_DESIGN.md
+│       ├── 05_ARCHITECTURE_DESIGN.md
+│       ├── 06_OPERATION_AND_HANDOFF.md
+│       └── legacy/
+│           ├── MULTI_OMR_BASIC_DESIGN.md   ← Legacy Source
+│           └── SCORE_READER_BASIC_DESIGN.md ← Legacy Source
 └── prototype/
     ├── src/
-    │   └── verify_score.py
+    │   └── verify_score.py   ← MIT License (SPDX: MIT)
     ├── tests/
-    │   └── *.musicxml
+    │   └── *.musicxml         ← パブリックドメイン素材（BWV 66）。詳細は NOTICE 参照
     └── requirements.txt
 ```
+
+## ライセンス（License）
+
+本リポジトリの成果物はファイルの種別ごとに異なるライセンスを適用します。
+
+| 対象 | ライセンス | ファイル |
+|------|-----------|---------|
+| ソースコード（`prototype/src/verify_score.py`） | MIT License | [LICENSE-CODE](LICENSE-CODE) |
+| 設計文書・作業ルール文書（`docs/design/`・`SKILL.md`・`README.md`） | CC BY-NC-SA 4.0 | [LICENSE-DOCS](LICENSE-DOCS) |
+| テスト素材（`prototype/tests/*.musicxml`） | パブリックドメイン由来（BWV 66、Bach 1685–1750）。music21 由来の部分は帰属表示要確認 | [NOTICE](NOTICE) |
+| 依存ライブラリ（music21 10.3.0） | BSD 3-Clause License | [NOTICE](NOTICE) |
+
+> **移行経緯**: リポジトリルートの `LICENSE` ファイル（CC BY-NC-SA 4.0）は、単一ライセンス構成からこの分離構成へ移行する過程の記録として保持しています。
 
 ## 著作権・セキュリティ
 
