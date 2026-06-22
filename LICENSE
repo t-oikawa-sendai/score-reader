@@ -1,3 +1,14 @@
+NOTICE:
+This file is retained as the legacy documentation license record.
+The current license policy is split by artifact type:
+- Source code: MIT License, see LICENSE-CODE.
+- Documentation: CC BY-NC-SA 4.0, see LICENSE-DOCS.
+- Third-party notices and test material notes: see NOTICE.
+
+For the current license policy, README.md, LICENSE-CODE, LICENSE-DOCS, and NOTICE take precedence over this legacy LICENSE file.
+
+=======================================================================
+
 Attribution-NonCommercial-ShareAlike 4.0 International
 
 =======================================================================
