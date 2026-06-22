@@ -280,6 +280,8 @@ score-reader 実行後、利用者が実施する人間レビューのチェッ�
 | TBD-001 | 検査項目 [3][4] を第 1 パートから全パート対応へ拡張する場合の運用・テスト手順の更新方針を定義するか。 | Takashi Oikawa | 未定 | Open |
 | TBD-002 | プロトタイプ検証で蓄積された `[WARN]`/`[ANOMALY]` 発生パターンをナレッジとして記録・共有する仕組みを整備するか。 | Takashi Oikawa | 未定 | Open |
 | TBD-003 | 将来フェーズで本番サービス化する際の、デプロイ・リリース・監視・インシデント対応手順を設計するか。 | Takashi Oikawa | 未定 | Open |
+| TBD-004 | 現在の LICENSE（CC BY-NC-SA 4.0）はソフトウェア本体への適用に適さない場合がある。ソースコード用ライセンス（MIT 等）と設計文書用ライセンス（CC BY-NC-SA 4.0）を分離するかを引き継ぎ先で判断するか。 | Takashi Oikawa | 未定 | Open |
+| TBD-005 | Windows 環境での動作確認（仮想環境有効化コマンドの差異: `source .venv/bin/activate` → `.venv\Scripts\activate`、パス表記・改行コードの差異等）を実施し、手順書を更新するか。現手順は macOS / Linux 前提。 | Takashi Oikawa | 未定 | Open |
 
 ---
 

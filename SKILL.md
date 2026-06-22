@@ -6,19 +6,26 @@
 
 本書は基本設計書ではない。
 
-設計上の判断は、正本となる基本設計書を優先する。
+設計上の判断は、正本となる設計文書（§2 参照）を優先する。
 
-本書と基本設計書が矛盾する場合は、作業を停止する。
+本書と正本設計書（§2）が矛盾する場合は、作業を停止する。
 
 ## 2. 正本となる設計文書
 
 正本:
 
-- [docs/design/SCORE_READER_BASIC_DESIGN.md](docs/design/SCORE_READER_BASIC_DESIGN.md)
+- [docs/design/README.md](docs/design/README.md)（設計Doc群のインデックス・全体方針）
+- [docs/design/01_REQUEST_DEFINITION.md](docs/design/01_REQUEST_DEFINITION.md)
+- [docs/design/02_REQUIREMENTS_DEFINITION.md](docs/design/02_REQUIREMENTS_DEFINITION.md)
+- [docs/design/03_DATA_AND_SECURITY_DESIGN.md](docs/design/03_DATA_AND_SECURITY_DESIGN.md)
+- [docs/design/04_UI_AND_FLOW_DESIGN.md](docs/design/04_UI_AND_FLOW_DESIGN.md)
+- [docs/design/05_ARCHITECTURE_DESIGN.md](docs/design/05_ARCHITECTURE_DESIGN.md)
+- [docs/design/06_OPERATION_AND_HANDOFF.md](docs/design/06_OPERATION_AND_HANDOFF.md)
 
-参考資料:
+参考資料（Legacy Source）:
 
-- [docs/design/MULTI_OMR_BASIC_DESIGN.md](docs/design/MULTI_OMR_BASIC_DESIGN.md)
+- [docs/design/legacy/MULTI_OMR_BASIC_DESIGN.md](docs/design/legacy/MULTI_OMR_BASIC_DESIGN.md)（標準7文書化前の旧設計書）
+- [docs/design/legacy/SCORE_READER_BASIC_DESIGN.md](docs/design/legacy/SCORE_READER_BASIC_DESIGN.md)（標準7文書化前の旧設計書）
 
 ## 3. 利用方法
 
@@ -51,8 +58,13 @@ Cursor へ作業を依頼する際は、作業開始前に本書を読み込ま�
 
 ```text
 SKILL.md
-docs/design/SCORE_READER_BASIC_DESIGN.md
-docs/design/MULTI_OMR_BASIC_DESIGN.md
+docs/design/README.md
+docs/design/01_REQUEST_DEFINITION.md
+docs/design/02_REQUIREMENTS_DEFINITION.md
+docs/design/03_DATA_AND_SECURITY_DESIGN.md
+docs/design/04_UI_AND_FLOW_DESIGN.md
+docs/design/05_ARCHITECTURE_DESIGN.md
+docs/design/06_OPERATION_AND_HANDOFF.md
 ```
 
 各文書の役割は以下のとおりとする。
@@ -60,8 +72,15 @@ docs/design/MULTI_OMR_BASIC_DESIGN.md
 | 文書 | 役割 |
 |------|------|
 | `SKILL.md` | 作業ルール、禁止事項、停止条件 |
-| `docs/design/SCORE_READER_BASIC_DESIGN.md` | `verify_score.py` プロトタイプのプログラム仕様書（正本） |
-| `docs/design/MULTI_OMR_BASIC_DESIGN.md` | OMR サービス概要・精度・複数 OMR 比較の背景（参考資料） |
+| `docs/design/README.md` | 設計Doc群のインデックス・全体方針（正本） |
+| `docs/design/01_REQUEST_DEFINITION.md` | 要求定義（正本） |
+| `docs/design/02_REQUIREMENTS_DEFINITION.md` | 要件定義（正本） |
+| `docs/design/03_DATA_AND_SECURITY_DESIGN.md` | データ・セキュリティ設計（正本） |
+| `docs/design/04_UI_AND_FLOW_DESIGN.md` | UI・フロー設計（正本） |
+| `docs/design/05_ARCHITECTURE_DESIGN.md` | アーキテクチャ設計（正本） |
+| `docs/design/06_OPERATION_AND_HANDOFF.md` | 運用・引き継ぎ設計（正本） |
+| `docs/design/legacy/SCORE_READER_BASIC_DESIGN.md` | 旧設計書（参考資料）。標準7文書移行済みのため正本扱いしない |
+| `docs/design/legacy/MULTI_OMR_BASIC_DESIGN.md` | 旧設計書（参考資料）。標準7文書移行済みのため正本扱いしない |
 
 ### 3.4 参照する工程
 
@@ -76,7 +95,7 @@ docs/design/MULTI_OMR_BASIC_DESIGN.md
 
 ### 3.5 矛盾を検出した場合
 
-本書と基本設計書が矛盾する場合は、基本設計書を優先する。
+本書と正本設計書が矛盾する場合は、正本設計書（§2 参照）を優先する。
 
 ただし、Cursor が独自判断で修正してはいけない。
 作業を停止し、矛盾点だけを報告する。
@@ -137,7 +156,7 @@ prototype/tests/
 - 変更前後の Git 状態を確認する。
 - 変更対象と変更禁止対象を明確にする。
 - プロトタイプ関連ファイルを変更する場合は、変更前後の SHA-256 を確認する。
-- 基本設計書との整合性を確認する。
+- 正本設計書（§2）との整合性を確認する。
 - commit 前に差分を確認する。
 - push 前に作業ツリーがクリーンであることを確認する。
 - 仕様不一致、破壊的変更、秘匿情報、著作権上の問題を検出した場合は停止する。

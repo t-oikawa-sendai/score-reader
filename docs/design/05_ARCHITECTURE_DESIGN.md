@@ -145,7 +145,7 @@ sequenceDiagram
 | Type（種別） | Technology（採用技術） | Version（バージョン） | Rationale（採用理由） |
 |---|---|---|---|
 | Language（言語） | Python | 3.x（`python3` コマンド） | MusicXML 解析ライブラリ music21 が Python で提供されるため。プロトタイプ実装の生産性が高い |
-| Library（ライブラリ） | music21 | 10.3.0 | MusicXML の構造化読み取り・パート/小節/音価/拍子/調号等の要素へのアクセスが可能な OSS。プロトタイプの技術検証において最も成熟した Python MusicXML 解析ライブラリ |
+| Library（ライブラリ） | music21 | 10.3.0 | MusicXML の構造化読み取り・パート/小節/音価/拍子/調号等の要素へのアクセスが可能な OSS。プロトタイプの技術検証において最も成熟した Python MusicXML 解析ライブラリ。ライセンス: BSD-3-Clause（再配布時は著作権表示・ライセンス条件・免責文の保持が必要。詳細は TBD-005 参照） |
 | CLI Parsing（引数解析） | argparse（Python 標準） | Python 3.x 同梱 | 外部依存を増やさず CLI 引数・フラグ（`--json`）を処理できる。標準ライブラリのため追加インストール不要 |
 | Framework（フレームワーク） | なし | — | プロトタイプフェーズでは単一スクリプト構成を採用。フレームワークは不要 |
 | Database（DB） | なし | — | データを永続化しない設計。`03_DATA_AND_SECURITY_DESIGN.md` §5.1 参照 |
@@ -285,6 +285,8 @@ prototype/
 | TBD-002 | 検査項目 [3][4] を第 1 パートから全パート対応へ拡張する場合の実装方針を設計書で定義するか。 | Takashi Oikawa | 未定 | Open |
 | TBD-003 | 外部 OMR サービス API 連携を将来フェーズで実装する場合のコンポーネント設計（API クライアント層の追加）を設計書で定義するか。 | Takashi Oikawa | 未定 | Open |
 | TBD-004 | プロトタイプから正式版へ移行する場合の、単一スクリプト構成からのモジュール分割方針（Inspection Engine の関数分離・パッケージ化）を設計書で定義するか。 | Takashi Oikawa | 未定 | Open |
+| TBD-005 | score-reader を再配布する際の music21（BSD-3-Clause）の著作権表示・ライセンス条件・免責文の保持方法（NOTICE ファイル・README への記載等）を設計するか。 | Takashi Oikawa | 未定 | Open |
+| TBD-006 | Windows 環境での動作確認（仮想環境有効化コマンド・パス表記・改行コードの差異等）を実施するか。現手順は macOS / Linux 前提。 | Takashi Oikawa | 未定 | Open |
 
 ---
 
