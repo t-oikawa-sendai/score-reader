@@ -176,6 +176,10 @@ score-reader は、以下を目的とする。
 
 **score-reader は人間確認をゼロにするシステムではない。** 確認対象を絞り込み、作業効率を最大化することが目的である。
 
+#### 解決方針（Solution Approach）
+
+完成版MusicXML作成支援システムに向け、複数 OMR 結果の比較、MusicXML 内部構造検査、比較不能箇所の明示を組み合わせ、人間が原本 PDF と照合すべき箇所を絞り込む。推測による自動補完や入力ファイルの上書きは行わない。
+
 ### 5.2 Stakeholders（ステークホルダー一覧と関心事）
 
 | Stakeholder（ステークホルダー） | Interests and Requests（関心事・要求） |

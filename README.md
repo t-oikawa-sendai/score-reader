@@ -64,7 +64,7 @@ score-reader は、OMR（Optical Music Recognition）が出力した MusicXML �
 |---|---|---|
 | Current Problems（現在の問題点） | OMR 出力 MusicXML は精度に限界があり、そのまま完成版として扱えない。難しい楽譜では MuseScore 上での手作業確認に大量の時間を要する。 | [01_REQUEST_DEFINITION.md](docs/design/01_REQUEST_DEFINITION.md) |
 | Development Purpose（開発目的） | 人間確認をゼロにするのではなく、確認対象を絞り込み作業を省力化する。自動化できることと人間確認が必要なことを明確に分離する。 | [01_REQUEST_DEFINITION.md](docs/design/01_REQUEST_DEFINITION.md) |
-| Solution Approach（解決方針） | ローカル CLI で単一 MusicXML の構造検査 [1]〜[8] を実行し、推測・断定せず `[FATAL]` / `[ANOMALY]` / `[WARN]` / `[INFO]` で列挙する。入力ファイルは非破壊。 | [01_REQUEST_DEFINITION.md](docs/design/01_REQUEST_DEFINITION.md) |
+| Solution Approach（解決方針） | 完成版MusicXML作成支援システムに向け、複数 OMR 結果の比較、MusicXML 内部構造検査、比較不能箇所の明示を組み合わせ、人間が原本 PDF と照合すべき箇所を絞り込む。推測による自動補完や入力ファイルの上書きは行わない。 | [01_REQUEST_DEFINITION.md](docs/design/01_REQUEST_DEFINITION.md) |
 | System Functions（システム機能） | MusicXML パース、移調・小節長・調号・拍子/テンポ・未確定要素・リハーサルマーク・和音音数・パート間小節数の検査、テキスト/JSON 出力、終了コード管理。 | [02_REQUIREMENTS_DEFINITION.md](docs/design/02_REQUIREMENTS_DEFINITION.md) |
 | Expected Benefits（期待効果） | 構造的異常の早期発見、確認箇所の優先順位付け、設計意図の記録による将来の引き継ぎ。削減効果の定量値はプロトタイプ検証段階では未実測。 | [01_REQUEST_DEFINITION.md](docs/design/01_REQUEST_DEFINITION.md) |
 | Completion Criteria（完成判定基準） | SC-001〜SC-008（パース判定・各検査項目の出力・テキスト/JSON 出力）を満たすこと。`[WARN]`/`[ANOMALY]` 0 件でも完全無欠を保証しない（HC-005）。 | [01_REQUEST_DEFINITION.md](docs/design/01_REQUEST_DEFINITION.md) |
