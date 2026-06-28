@@ -1,76 +1,94 @@
 # Design Documents Index（設計書一覧）
 
+<!--
+README Writing Policy（README作成方針）
+- README は設計書群の表紙・入口とする
+- 文章は最短にする。詳細は個別 Doc へ誘導する
+- スクリーンショットは最小サイズの代表画像のみ掲載する
+- `screenshots/thumbnail/` は README 用の小さい代表スクリーンショットを配置する
+- `screenshots/full/` は個別 Doc 用の大きいスクリーンショットを配置する
+- README では thumbnail の代表画像のみを使用し、詳細画像は 04_UI_AND_FLOW_DESIGN.md から full を参照する
+- 大きいスクリーンショット・画面項目説明・操作フローは 04_UI_AND_FLOW_DESIGN.md へ分離する
+- 個人情報・機密情報・APIキー・トークンが写る画像は使用禁止
+- Change History は作業メモにしない
+-->
+
 <!-- Document Info（文書情報） -->
 | Item（項目） | Value（値） |
 |---|---|
 | Document ID（文書ID） | README-001 |
-| Version（バージョン） | 0.2 |
+| Version（バージョン） | 0.3.3 |
 | Status（ステータス） | Draft |
-| Created Date（作成日） | 2026-06-21 |
-| Last Updated（最終更新日） | 2026-06-21 |
+| Created Date（作成日） | 2026-06-09 |
+| Last Updated（最終更新日） | 2026-06-28 |
 | Owner（管理者） | Takashi Oikawa |
-| Related Documents（関連文書） | LICENSE / legacy/MULTI_OMR_BASIC_DESIGN.md / legacy/SCORE_READER_BASIC_DESIGN.md |
+| Related Documents（関連文書） | docs/standards/DESIGN_DOCUMENT_STANDARD.md / legacy/ |
 
 ---
 
 ## Table of Contents（目次）
 
 1. [Project Overview（プロジェクト・機能の概要）](#1-project-overviewプロジェクト機能の概要)
-2. [Design Documents Index（設計書一覧）](#2-design-documents-index設計書一覧)
-3. [Overall Design Policy（設計上の全体方針・前提）](#3-overall-design-policy設計上の全体方針前提)
-4. [Glossary（用語集・略語定義）](#4-glossary用語集略語定義)
-5. [Document Owners and Reviewers（文書管理者・レビュアー一覧）](#5-document-owners-and-reviewers文書管理者レビュアー一覧)
-6. [Change History（変更履歴）](#6-change-history変更履歴)
+2. [Problem / Solution / Benefit Summary（問題・解決・効果の概要）](#2-problem-solution-benefit-summary問題解決効果の概要)
+3. [Screen Overview（画面概要）](#3-screen-overview画面概要)
+4. [Design Documents Index（設計書一覧）](#4-design-documents-index設計書一覧)
+5. [Overall Design Policy（設計上の全体方針・前提）](#5-overall-design-policy設計上の全体方針前提)
+6. [Glossary（用語集・略語定義）](#6-glossary用語集略語定義)
+7. [Document Owners and Reviewers（文書管理者・レビュアー一覧）](#7-document-owners-and-reviewers文書管理者レビュアー一覧)
+8. [Change History（変更履歴）](#8-change-history変更履歴)
 
 ---
 
 ## 1. Project Overview（プロジェクト・機能の概要）
 
-### Design Document Overview（設計書概要）
+本設計書群は、完成版 MusicXML 作成支援システムへ到達するための検証結果・設計判断・未確定事項を整理したプロトタイプ段階の設計ガイドラインである。
 
-本ディレクトリは score-reader プロジェクトの設計書群を管理する。
+score-reader は、OMR（Optical Music Recognition）が出力した MusicXML の**内部整合性を検査するプロトタイプ検証段階の検証支援 CLI ツール**である。機械的に検出できる構造的異常・要確認箇所を列挙し、人間の原本 PDF 照合作業の対象を絞り込む。
 
-score-reader は **OMR（Optical Music Recognition）出力 MusicXML の内部整合性検査を行う Prototype / 検証支援ツール**である。完成アプリケーションの実装を目的としない。
+開発段階の整理は下表「Development Stage Classification（開発段階の分類）」を参照する。
 
-### Project Position（プロジェクトの位置づけ）
+### Development Stage Classification（開発段階の分類）
 
-| 項目 | 内容 |
-|---|---|
-| システム種別 | 独立したローカル実行 CLI ツール（他システムとの連携なし） |
-| フェーズ | プロトタイプ・技術検証フェーズ |
-| 目的 | OMR 出力の構造的異常・要確認箇所を自動抽出し、人間の確認作業を省力化する |
-| 完全自動化 | 目的としない。現技術では音高・音価・声部の正誤を機械的に確定できない |
-| 人間確認 | 省略しない。最終的な正確性は原本 PDF との目視照合で担保する |
-
-### Recommended Reading Order（推奨参照順）
-
-設計書を初めて参照する場合は以下の順で読むことを推奨する。
-
-```
-README.md（本文書）
-  ↓
-01_REQUEST_DEFINITION.md   ← 背景・課題・要求・成功基準
-  ↓
-02_REQUIREMENTS_DEFINITION.md  ← 機能要件・非機能要件・検査項目[1]〜[8]
-  ↓
-03_DATA_AND_SECURITY_DESIGN.md ← データ取り扱い・著作権・秘密情報
-  ↓
-04_UI_AND_FLOW_DESIGN.md   ← CLI操作・業務フロー・人間レビューチェックリスト
-  ↓
-05_ARCHITECTURE_DESIGN.md  ← システム構成・技術スタック・拡張ポイント
-  ↓
-06_OPERATION_AND_HANDOFF.md ← 利用手順・テスト方針・設計引き継ぎ
-```
-
-実装担当者は `06_OPERATION_AND_HANDOFF.md` §5.1 Handoff Items および §7 Handoff を最初に確認すること。
+| Development Stage（開発段階） | Main Scope（主な対象） | Representative Implementation（代表実装） | Not Included / Future Consideration（含めないもの / 将来検討事項） |
+|---|---|---|---|
+| プロトタイプ検証段階 | 単一 MusicXML の構造検査。検証結果・設計判断・未確定事項の記録 | `prototype/src/verify_score.py`（単一 MusicXML 構造検査の検証実装）。検査結果の標準出力（テキスト / JSON） | 自動修正、自動統合、Web UI、原本 PDF 横並び画面は、現時点で定義する本実装段階には含めず、将来検討事項として扱う |
+| 完成版MusicXML作成支援システムの本実装段階 | 複数 MusicXML 比較、差分可視化、比較レポート生成 | 未実装（本設計書群では方針・引き継ぎ事項として整理） | 自動修正、自動統合、Web UI、原本 PDF 横並び画面は、現時点で定義する本実装段階には含めず、将来検討事項として扱う。詳細は各 Doc の Open Issues を参照 |
 
 ---
 
-## 2. Design Documents Index（設計書一覧）
+## 2. Problem / Solution / Benefit Summary（問題・解決・効果の概要）
 
-### Current Status（現在のステータス）
+<!-- 各項目は1〜2文の概要のみ。詳細は下記 Doc へ誘導する -->
 
-| File（ファイル名） | Document Name（文書名） | Status | Version | Owner |
+| Item（項目） | Summary（概要） | Detail Document（詳細文書） |
+|---|---|---|
+| Current Problems（現在の問題点） | OMR 出力 MusicXML は精度に限界があり、そのまま完成版として扱えない。難しい楽譜では MuseScore 上での手作業確認に大量の時間を要する。 | [01_REQUEST_DEFINITION.md](./01_REQUEST_DEFINITION.md) |
+| Development Purpose（開発目的） | 人間確認をゼロにするのではなく、確認対象を絞り込み作業を省力化する。自動化できることと人間確認が必要なことを明確に分離する。 | [01_REQUEST_DEFINITION.md](./01_REQUEST_DEFINITION.md) |
+| Solution Approach（解決方針） | ローカル CLI で単一 MusicXML の構造検査 [1]〜[8] を実行し、推測・断定せず `[FATAL]` / `[ANOMALY]` / `[WARN]` / `[INFO]` で列挙する。入力ファイルは非破壊。 | [01_REQUEST_DEFINITION.md](./01_REQUEST_DEFINITION.md) |
+| System Functions（システム機能） | MusicXML パース、移調・小節長・調号・拍子/テンポ・未確定要素・リハーサルマーク・和音音数・パート間小節数の検査、テキスト/JSON 出力、終了コード管理。 | [02_REQUIREMENTS_DEFINITION.md](./02_REQUIREMENTS_DEFINITION.md) |
+| Expected Benefits（期待効果） | 構造的異常の早期発見、確認箇所の優先順位付け、設計意図の記録による将来の引き継ぎ。削減効果の定量値はプロトタイプ検証段階では未実測。 | [01_REQUEST_DEFINITION.md](./01_REQUEST_DEFINITION.md) |
+| Completion Criteria（完成判定基準） | SC-001〜SC-008（パース判定・各検査項目の出力・テキスト/JSON 出力）を満たすこと。`[WARN]`/`[ANOMALY]` 0 件でも完全無欠を保証しない（HC-005）。 | [01_REQUEST_DEFINITION.md](./01_REQUEST_DEFINITION.md) |
+
+---
+
+## 3. Screen Overview（画面概要）
+
+<!-- 代表画面のみ thumbnail で掲載。full の詳細画像・画面項目・操作フローは 04 へ分離 -->
+
+プロトタイプ検証段階は GUI / Web UI を持たない CLI ツールのため、代表インターフェースはターミナル上の実行例とする。
+
+```bash
+python3 verify_score.py ../tests/<file>.musicxml
+python3 verify_score.py ../tests/<file>.musicxml --json
+```
+
+詳細（CLI 仕様・業務フロー・出力確認・人間レビューチェックリスト）: [04_UI_AND_FLOW_DESIGN.md](./04_UI_AND_FLOW_DESIGN.md)
+
+---
+
+## 4. Design Documents Index（設計書一覧）
+
+| File（ファイル名） | Document Name（文書名） | Status（ステータス） | Version（バージョン） | Owner（担当者） |
 |---|---|---|---|---|
 | [01_REQUEST_DEFINITION.md](./01_REQUEST_DEFINITION.md) | Request Definition（要求定義） | Draft | 0.2 | Takashi Oikawa |
 | [02_REQUIREMENTS_DEFINITION.md](./02_REQUIREMENTS_DEFINITION.md) | Requirements Definition（要件定義） | Draft | 0.2 | Takashi Oikawa |
@@ -79,78 +97,55 @@ README.md（本文書）
 | [05_ARCHITECTURE_DESIGN.md](./05_ARCHITECTURE_DESIGN.md) | Architecture Design（アーキテクチャ設計） | Draft | 0.2 | Takashi Oikawa |
 | [06_OPERATION_AND_HANDOFF.md](./06_OPERATION_AND_HANDOFF.md) | Operation and Handoff Design（運用・詳細設計引き継ぎ） | Draft | 0.2 | Takashi Oikawa |
 
-各文書はすべて **Draft** ステータスであり、プロトタイプ・技術検証フェーズの設計記録として位置づける。
-
-### Legacy Source（参照元 Legacy 文書）
-
-以下の2文書は `legacy/` に保持する。削除済みではなく、上記6文書の記入時の参照元（Legacy Source）として保存している。
-
-| File（ファイル名） | 内容の概要 | 初版コミット日 | 主に移行された設計書 |
-|---|---|---|---|
-| [legacy/MULTI_OMR_BASIC_DESIGN.md](./legacy/MULTI_OMR_BASIC_DESIGN.md) | OMRサービス概要・精度・複数OMR比較の必要性・完全自動化が困難な技術要因 | 2026-06-04 | 01, 03 |
-| [legacy/SCORE_READER_BASIC_DESIGN.md](./legacy/SCORE_READER_BASIC_DESIGN.md) | verify_score.py の入出力仕様・検査項目[1]〜[8]・実行方法・制約・著作権注意 | 2026-06-07 | 02, 04, 05, 06 |
+各文書は Draft ステータスであり、**プロトタイプ検証段階**の設計記録として位置づける。開発段階の分類は §1 Development Stage Classification を参照。内容抽出元の旧 Doc は [legacy/](./legacy/) に保持する。
 
 ---
 
-## 3. Overall Design Policy（設計上の全体方針・前提）
-
-### Important Premises（重要前提）
-
-以下の前提は、すべての設計書に共通して適用する。個別文書での繰り返し記述を防ぐため、ここにまとめて定義する。
+## 5. Overall Design Policy（設計上の全体方針・前提）
 
 | 前提 | 内容 |
 |---|---|
-| 完成アプリではない | score-reader はプロトタイプ・検証支援ツールである。正式完成版として扱わない |
-| 完全自動化しない | 現技術では音高・音価・声部・タイ/スラー等の正誤を機械的に確定できない |
-| 人間確認を省略しない | score-reader の目的は確認対象を絞り込むことであり、原本 PDF との目視照合は必須 |
-| 推測しない・断定しない | 確定できない結果は `[WARN]`/`[INFO]` で列挙し、黙殺・自動補完を行わない |
-| 警告なし≠正確 | `[WARN]`/`[ANOMALY]` が 0 件でも MusicXML の完全無欠を保証しない |
+| 設計ガイドラインの位置づけ | 本設計書群は、完成版 MusicXML 作成支援システムへ到達するための検証結果・設計判断・未確定事項を整理したプロトタイプ段階の設計ガイドラインである |
+| 開発段階の分類 | §1 Development Stage Classification を参照。プロトタイプ検証段階と完成版MusicXML作成支援システムの本実装段階の2分類で整理する |
+| プロトタイプ検証段階のスコープ | 単一 MusicXML の内部整合性検査 CLI（`verify_score.py`）のみ |
+| 本実装段階の主対象 | 複数 MusicXML 比較、差分可視化、比較レポート生成 |
+| 将来検討事項 | 自動修正、自動統合、Web UI、原本 PDF 横並び画面は、現時点で定義する本実装段階には含めず、将来検討事項として扱う |
+| 完全自動化しない | 音高・音価・声部・タイ/スラー等の正誤を機械的に確定できない |
+| 人間確認を省略しない | 確認対象を絞り込むことが目的であり、原本 PDF との目視照合は必須 |
+| 推測しない・断定しない | 確定できない結果は `[WARN]` / `[INFO]` で列挙し、黙殺・自動補完を行わない |
+| 警告なし≠正確 | `[WARN]` / `[ANOMALY]` が 0 件でも MusicXML の完全無欠を保証しない |
 | OMR 出力は確認対象データ | OMR が生成した MusicXML は「正解データ」ではなく「確認対象データ」である |
-| 独立したシステム | score-reader は他のシステムとは無関係の独立したローカル実行ツールである |
+| 独立したシステム | 他システムと連携しないローカル実行ツール |
 
-### License / Copyright Notes（ライセンス・著作権）
+**ライセンス・著作権（概要）**
 
-- score-reader のライセンスは **CC BY-NC-SA 4.0**（`LICENSE` ファイル参照）
-- **非商用（NonCommercial）**: 商業目的での利用・派生物の配布は禁止
-- **継承（ShareAlike）**: 改変・再配布時は同一ライセンス（CC BY-NC-SA 4.0）を適用すること
-- **帰属（Attribution）**: 利用・再配布時は原著者（Takashi Oikawa）を表示すること
+- score-reader のライセンスは **CC BY-NC-SA 4.0**（`LICENSE` 参照）
+- 著作権保護楽譜を公開リポジトリへ登録しない。テスト素材（`prototype/tests/`）はパブリックドメインに限定
+- 詳細は [03_DATA_AND_SECURITY_DESIGN.md](./03_DATA_AND_SECURITY_DESIGN.md)
 
-**著作権保護楽譜の取り扱い**
+**推奨参照順**
 
-- 著作権保護された楽譜 PDF・MusicXML・画像を公開リポジトリ（GitHub 等）へ登録しない
-- テスト素材（`prototype/tests/`）はパブリックドメイン楽譜に限定する
-- 外部 OMR サービスへ楽譜を送信する前に、利用規約・著作権条件を確認する
-- API キー・トークン・秘密鍵・個人情報をソース・Git・ログ・出力に含めない
-
-詳細は `03_DATA_AND_SECURITY_DESIGN.md` §5.4 を参照。
-
-### Open Issues Summary（未決事項サマリー）
-
-各設計書の Open Issues のうち、設計書群を横断する主要な未決事項を示す。詳細は各文書の §6 を参照。
-
-| テーマ | 主な関連文書 |
-|---|---|
-| 複数 MusicXML 比較機能の将来要件化 | 01, 02, 05 |
-| 検査項目 [3][4] の全パート対応拡張 | 02, 05, 06 |
-| 外部 OMR サービス API 連携の設計 | 03, 05 |
-| プロトタイプから正式版への移行基準 | 01, 05 |
-| 削減効果の実測設計・測定方法の定義 | 01 |
-| ソースコード用と設計文書用のライセンス分離 | 03, 06 |
-| music21 ライセンス表示義務の再配布時確認 | 03, 05 |
-| Windows 環境での動作確認・手順整備 | 05, 06 |
+```
+README.md → 01 → 02 → 03 → 04 → 05 → 06
+```
 
 ---
 
-## 4. Glossary（用語集・略語定義）
+## 6. Glossary（用語集・略語定義）
+
+<!-- この設計書群で使用するプロジェクト固有の用語・略語を定義する -->
+<!-- 汎用的な IT 用語は記載不要 -->
 
 | Term / Abbreviation（用語・略語） | Definition（定義） |
 |---|---|
 | OMR | Optical Music Recognition。楽譜 PDF・画像から MusicXML 等の機械可読形式へ変換する処理 |
 | MusicXML | 楽譜を XML 形式で表現した標準フォーマット。OMR の出力形式として利用する |
-| score-reader | 本プロジェクト。OMR 出力 MusicXML の内部整合性検査を行う Prototype / 検証支援 CLI ツール |
-| verify_score.py | score-reader のプロトタイプ実装ファイル（`prototype/src/verify_score.py`） |
-| Prototype | 技術検証用の実装。正式完成版ではない。現フェーズの `verify_score.py` を指す |
-| Legacy Source | 標準7文書化前の旧設計書（`legacy/` 配下）。削除済みではなく参照元として保持する |
+| score-reader | 本プロジェクト。OMR 出力 MusicXML の内部整合性検査を行うプロトタイプ検証段階の検証支援 CLI ツール |
+| verify_score.py | プロトタイプ検証段階の検証実装（`prototype/src/verify_score.py`）。単一 MusicXML 構造検査 |
+| プロトタイプ検証段階 | 単一 MusicXML 構造検査と検証結果記録の段階。`verify_score.py` が代表実装 |
+| 完成版MusicXML作成支援システムの本実装段階 | 複数 MusicXML 比較・差分可視化・比較レポート生成を主対象とする段階（未実装） |
+| Prototype | 技術検証用の実装。正式完成版ではない |
+| Legacy Source | 標準7文書化前の旧設計書（`legacy/` 配下）。参照元として保持する |
 | `[FATAL]` | MusicXML パース失敗を示す出力レベル。終了コード 1 で終了する |
 | `[ANOMALY]` | 小節長と拍子の不一致など、構造上の異常を示す出力レベル |
 | `[WARN]` | 要確認の疑いがある箇所を示す出力レベル |
@@ -161,18 +156,18 @@ README.md（本文書）
 
 ---
 
-## 5. Document Owners and Reviewers（文書管理者・レビュアー一覧）
+## 7. Document Owners and Reviewers（文書管理者・レビュアー一覧）
 
 | Role（役割） | Name（氏名） | Assigned Documents（担当文書） |
 |---|---|---|
-| Document Owner（文書管理者） | Takashi Oikawa | 全文書（README / 01〜06 / legacy/） |
+| Document Owner（文書管理者） | Takashi Oikawa | All Documents（README / 01〜06） |
 | Reviewer（レビュアー） | 未定 | 未定 |
 
 ---
 
-## 6. Change History（変更履歴）
+## 8. Change History（変更履歴）
 
 | Version（バージョン） | Date（日付） | Changes（変更内容） | Author（変更者） |
 |---|---|---|---|
-| 0.1 | 2026-06-04 | Legacy Source 初版（legacy/MULTI_OMR_BASIC_DESIGN.md 初版コミット日を引き継ぐ。設計Doc群の中で最も古い元Doc作成日を採用） | Takashi Oikawa |
-| 0.2 | 2026-06-21 | 標準7文書への移行完了に伴い README を記入。01〜06 各設計書・legacy 2文書・LICENSE ファイルを参照し全セクションを記入 | Takashi Oikawa |
+| 0.1 | 2026-06-09 | 初版作成 | Takashi Oikawa |
+| 0.2 | 2026-06-28 | legacy/ を内容抽出元として設計書群正本記入・Development Stage Classification 追加・開発段階分類表記統一・将来検討事項表記統一・Document Info 日付統一 | Takashi Oikawa |

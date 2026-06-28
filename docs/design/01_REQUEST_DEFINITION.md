@@ -6,8 +6,8 @@
 | Document ID（文書ID） | REQ-001 |
 | Version（バージョン） | 0.2 |
 | Status（ステータス） | Draft |
-| Created Date（作成日） | 2026-06-21 |
-| Last Updated（最終更新日） | 2026-06-21 |
+| Created Date（作成日） | 2026-06-09 |
+| Last Updated（最終更新日） | 2026-06-28 |
 | Owner（管理者） | Takashi Oikawa |
 | Related Documents（関連文書） | README.md / 02_REQUIREMENTS_DEFINITION.md / legacy/MULTI_OMR_BASIC_DESIGN.md / legacy/SCORE_READER_BASIC_DESIGN.md |
 
@@ -28,9 +28,9 @@
 
 ## 1. Purpose（目的）
 
-本文書は、score-reader プロジェクトにおける背景・課題・要求・成功基準を定義し、要件定義・設計フェーズの前提とすることを目的とする。
+本設計書群は、完成版 MusicXML 作成支援システムへ到達するための検証結果・設計判断・未確定事項を整理したプロトタイプ段階の設計ガイドラインである。本文書はそのうち背景・課題・要求・成功基準を定義し、要件定義・設計フェーズの前提とすることを目的とする。
 
-score-reader は完成アプリケーションの実装を目的としない。現技術で可能な範囲において、OMR（Optical Music Recognition）出力 MusicXML の検査支援を行うプロトタイプ・検証ツールの設計を対象とする。
+開発段階の分類（プロトタイプ検証段階 / 完成版MusicXML作成支援システムの本実装段階）は `README.md` §1 Development Stage Classification を参照する。現行プロトタイプ `verify_score.py` はプロトタイプ検証段階における単一 MusicXML 構造検査の検証実装である。
 
 本文書の対象読者は、設計者・開発者・プロジェクトオーナーである。
 
@@ -42,6 +42,7 @@ score-reader は完成アプリケーションの実装を目的としない。�
 
 | 対象 | 内容 |
 |---|---|
+| 開発段階 | **プロトタイプ検証段階**（本設計書群の主対象）。開発段階の全体整理は `README.md` §1 を参照 |
 | システム | score-reader（OMR 出力 MusicXML 検査支援ツール） |
 | フェーズ | プロトタイプ・技術検証フェーズ |
 | 対象ファイル | 単一 MusicXML ファイルの内部整合性検査 |
@@ -53,7 +54,7 @@ score-reader は完成アプリケーションの実装を目的としない。�
 
 ## 3. Out of Scope（対象外範囲）
 
-以下は本プロジェクトのスコープ外とする。
+以下は本プロジェクトのスコープ外とする。自動修正、自動統合、Web UI、原本 PDF 横並び画面は、現時点で定義する本実装段階には含めず、将来検討事項として扱う（`README.md` §1 Development Stage Classification 参照）。
 
 | 対象外項目 | 理由 |
 |---|---|
@@ -252,7 +253,7 @@ score-reader は、以下を目的とする。
 
 **削減効果について**
 
-削減効果は未実測であり、現時点では定量的な成功基準としない。実測設計・測定方法は将来フェーズの検討課題とする（TBD-003）。
+削減効果は未実測であり、現時点では定量的な成功基準としない。実測設計・測定方法は将来検討事項の検討課題とする（TBD-003）。
 
 ---
 
@@ -260,7 +261,7 @@ score-reader は、以下を目的とする。
 
 | ID | Open Issue（未決事項） | Owner（担当者） | Due Date（期限） | Status（ステータス） |
 |---|---|---|---|---|
-| TBD-001 | 複数 MusicXML 比較機能（複数 OMR 出力の差分抽出・一致箇所の特定）を将来フェーズで実装対象とするか。現フェーズは単一ファイル検査のみ。 | Takashi Oikawa | 未定 | Open |
+| TBD-001 | 複数 MusicXML 比較機能（複数 OMR 出力の差分抽出・一致箇所の特定）を将来検討事項で実装対象とするか。現フェーズは単一ファイル検査のみ。 | Takashi Oikawa | 未定 | Open |
 | TBD-002 | Prototype（verify_score.py）を正式版へ移行する基準・条件を定義するか。現設計はプロトタイプ検証フェーズに限定している。 | Takashi Oikawa | 未定 | Open |
 | TBD-003 | 削減効果の実測設計・測定方法（測定対象・条件・手順・記録方式）を定義するか。現フェーズでは削減効果を定量的な成功基準としない。 | Takashi Oikawa | 未定 | Open |
 | TBD-004 | Newzik 以外の OMR サービス（Audiveris、ACE Studio 等）との比較検証を本プロジェクトのスコープに含めるか。 | Takashi Oikawa | 未定 | Open |
@@ -285,5 +286,5 @@ score-reader は、以下を目的とする。
 
 | Version（バージョン） | Date（日付） | Changes（変更内容） | Author（変更者） |
 |---|---|---|---|
-| 0.1 | 2026-06-04 | Legacy Source 初版（legacy/MULTI_OMR_BASIC_DESIGN.md 初版コミット日を引き継ぐ） | Takashi Oikawa |
-| 0.2 | 2026-06-21 | 標準7文書への移行・記入。legacy/MULTI_OMR_BASIC_DESIGN.md（初版 2026-06-04）および legacy/SCORE_READER_BASIC_DESIGN.md（初版 2026-06-07）を参照し全セクションを記入 | Takashi Oikawa |
+| 0.1 | 2026-06-09 | 初版作成 | Takashi Oikawa |
+| 0.2 | 2026-06-28 | legacy/01 を内容抽出元として正本記入・§3 将来検討事項表記・開発段階分類表記統一 | Takashi Oikawa |
