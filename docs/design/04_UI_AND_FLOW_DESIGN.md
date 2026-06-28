@@ -68,7 +68,6 @@
 - 利用者は MuseScore 等の楽譜編集ソフトを別途用意し、原本 PDF との照合を行う意図があること
 - score-reader の CLI 出力は「確認対象情報」であり、正解として採用しないこと
 - 本プロジェクトのライセンスは **CC BY-NC-SA 4.0**（LICENSE ファイル参照）
-- 本文書の Created Date は Document Info（2026-06-09）を参照する
 
 ---
 

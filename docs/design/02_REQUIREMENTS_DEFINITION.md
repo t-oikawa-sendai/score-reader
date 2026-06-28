@@ -71,7 +71,6 @@
 - 依存ライブラリは `music21 10.3.0` のみとする（`prototype/requirements.txt` 参照）
 - 機能要件 FR-001〜FR-012 はプロトタイプ（`verify_score.py`）の現仕様に基づく
 - `[WARN]` / `[ANOMALY]` が 0 件であっても、MusicXML の完全無欠を保証しないことを要件として扱う
-- 本文書の Created Date は Document Info（2026-06-09）を参照する
 
 ---
 
