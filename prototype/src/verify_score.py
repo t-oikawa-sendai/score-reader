@@ -4,7 +4,7 @@
 # Language:     Python 3
 # Function:     MusicXML 内部整合性検査 CLI（Prototype）
 # Created:      2026-06-04
-# Last Updated: 2026-06-22
+# Last Updated: 2026-06-28
 # Author:       Takashi Oikawa
 # AI:           Cursor
 # Memo:         OMR 出力 MusicXML を推測せず読み取り、誤りが混入しやすい箇所を機械的に検査する。
@@ -30,11 +30,14 @@ def load(path):
 
 def _format_measure_number(measure_number):
     """小節番号の表示用。未確定は "?" に統一。"""
+    # 2026-06-28 レビュー指摘対応: 未確定値を "None" と表示しない。
     return measure_number if measure_number is not None else "?"
 
 
 def _is_anacrusis_tolerance(m, actual, expected):
     """アウフタクト許容: 小節番号が確定し、先頭付近(<=1)かつ音価不足のみ。"""
+    # 2026-06-28 レビュー指摘対応:
+    # 番号なし小節を推測でアウフタクト扱いしないため、許容条件を保守的にする。
     if actual >= expected:
         return False
     num = m.number
@@ -87,6 +90,8 @@ def verify_measure_durations(score):
 def list_key_signatures(score):
     """[3] 調号の検出と変化点の列挙。"""
     print("=== [3] 調号 ===")
+    # 2026-06-28 レビュー指摘対応:
+    # 空スコア入力時も検証処理を中断せず、WARN として扱う。
     if not score.parts:
         print("  [WARN] パートが存在しないため調号検査不可")
         return
