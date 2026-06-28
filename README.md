@@ -1,4 +1,9 @@
-# Design Documents Index（設計書一覧）
+# score-reader
+
+- score-reader は、OMR が出力した MusicXML の確認対象を絞り込むための設計・検証プロジェクトである
+- 現在は完成版MusicXML作成支援システムへ向けた**プロトタイプ検証段階**である
+- 正本設計Docは [docs/design/01](docs/design/01_REQUEST_DEFINITION.md)〜[06](docs/design/06_OPERATION_AND_HANDOFF.md) である
+- `prototype/` は正式実装ではなく技術検証用である
 
 <!--
 README Writing Policy（README作成方針）
