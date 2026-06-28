@@ -28,6 +28,21 @@ def load(path):
         sys.exit(1)
 
 
+def _format_measure_number(measure_number):
+    """小節番号の表示用。未確定は "?" に統一。"""
+    return measure_number if measure_number is not None else "?"
+
+
+def _is_anacrusis_tolerance(m, actual, expected):
+    """アウフタクト許容: 小節番号が確定し、先頭付近(<=1)かつ音価不足のみ。"""
+    if actual >= expected:
+        return False
+    num = m.number
+    if num is None:
+        return False
+    return num <= 1
+
+
 def report_transposing_instruments(score):
     """[1] 移調楽器テーブル: 各パートの管調と記音/実音の差を報告。"""
     print("=== [1] 移調楽器チェック ===")
@@ -57,14 +72,13 @@ def verify_measure_durations(score):
             if m.timeSignature:
                 cur_ts = m.timeSignature
             if ts is None:
-                print(f"  [WARN] Part{pi+1} m.{m.number}: 拍子記号が未確定")
+                print(f"  [WARN] Part{pi+1} m.{_format_measure_number(m.number)}: 拍子記号が未確定")
                 anomalies += 1
                 continue
             expected = Fraction(ts.numerator, ts.denominator) * 4  # 四分音符単位
             actual = Fraction(m.duration.quarterLength).limit_denominator(1000)
-            # アウフタクト(小節先頭の不完全小節)は許容
-            if actual != expected and not (m.number in (0, 1) and actual < expected):
-                print(f"  [ANOMALY] Part{pi+1} m.{m.number}: "
+            if actual != expected and not _is_anacrusis_tolerance(m, actual, expected):
+                print(f"  [ANOMALY] Part{pi+1} m.{_format_measure_number(m.number)}: "
                       f"拍子{ts.ratioString} 期待{expected} ≠ 実測{actual}")
                 anomalies += 1
     print(f"  → 異常 {anomalies} 件" if anomalies else "  → 全小節OK")
@@ -73,25 +87,31 @@ def verify_measure_durations(score):
 def list_key_signatures(score):
     """[3] 調号の検出と変化点の列挙。"""
     print("=== [3] 調号 ===")
+    if not score.parts:
+        print("  [WARN] パートが存在しないため調号検査不可")
+        return
     part = score.parts[0]
     for ks in part.recurse().getElementsByClass(key.KeySignature):
         m = ks.measureNumber
-        print(f"  - m.{m}: 調号 {ks.sharps:+d} (シャープ/フラット数)")
+        print(f"  - m.{_format_measure_number(m)}: 調号 {ks.sharps:+d} (シャープ/フラット数)")
 
 
 def list_tempo_meter_events(score):
     """[4] テンポ・拍子変化のイベントリスト化。"""
     print("=== [4] テンポ/拍子 変化イベント ===")
+    if not score.parts:
+        print("  [WARN] パートが存在しないためテンポ/拍子検査不可")
+        return
     part = score.parts[0]
     events = []
     for ts in part.recurse().getElementsByClass(meter.TimeSignature):
         events.append((ts.measureNumber, f"拍子 {ts.ratioString}"))
     for mm in part.recurse().getElementsByClass(tempo.MetronomeMark):
         label = mm.text or ""
-        bpm = f"{mm.number}" if mm.number else "?"
+        bpm = f"{mm.number}" if mm.number is not None else "?"
         events.append((mm.measureNumber, f"テンポ {label} ♩={bpm}"))
-    for m, desc in sorted(events, key=lambda x: (x[0] or 0)):
-        print(f"  - m.{m}: {desc}")
+    for m, desc in sorted(events, key=lambda x: (x[0] is None, x[0] or 0)):
+        print(f"  - m.{_format_measure_number(m)}: {desc}")
 
 
 def list_unreadable(score):
@@ -172,16 +192,16 @@ def list_chord_voicing(score):
             continue
         total += len(chords)
 
-        counts = [len(c.pitches) for c in chords]
+        counts = [len(ch.pitches) for ch in chords]
         dist = Counter(counts)
         # パート内で最も多い音数(主流)。「べき音数」の断定ではなく目安として用いる。
         dominant = dist.most_common(1)[0][0]
         dist_str = ", ".join(f"{n}音×{cnt}" for n, cnt in sorted(dist.items()))
         print(f"  [{name}] 和音 {len(chords)} 個 (内訳: {dist_str}, 主流 {dominant}音)")
 
-        for c in chords:
-            cnt = len(c.pitches)
-            m = c.measureNumber
+        for ch in chords:
+            cnt = len(ch.pitches)
+            m = ch.measureNumber
             if cnt == 1:
                 print(f"    [INFO] m.{m}: 単音が和音として記譜 (1音) "
                       f"→ 記譜上の意図か音抜けか元譜で要確認")
@@ -285,7 +305,7 @@ def collect_measure_anomalies(score, warnings):
                 continue
             expected = Fraction(ts.numerator, ts.denominator) * 4
             actual = Fraction(m.duration.quarterLength).limit_denominator(1000)
-            if actual != expected and not (m.number in (0, 1) and actual < expected):
+            if actual != expected and not _is_anacrusis_tolerance(m, actual, expected):
                 msg = f"拍子{ts.ratioString} 期待{expected} ≠ 実測{actual}"
                 entry = {
                     "part": pi + 1, "measure": m.number, "level": "ANOMALY",
@@ -302,6 +322,12 @@ def collect_measure_anomalies(score, warnings):
 
 def collect_key_signatures(score, warnings):
     """[3] 調号を構造化。"""
+    if not score.parts:
+        warnings.append({
+            "section": 3, "level": "WARN", "measure": None,
+            "message": "パートが存在しないため調号検査不可",
+        })
+        return []
     part = score.parts[0]
     return [
         {"measure": ks.measureNumber, "sharps": ks.sharps}
@@ -311,6 +337,12 @@ def collect_key_signatures(score, warnings):
 
 def collect_tempo_meter_events(score, warnings):
     """[4] テンポ/拍子イベントを構造化(小節番号順)。"""
+    if not score.parts:
+        warnings.append({
+            "section": 4, "level": "WARN", "measure": None,
+            "message": "パートが存在しないためテンポ/拍子検査不可",
+        })
+        return []
     part = score.parts[0]
     events = []
     for ts in part.recurse().getElementsByClass(meter.TimeSignature):
@@ -320,12 +352,13 @@ def collect_tempo_meter_events(score, warnings):
         })
     for mm in part.recurse().getElementsByClass(tempo.MetronomeMark):
         label = mm.text or ""
+        bpm_display = mm.number if mm.number is not None else "?"
         events.append({
             "measure": mm.measureNumber, "type": "tempo",
-            "description": f"テンポ {label} ♩={mm.number if mm.number else '?'}",
+            "description": f"テンポ {label} ♩={bpm_display}",
             "bpm": mm.number, "text": label or None,
         })
-    return sorted(events, key=lambda e: (e["measure"] or 0))
+    return sorted(events, key=lambda e: (e["measure"] is None, e["measure"] or 0))
 
 
 def collect_rehearsal_marks(score, warnings):
@@ -378,13 +411,13 @@ def collect_chord_voicing(score, warnings):
         chords = list(part.recurse().getElementsByClass(chord.Chord))
         if not chords:
             continue
-        counts = [len(c.pitches) for c in chords]
+        counts = [len(ch.pitches) for ch in chords]
         dist = Counter(counts)
         dominant = dist.most_common(1)[0][0]
         items = []
-        for c in chords:
-            cnt = len(c.pitches)
-            m = c.measureNumber
+        for ch in chords:
+            cnt = len(ch.pitches)
+            m = ch.measureNumber
             flag = None
             if cnt == 1:
                 flag = "INFO"
