@@ -7,15 +7,12 @@ in this repository:
 
   - README.md
   - SKILL.md
-  - docs/design/README.md
   - docs/design/01_REQUEST_DEFINITION.md
   - docs/design/02_REQUIREMENTS_DEFINITION.md
   - docs/design/03_DATA_AND_SECURITY_DESIGN.md
   - docs/design/04_UI_AND_FLOW_DESIGN.md
   - docs/design/05_ARCHITECTURE_DESIGN.md
   - docs/design/06_OPERATION_AND_HANDOFF.md
-  - docs/design/legacy/MULTI_OMR_BASIC_DESIGN.md
-  - docs/design/legacy/SCORE_READER_BASIC_DESIGN.md
 
 Source code is licensed separately under the MIT License (see LICENSE-CODE).
 Test materials in prototype/tests/ are derived from public-domain sources;

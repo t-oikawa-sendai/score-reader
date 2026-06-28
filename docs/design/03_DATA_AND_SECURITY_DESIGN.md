@@ -9,7 +9,7 @@
 | Created Date（作成日） | 2026-06-09 |
 | Last Updated（最終更新日） | 2026-06-28 |
 | Owner（管理者） | Takashi Oikawa |
-| Related Documents（関連文書） | README.md / 02_REQUIREMENTS_DEFINITION.md / 05_ARCHITECTURE_DESIGN.md / legacy/MULTI_OMR_BASIC_DESIGN.md / legacy/SCORE_READER_BASIC_DESIGN.md |
+| Related Documents（関連文書） | README.md / 02_REQUIREMENTS_DEFINITION.md / 05_ARCHITECTURE_DESIGN.md |
 
 ---
 
@@ -66,7 +66,7 @@
 - score-reader はデータベースを持たない。データは「入力 MusicXML（読み取り専用）」と「標準出力（テキスト/JSON）」のみで完結する
 - OMR 出力 MusicXML は「正解データ」ではなく「確認対象データ」として扱う。score-reader の検査結果も同様に確認対象であり、正確性の保証とは区別する
 - 外部 OMR サービスへの楽譜送信は、score-reader の処理スコープ外（利用者が事前に行う操作）であるが、著作権・利用規約の観点から本文書で方針を定める
-- 本文書の v0.1 日付は、移行元 Legacy Source（`legacy/MULTI_OMR_BASIC_DESIGN.md`）の初版コミット日（2026-06-04）を引き継ぐ
+- 本文書の Created Date は Document Info（2026-06-09）を参照する
 
 ---
 
@@ -235,4 +235,4 @@ score-reader 自体は外部ネットワーク通信を行わない。入力 Mus
 | Version（バージョン） | Date（日付） | Changes（変更内容） | Author（変更者） |
 |---|---|---|---|
 | 0.1 | 2026-06-09 | 初版作成 | Takashi Oikawa |
-| 0.2 | 2026-06-28 | legacy/03 を内容抽出元として正本記入・開発段階分類表記統一 | Takashi Oikawa |
+| 0.2 | 2026-06-28 | 正本記入・開発段階分類表記統一 | Takashi Oikawa |

@@ -14,18 +14,13 @@
 
 正本:
 
-- [docs/design/README.md](docs/design/README.md)（設計Doc群のインデックス・全体方針）
+- [README.md](README.md)（設計Doc群のインデックス・全体方針）
 - [docs/design/01_REQUEST_DEFINITION.md](docs/design/01_REQUEST_DEFINITION.md)
 - [docs/design/02_REQUIREMENTS_DEFINITION.md](docs/design/02_REQUIREMENTS_DEFINITION.md)
 - [docs/design/03_DATA_AND_SECURITY_DESIGN.md](docs/design/03_DATA_AND_SECURITY_DESIGN.md)
 - [docs/design/04_UI_AND_FLOW_DESIGN.md](docs/design/04_UI_AND_FLOW_DESIGN.md)
 - [docs/design/05_ARCHITECTURE_DESIGN.md](docs/design/05_ARCHITECTURE_DESIGN.md)
 - [docs/design/06_OPERATION_AND_HANDOFF.md](docs/design/06_OPERATION_AND_HANDOFF.md)
-
-参考資料（Legacy Source）:
-
-- [docs/design/legacy/MULTI_OMR_BASIC_DESIGN.md](docs/design/legacy/MULTI_OMR_BASIC_DESIGN.md)（標準7文書化前の旧設計書）
-- [docs/design/legacy/SCORE_READER_BASIC_DESIGN.md](docs/design/legacy/SCORE_READER_BASIC_DESIGN.md)（標準7文書化前の旧設計書）
 
 ## 3. 利用方法
 
@@ -58,7 +53,7 @@ Cursor へ作業を依頼する際は、作業開始前に本書を読み込ま�
 
 ```text
 SKILL.md
-docs/design/README.md
+README.md
 docs/design/01_REQUEST_DEFINITION.md
 docs/design/02_REQUIREMENTS_DEFINITION.md
 docs/design/03_DATA_AND_SECURITY_DESIGN.md
@@ -72,15 +67,13 @@ docs/design/06_OPERATION_AND_HANDOFF.md
 | 文書 | 役割 |
 |------|------|
 | `SKILL.md` | 作業ルール、禁止事項、停止条件 |
-| `docs/design/README.md` | 設計Doc群のインデックス・全体方針（正本） |
+| `README.md` | 設計Doc群のインデックス・全体方針（正本） |
 | `docs/design/01_REQUEST_DEFINITION.md` | 要求定義（正本） |
 | `docs/design/02_REQUIREMENTS_DEFINITION.md` | 要件定義（正本） |
 | `docs/design/03_DATA_AND_SECURITY_DESIGN.md` | データ・セキュリティ設計（正本） |
 | `docs/design/04_UI_AND_FLOW_DESIGN.md` | UI・フロー設計（正本） |
 | `docs/design/05_ARCHITECTURE_DESIGN.md` | アーキテクチャ設計（正本） |
 | `docs/design/06_OPERATION_AND_HANDOFF.md` | 運用・引き継ぎ設計（正本） |
-| `docs/design/legacy/SCORE_READER_BASIC_DESIGN.md` | 旧設計書（参考資料）。標準7文書移行済みのため正本扱いしない |
-| `docs/design/legacy/MULTI_OMR_BASIC_DESIGN.md` | 旧設計書（参考資料）。標準7文書移行済みのため正本扱いしない |
 
 ### 3.4 参照する工程
 

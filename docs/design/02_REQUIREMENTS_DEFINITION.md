@@ -9,7 +9,7 @@
 | Created Date（作成日） | 2026-06-09 |
 | Last Updated（最終更新日） | 2026-06-28 |
 | Owner（管理者） | Takashi Oikawa |
-| Related Documents（関連文書） | README.md / 01_REQUEST_DEFINITION.md / 03_DATA_AND_SECURITY_DESIGN.md / 04_UI_AND_FLOW_DESIGN.md / 05_ARCHITECTURE_DESIGN.md / legacy/SCORE_READER_BASIC_DESIGN.md / legacy/MULTI_OMR_BASIC_DESIGN.md |
+| Related Documents（関連文書） | README.md / 01_REQUEST_DEFINITION.md / 03_DATA_AND_SECURITY_DESIGN.md / 04_UI_AND_FLOW_DESIGN.md / 05_ARCHITECTURE_DESIGN.md |
 
 ---
 
@@ -71,7 +71,7 @@
 - 依存ライブラリは `music21 10.3.0` のみとする（`prototype/requirements.txt` 参照）
 - 機能要件 FR-001〜FR-012 はプロトタイプ（`verify_score.py`）の現仕様に基づく
 - `[WARN]` / `[ANOMALY]` が 0 件であっても、MusicXML の完全無欠を保証しないことを要件として扱う
-- 本文書の v0.1 日付は、移行元 Legacy Source（`legacy/SCORE_READER_BASIC_DESIGN.md`）の初版コミット日（2026-06-07）を引き継ぐ
+- 本文書の Created Date は Document Info（2026-06-09）を参照する
 
 ---
 
@@ -256,4 +256,4 @@
 | Version（バージョン） | Date（日付） | Changes（変更内容） | Author（変更者） |
 |---|---|---|---|
 | 0.1 | 2026-06-09 | 初版作成 | Takashi Oikawa |
-| 0.2 | 2026-06-28 | legacy/02 を内容抽出元として正本記入・開発段階分類表記統一 | Takashi Oikawa |
+| 0.2 | 2026-06-28 | 正本記入・開発段階分類表記統一 | Takashi Oikawa |

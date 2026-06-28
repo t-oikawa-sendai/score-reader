@@ -9,7 +9,7 @@
 | Created Date（作成日） | 2026-06-09 |
 | Last Updated（最終更新日） | 2026-06-28 |
 | Owner（管理者） | Takashi Oikawa |
-| Related Documents（関連文書） | README.md / 02_REQUIREMENTS_DEFINITION.md / legacy/MULTI_OMR_BASIC_DESIGN.md / legacy/SCORE_READER_BASIC_DESIGN.md |
+| Related Documents（関連文書） | README.md / 02_REQUIREMENTS_DEFINITION.md |
 
 ---
 
@@ -105,8 +105,7 @@
 
 **文書管理に関する前提**
 
-- 本文書の v0.1 日付は、テンプレート配置日ではなく移行元 Legacy Source（`legacy/MULTI_OMR_BASIC_DESIGN.md`）の初版コミット日（2026-06-04）を引き継ぐ
-- 設計Doc移行時の初版日は、元Docの作成日を採用する運用ルールとする
+- 本文書の Created Date は Document Info（2026-06-09）を参照する
 
 ---
 
@@ -272,11 +271,11 @@ score-reader は、以下を目的とする。
 
 要件定義・アーキテクチャ設計フェーズへ引き継ぐ、本要求定義での主要な設計意図を示す。
 
-1. **「推測しない」設計原則の継承**: 検査結果は断定せず、読めない・確定できない箇所を `[WARN]` / `[ANOMALY]` として列挙する原則を、正式版設計でも継続すること（`SCORE_READER_BASIC_DESIGN.md` §制約 参照）。
+1. **「推測しない」設計原則の継承**: 検査結果は断定せず、読めない・確定できない箇所を `[WARN]` / `[ANOMALY]` として列挙する原則を、正式版設計でも継続すること（`02_REQUIREMENTS_DEFINITION.md`・`05_ARCHITECTURE_DESIGN.md` の制約参照）。
 
 2. **「自動化できること」と「人間確認が必要なこと」の境界を保持**: §5.5 の SC / HC / ND 分類を要件定義（`02_REQUIREMENTS_DEFINITION.md`）の機能要件・非機能要件に反映すること。この境界を曖昧にしないこと。
 
-3. **Prototype の記録を参照源とすること**: `legacy/SCORE_READER_BASIC_DESIGN.md` の検査項目 [1]〜[8] および出力仕様は、要件定義・アーキテクチャ設計の出発点として参照すること。ただし、正式版では仕様変更・拡張が生じうるため、legacy 文書との差分を明示的に管理すること。
+3. **Prototype の記録を参照源とすること**: `prototype/src/verify_score.py` の検査項目 [1]〜[8] および出力仕様は、要件定義・アーキテクチャ設計の出発点として参照すること。ただし、正式版では仕様変更・拡張が生じうるため、プロトタイプ実装との差分を明示的に管理すること。
 
 4. **完全自動化を約束しないこと**: 成功基準（§5.5）の「現技術では困難なこと」は、要件定義・UI 設計・運用設計においても利用者への誤解防止として一貫して扱うこと。
 
@@ -287,4 +286,4 @@ score-reader は、以下を目的とする。
 | Version（バージョン） | Date（日付） | Changes（変更内容） | Author（変更者） |
 |---|---|---|---|
 | 0.1 | 2026-06-09 | 初版作成 | Takashi Oikawa |
-| 0.2 | 2026-06-28 | legacy/01 を内容抽出元として正本記入・§3 将来検討事項表記・開発段階分類表記統一 | Takashi Oikawa |
+| 0.2 | 2026-06-28 | 正本記入・§3 将来検討事項表記・開発段階分類表記統一 | Takashi Oikawa |
