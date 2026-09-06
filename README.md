@@ -5,10 +5,10 @@
 
 score-readerは、OMR（楽譜認識）が出力したMusicXMLの構造検査を行うCLIツールです。
 
-本リポジトリの本質は、**現行技術では自動化できない楽譜データ化の問題について、「機械にできること・できないこと・人間に委ねるべきこと」の境界を検証し、その設計判断を後世に引き継ぐバトンとして残す**ことにあります。
+本リポジトリの本質は、**現行技術では自動化できない楽譜データ化の問題について、「機械にできること・できないこと・人間に委ねるべきこと」の境界を検証し、将来の開発者・保守者へ引き継ぐ設計記録として残す**ことにあります。
 
 楽譜PDFのデータ化において、現状の技術では、本プロジェクトが対象とするMusicXMLの構造検査だけで、音高・音価・声部が原本譜と一致しているかを機械的に確定することはできません。<br>
-score-readerは「機械にできる構造検査の範囲」を最大化しつつ、「人間が原本PDFと照合すべき領域」を明確に絞り込むことで、確認作業の省力化を目指します。ここでいう「最大化」は設計上の目標であり、現段階の定量的な要件または合否基準ではありません。
+score-readerは「機械にできる構造検査の範囲」を最大化しつつ、「人間が原本PDFと照合すべき領域」を明確に絞り込むことで、確認作業の省力化を目指します。ここでいう「最大化」は設計上の目標であり、現段階の定量的な要件でも、合否基準でもありません。
 
 > 「人間確認をゼロにする」のではなく、<br>
 > 「人間が確認すべき箇所を絞り込む」ことで作業効率を最大化する。
@@ -20,7 +20,7 @@ score-readerは「機械にできる構造検査の範囲」を最大化しつ�
 - **将来検討事項**：自動修正、自動統合、Web UI
 - **本リポジトリの対象外**：原本PDF横並び画面。本リポジトリでは設計・実装方針を定義しません
 
-原本PDF横並び画面を本リポジトリ内へ実装することは対象外ですが、人間がMuseScore等を使用して原本PDFと目視照合する既存運用は維持します。
+原本PDF横並び画面の本リポジトリへの実装は対象外ですが、人間がMuseScore等を使用して原本PDFと目視照合する既存運用は維持します。
 
 ## 使い方
 
@@ -38,17 +38,6 @@ README Writing Policy（README作成方針）
 - 個人情報・機密情報・APIキー・トークンが写る画像は使用禁止
 - Change History は作業メモにしない
 -->
-
-<!-- Document Info（文書情報） -->
-| Item（項目） | Value（値） |
-|---|---|
-| Document ID（文書ID） | README-001 |
-| Version（バージョン） | 0.4.4 |
-| Status（ステータス） | Draft |
-| Created Date（作成日） | 2026-06-09 |
-| Last Updated（最終更新日） | 2026-09-06 |
-| Owner（管理者） | Takashi Oikawa |
-| Related Documents（関連文書） | SKILL.md / docs/design/01_REQUEST_DEFINITION.md 〜 06_OPERATION_AND_HANDOFF.md / docs/reviews/2026-09-06_SCORE_READER_DESIGN_REVIEW.md / docs/reviews/2026-09-06_SCORE_READER_CROSS_DOCUMENT_REVIEW.md |
 
 ---
 
@@ -69,7 +58,7 @@ README Writing Policy（README作成方針）
 
 ## 1. Project Overview Detail（開発段階の詳細分類）
 
-開発段階ごとの詳細分類を下表に示す。読み手が最初に理解すべき概要、設計思想、現在位置、基本実行例は冒頭（現行の位置づけ・使い方）を参照する。全体方針は §5、要求上の境界分類は [01_REQUEST_DEFINITION.md](docs/design/01_REQUEST_DEFINITION.md) を参照する。正本設計文書は [docs/design/01](docs/design/01_REQUEST_DEFINITION.md)〜[06](docs/design/06_OPERATION_AND_HANDOFF.md) である。`prototype/` は正式実装ではなく技術検証用である。score-reader は、OMR（Optical Music Recognition）が出力した MusicXML の内部整合性を検査する検証支援 CLI ツールである。機械的に検出できる構造的異常・要確認箇所を列挙し、人間の原本 PDF 照合作業の対象を絞り込む。
+開発段階ごとの詳細分類を下表に示す。読者が最初に理解すべき概要、設計思想、現在位置、基本実行例は冒頭（現行の位置づけ・使い方）を参照する。全体方針は §5、要求上の境界分類は [01_REQUEST_DEFINITION.md](docs/design/01_REQUEST_DEFINITION.md) を参照する。正本設計文書は [docs/design/01](docs/design/01_REQUEST_DEFINITION.md)〜[06](docs/design/06_OPERATION_AND_HANDOFF.md) である。`prototype/` は正式実装ではなく技術検証用である。score-reader は、OMR（Optical Music Recognition）が出力した MusicXML の内部整合性を検査する検証支援 CLI ツールである。機械的に検出できる構造的異常・要確認箇所を列挙し、人間の原本 PDF 照合作業の対象を絞り込む。
 
 ### Development Stage Classification（開発段階の分類）
 
@@ -78,7 +67,7 @@ README Writing Policy（README作成方針）
 | 現行プロトタイプ（プロトタイプ検証段階） | 単一 MusicXML の構造検査。検証結果・設計判断・未確定事項の記録 | `prototype/src/verify_score.py`（単一 MusicXML 構造検査の検証実装）。検査結果の標準出力（テキスト / JSON）。コード凍結中 | 本実装確定スコープ（複数 MusicXML 比較一式）は現行プロトタイプに含めない。自動修正、自動統合、Web UI は将来検討事項。原本 PDF 横並び画面は本リポジトリの対象外であり、本リポジトリでは設計・実装方針を定義しない |
 | 完成版MusicXML作成支援システムの本実装（確定スコープ） | 複数 MusicXML 入力、正規化、比較可能性判定、差分比較、差分可視化、比較レポート生成 | 未実装（確定スコープ。詳細は本実装時に定義する） | 自動修正、自動統合、Web UI は、現時点で定義する本実装段階には含めず、将来検討事項として扱う。原本 PDF 横並び画面は本リポジトリの対象外であり、本リポジトリでは設計・実装方針を定義しない |
 | 将来検討事項 | 対象外。本実装確定スコープにも現行プロトタイプにも含めない | 未実装 | 自動修正、自動統合、Web UI |
-| 本リポジトリの対象外 | 原本 PDF 横並び画面。本リポジトリでは設計・実装方針を定義しない | 定義しない | 原本 PDF 横並び画面を本リポジトリ内へ実装することは対象外である。人間が MuseScore 等を使用して原本 PDF と目視照合する既存運用は維持する |
+| 本リポジトリの対象外 | 原本 PDF 横並び画面。本リポジトリでは設計・実装方針を定義しない | 定義しない | 原本 PDF 横並び画面の本リポジトリへの実装は対象外である。人間が MuseScore 等を使用して原本 PDF と目視照合する既存運用は維持する |
 
 ---
 
@@ -109,12 +98,12 @@ README Writing Policy（README作成方針）
 
 | File（ファイル名） | Document Name（文書名） | Status（ステータス） | Version（バージョン） | Owner（担当者） |
 |---|---|---|---|---|
-| [01_REQUEST_DEFINITION.md](docs/design/01_REQUEST_DEFINITION.md) | Request Definition（要求定義） | Draft | 0.3.4 | Takashi Oikawa |
-| [02_REQUIREMENTS_DEFINITION.md](docs/design/02_REQUIREMENTS_DEFINITION.md) | Requirements Definition（要件定義） | Draft | 0.3.4 | Takashi Oikawa |
-| [03_DATA_AND_SECURITY_DESIGN.md](docs/design/03_DATA_AND_SECURITY_DESIGN.md) | Data and Security Design（データ・セキュリティ設計） | Draft | 0.3.3 | Takashi Oikawa |
-| [04_UI_AND_FLOW_DESIGN.md](docs/design/04_UI_AND_FLOW_DESIGN.md) | UI and Flow Design（UI・フロー設計） | Draft | 0.3.3 | Takashi Oikawa |
-| [05_ARCHITECTURE_DESIGN.md](docs/design/05_ARCHITECTURE_DESIGN.md) | Architecture Design（アーキテクチャ設計） | Draft | 0.3.4 | Takashi Oikawa |
-| [06_OPERATION_AND_HANDOFF.md](docs/design/06_OPERATION_AND_HANDOFF.md) | Operation and Handoff Design（運用・詳細設計引き継ぎ） | Draft | 0.3.4 | Takashi Oikawa |
+| [01_REQUEST_DEFINITION.md](docs/design/01_REQUEST_DEFINITION.md) | Request Definition（要求定義） | Draft | 0.3.5 | Takashi Oikawa |
+| [02_REQUIREMENTS_DEFINITION.md](docs/design/02_REQUIREMENTS_DEFINITION.md) | Requirements Definition（要件定義） | Draft | 0.3.5 | Takashi Oikawa |
+| [03_DATA_AND_SECURITY_DESIGN.md](docs/design/03_DATA_AND_SECURITY_DESIGN.md) | Data and Security Design（データ・セキュリティ設計） | Draft | 0.3.4 | Takashi Oikawa |
+| [04_UI_AND_FLOW_DESIGN.md](docs/design/04_UI_AND_FLOW_DESIGN.md) | UI and Flow Design（UI・フロー設計） | Draft | 0.3.4 | Takashi Oikawa |
+| [05_ARCHITECTURE_DESIGN.md](docs/design/05_ARCHITECTURE_DESIGN.md) | Architecture Design（アーキテクチャ設計） | Draft | 0.3.5 | Takashi Oikawa |
+| [06_OPERATION_AND_HANDOFF.md](docs/design/06_OPERATION_AND_HANDOFF.md) | Operation and Handoff Design（運用・詳細設計引き継ぎ） | Draft | 0.3.5 | Takashi Oikawa |
 
 各文書は Draft ステータスであり、**プロトタイプ検証段階**の設計記録として位置づける。開発段階の分類は §1 Development Stage Classification を参照する。作業ルールは [SKILL.md](SKILL.md) を参照する。設計レビュー記録は [docs/reviews/2026-09-06_SCORE_READER_DESIGN_REVIEW.md](docs/reviews/2026-09-06_SCORE_READER_DESIGN_REVIEW.md) および [docs/reviews/2026-09-06_SCORE_READER_CROSS_DOCUMENT_REVIEW.md](docs/reviews/2026-09-06_SCORE_READER_CROSS_DOCUMENT_REVIEW.md) を参照する。
 
@@ -139,14 +128,14 @@ README Writing Policy（README作成方針）
 
 **ライセンス・著作権（概要）**
 
-現在の分離構成を正とする。
+現在の分離構成を正式な構成として扱う。
 
 | 対象 | ライセンス | 参照 |
 |---|---|---|
 | ソースコード | MIT License | [LICENSE-CODE](LICENSE-CODE) |
 | 設計文書・README・作業ルール | CC BY-NC-SA 4.0 | [LICENSE-DOCS](LICENSE-DOCS) |
 | 旧ライセンス記録 | 移行前の単一ライセンス記録として残置 | [LICENSE](LICENSE) |
-| テスト素材（`prototype/tests/`） | 上記2区分のいずれにも自動的に含めない。権利・法務未解決事項は 03 TBD-005、技術的由来は 05 TBD-005 で追跡する | [NOTICE](NOTICE) / [03_DATA_AND_SECURITY_DESIGN.md](docs/design/03_DATA_AND_SECURITY_DESIGN.md) / [05_ARCHITECTURE_DESIGN.md](docs/design/05_ARCHITECTURE_DESIGN.md) |
+| テスト素材（`prototype/tests/`） | 上記2区分のいずれにも自動的に含めない。権利・法務未解決事項は 03 TBD-005、技術的な由来は 05 TBD-005 で追跡する | [NOTICE](NOTICE) / [03_DATA_AND_SECURITY_DESIGN.md](docs/design/03_DATA_AND_SECURITY_DESIGN.md) / [05_ARCHITECTURE_DESIGN.md](docs/design/05_ARCHITECTURE_DESIGN.md) |
 
 - テスト素材は、楽曲の権利、MusicXML エンコーディングの権利、加工・再配布条件を分けて確認する
 - 現在公開中のテスト素材は権利確認中であり、暫定的に公開継続する。公開可否の法的確定は未完了である
@@ -181,7 +170,7 @@ README.md → 01 → 02 → 03 → 04 → 05 → 06
 | `[INFO]` | 参考情報を示す出力レベル。同上 |
 | Unpitched（無音高） | 音高を持たない要素。検査 [5]（FR-006）の報告対象。[02_REQUIREMENTS_DEFINITION.md](docs/design/02_REQUIREMENTS_DEFINITION.md) |
 | 確認対象データ | OMR 出力 MusicXML の位置づけ。「正解データ」ではなく人間が確認すべきデータ |
-| パブリックドメイン | 著作権保護期間の満了または権利放棄により、楽曲・作曲物として自由利用できる状態を指すことがある。MusicXML エンコーディングの権利・再配布条件とは別であり、テスト素材への自動適用はしない |
+| パブリックドメイン | 本書では、著作権保護期間の満了等により、楽曲・作曲物について著作権による利用制限を受けない状態を指す。MusicXMLエンコーディングの権利・再配布条件とは別であり、テスト素材へ自動的に適用しない。 |
 | MIT License | ソースコード（`LICENSE-CODE`）に適用するライセンス |
 | CC BY-NC-SA 4.0 | 設計文書・README・作業ルール（`LICENSE-DOCS`）に適用するライセンス。非商用・継承・帰属の3条件が適用される |
 | LICENSE | 旧ライセンス記録。現行の適用ライセンスそのものではない |
@@ -209,3 +198,19 @@ README.md → 01 → 02 → 03 → 04 → 05 → 06
 | 0.4.2 | 2026-09-06 | 文書表現の整理。設計思想（機械と人間の役割境界）の明示、コード凍結の明記、Glossary の短縮。仕様の追加・変更は行っていない | Takashi Oikawa |
 | 0.4.3 | 2026-09-06 | 横断レビュー反映。実行例をリポジトリルート起点へ統一。権利追跡先と設計文書 Version を整合 | Takashi Oikawa |
 | 0.4.4 | 2026-09-06 | 冒頭へ設計思想・現行位置・基本実行例を全文掲載。原本 PDF 横並び画面を将来検討事項から外し、本リポジトリでは設計・実装方針を定義しない対象へ変更。人間が MuseScore 等で原本 PDF と目視照合する既存運用は維持する | Takashi Oikawa |
+| 0.4.5 | 2026-09-06 | 日本語表現の修正。設計記録の表現、最大化の位置づけ、原本 PDF 横並び画面の実装対象外の言い回し、読者表記、分離構成の表現を自然な日本語へ統一。Document Info を末尾の折りたたみ領域へ移動。仕様の追加・変更は行っていない | Takashi Oikawa |
+
+<details>
+<summary>Document Information（文書情報）</summary>
+
+| Item（項目） | Value（値） |
+|---|---|
+| Document ID（文書ID） | README-001 |
+| Version（バージョン） | 0.4.5 |
+| Status（ステータス） | Draft |
+| Created Date（作成日） | 2026-06-09 |
+| Last Updated（最終更新日） | 2026-09-06 |
+| Owner（管理者） | Takashi Oikawa |
+| Related Documents（関連文書） | SKILL.md / docs/design/01_REQUEST_DEFINITION.md 〜 06_OPERATION_AND_HANDOFF.md / docs/reviews/2026-09-06_SCORE_READER_DESIGN_REVIEW.md / docs/reviews/2026-09-06_SCORE_READER_CROSS_DOCUMENT_REVIEW.md |
+
+</details>

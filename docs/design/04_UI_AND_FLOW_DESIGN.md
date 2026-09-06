@@ -4,7 +4,7 @@
 | Item（項目） | Value（値） |
 |---|---|
 | Document ID（文書ID） | UI-001 |
-| Version（バージョン） | 0.3.3 |
+| Version（バージョン） | 0.3.4 |
 | Status（ステータス） | Draft |
 | Created Date（作成日） | 2026-06-09 |
 | Last Updated（最終更新日） | 2026-09-06 |
@@ -67,7 +67,7 @@
 - 利用者は Python 実行環境・仮想環境のセットアップが完了していること（環境構築手順は `06_OPERATION_AND_HANDOFF.md` に記載）
 - 利用者は MuseScore 等の楽譜編集ソフトを別途用意し、原本 PDF との照合を行う意図があること
 - score-reader の CLI 出力は「確認対象情報」であり、正解として採用しないこと
-- ライセンスは分離構成を正とする。ソースコードは MIT License（`LICENSE-CODE`）、設計文書・README・作業ルールは CC BY-NC-SA 4.0（`LICENSE-DOCS`）。`LICENSE` は旧ライセンス記録として残置する。テスト素材は両区分に自動含めない
+- ライセンスは現在の分離構成を正式な構成として扱う。ソースコードは MIT License（`LICENSE-CODE`）、設計文書・README・作業ルールは CC BY-NC-SA 4.0（`LICENSE-DOCS`）。`LICENSE` は旧ライセンス記録として残置する。テスト素材は両区分に自動含めない
 
 ---
 
@@ -208,3 +208,4 @@ JSON エラー形式は `02_REQUIREMENTS_DEFINITION.md` §5.7 FUT-002 で未確�
 | 0.3.1 | 2026-09-06 | 設計レビュー差し戻し反映。複数 MusicXML 比較を本実装確定スコープとし、CLI フロー詳細のみ TBD-001 に残す。Web UI は将来検討のまま | Takashi Oikawa |
 | 0.3.2 | 2026-09-06 | 文書表現の整理。CLI 現行・Web UI 将来検討・複数 MusicXML 比較の本実装確定を維持。仕様の追加・変更は行っていない | Takashi Oikawa |
 | 0.3.3 | 2026-09-06 | 原本 PDF 横並び画面を将来検討事項から外し、本リポジトリでは設計・実装方針を定義しない対象へ変更。人間が MuseScore 等で原本 PDF と目視照合する既存運用は維持する | Takashi Oikawa |
+| 0.3.4 | 2026-09-06 | 日本語表現の明確化。仕様・設計判断の変更なし | Takashi Oikawa |

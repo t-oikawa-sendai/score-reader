@@ -4,7 +4,7 @@
 | Item（項目） | Value（値） |
 |---|---|
 | Document ID（文書ID） | REVIEW-SCORE-READER-20260906-001 |
-| Version（バージョン） | 0.3 |
+| Version（バージョン） | 0.4 |
 | Status（ステータス） | Changes Requested |
 | Review Date（レビュー日） | 2026-09-06 |
 | Created Date（作成日） | 2026-09-06 |
@@ -24,7 +24,7 @@
 
 本文書は、2026-09-06 の設計レビュー、再回答、検証結果、採用判断、未解決事項を GitHub 管理対象として保存する。
 
-正本設計文書への反映内容は各設計文書を正とする。本文書はレビュー記録であり、法的助言ではない。
+正本設計文書への反映内容は各設計文書を正本として扱う。本文書はレビュー記録であり、法的助言ではない。
 
 ---
 
@@ -53,8 +53,8 @@
 
 | ID | 最終判定 | 内容 | 反映先 |
 |---|---|---|---|
-| RV-001 | Adopted | ライセンスは分離構成を正とする。ソースコードは MIT（`LICENSE-CODE`）、設計文書・README・作業ルールは CC BY-NC-SA 4.0（`LICENSE-DOCS`）。`LICENSE` は旧ライセンス記録として残置。テスト素材は両区分に自動含めない。03 / 06 のライセンス分離 TBD は commit `77ea651`（2026-06-22）を根拠に Resolved | README.md / LICENSE-DOCS / 03_DATA_AND_SECURITY_DESIGN.md / 04_UI_AND_FLOW_DESIGN.md / 06_OPERATION_AND_HANDOFF.md |
-| RV-002 | Adopted | 検査 [3][4] は第 1 パートだけを参照する。現行 CLI 出力にこの制約の注記はない。凍結中の受容済み制約とする。出力注記の実装は将来実装要求へ移す。全パート対応 TBD と混同しない | 02_REQUIREMENTS_DEFINITION.md / 05_ARCHITECTURE_DESIGN.md / 06_OPERATION_AND_HANDOFF.md |
+| RV-001 | Adopted | ライセンスは現在の分離構成を正式な構成として扱う。ソースコードは MIT（`LICENSE-CODE`）、設計文書・README・作業ルールは CC BY-NC-SA 4.0（`LICENSE-DOCS`）。`LICENSE` は旧ライセンス記録として残置。テスト素材は両区分に自動含めない。03 / 06 のライセンス分離 TBD は commit `77ea651`（2026-06-22）を根拠に Resolved | README.md / LICENSE-DOCS / 03_DATA_AND_SECURITY_DESIGN.md / 04_UI_AND_FLOW_DESIGN.md / 06_OPERATION_AND_HANDOFF.md |
+| RV-002 | Adopted | 検査 [3][4] は第 1 パートだけを参照する。現行 CLI 出力にこの制約の注記はない。コード凍結中に受容している既知の制約とする。出力注記の実装は将来実装要求へ移す。全パート対応 TBD と混同しない | 02_REQUIREMENTS_DEFINITION.md / 05_ARCHITECTURE_DESIGN.md / 06_OPERATION_AND_HANDOFF.md |
 | RV-003 | Adopted | リハーサルマーク 0 件は異常でも `[WARN]` でもない。レベルタグを付けない確認用注記とする。`[INFO]` タグが出るとは記載しない | 02_REQUIREMENTS_DEFINITION.md |
 | RV-004 | Split | 検査 [5] だけを単一の修正対象とせず、RV-004a と RV-004b へ分割した | 本記録 / 02_REQUIREMENTS_DEFINITION.md |
 | RV-004a | Adopted | 検査 [1][7] の注記は現行テキスト出力だけにあり、JSON には存在しない | 02_REQUIREMENTS_DEFINITION.md |
@@ -66,9 +66,9 @@
 | RV-009 | Adopted | FR-006 に対応する成功基準が欠落していたため SC-009 を追加する。和音音数の最頻値が同率の場合の正式ルールは未定義である。現行実装は最初に出現した候補に依存し、正式ルールは将来実装要求 FUT-005 として残す | 01_REQUEST_DEFINITION.md / 02_REQUIREMENTS_DEFINITION.md / README.md / 06_OPERATION_AND_HANDOFF.md |
 | RV-010 | Adopted | 現行プロトタイプは凍結を維持する。文書修正は凍結対象ではない。HO-002 は現行実装で完了済みと読める表現を改める。2026-06-28 の限定保守について、承認者・承認経緯は確認不能として扱い、推測で補完しない | 02_REQUIREMENTS_DEFINITION.md / 05_ARCHITECTURE_DESIGN.md / 06_OPERATION_AND_HANDOFF.md |
 | RV-011 | Adopted | FR-001〜FR-012 は現行プロトタイプの実際の動作を記載する。将来実装で実現したい仕様は独立した将来実装要求へ分離する | 02_REQUIREMENTS_DEFINITION.md |
-| RV-012 | Adopted / Open remainder | 楽曲・作曲物の権利、MusicXML エンコーディングの権利、派生成果物、公開 GitHub からの再配布範囲を分離して確認する。パブリックドメイン楽譜なら MusicXML も公開可能とは読ませない。準拠法域および公開可否の最終判断は未解決のまま残す | 01_REQUEST_DEFINITION.md / 03_DATA_AND_SECURITY_DESIGN.md / NOTICE / SKILL.md / LICENSE-DOCS |
+| RV-012 | Adopted / Open remainder | 楽曲・作曲物の権利、MusicXML エンコーディングの権利、派生成果物、公開 GitHub からの再配布範囲を分離して確認する。パブリックドメイン楽譜なら MusicXML も公開可能とは読ませない。適用される法域および公開可否の最終判断は未解決のまま残す | 01_REQUEST_DEFINITION.md / 03_DATA_AND_SECURITY_DESIGN.md / NOTICE / SKILL.md / LICENSE-DOCS |
 
-RV-012 のうち、最終判断責任者・暫定公開継続は §11 SB-002 で確定した。公開判断の固定期限は設けない。公開可否の法的確定、MusicXML エンコーディングの個別利用条件、準拠法域は未解決のまま残す。一次追跡先は `03_DATA_AND_SECURITY_DESIGN.md` TBD-005 である。
+RV-012 のうち、最終判断責任者・暫定公開継続は §11 SB-002 で確定した。公開判断の固定期限は設けない。公開可否の法的確定、MusicXML エンコーディングの個別利用条件、適用される法域は未解決のまま残す。一次追跡先は `03_DATA_AND_SECURITY_DESIGN.md` TBD-005 である。
 
 JSON との情報量統一、JSON 形式の FATAL、検査 [5] の 0 件表示統一は将来実装要求として分離した。フィールド名や JSON エラー構造は今回確定していない。
 
@@ -125,8 +125,8 @@ JSON との情報量統一、JSON 形式の FATAL、検査 [5] の 0 件表示�
 |---|---|
 | テスト素材エンコーディングの個別利用条件 | `03_DATA_AND_SECURITY_DESIGN.md` TBD-005 / `NOTICE` |
 | 世界向け再配布可否の法的確定 | `03_DATA_AND_SECURITY_DESIGN.md` TBD-005 |
-| 準拠法域 | `03_DATA_AND_SECURITY_DESIGN.md` TBD-005 |
-| テスト素材の技術的由来 | `05_ARCHITECTURE_DESIGN.md` TBD-005 |
+| 適用される法域 | `03_DATA_AND_SECURITY_DESIGN.md` TBD-005 |
+| テスト素材の技術的な由来 | `05_ARCHITECTURE_DESIGN.md` TBD-005 |
 | 2026-06-28 限定保守の明示的な承認記録 | `06_OPERATION_AND_HANDOFF.md` §5.2。確認できる記録からは特定できない |
 | 将来実装での JSON 仕様（情報量統一、JSON エラー形式、フィールド名） | `02_REQUIREMENTS_DEFINITION.md` §5.7 |
 | プロトタイプを再利用・置換・廃止する判断 | `01_REQUEST_DEFINITION.md` TBD-002 / `SKILL.md` §7（本文書ではコードを変更しない） |
@@ -140,7 +140,7 @@ JSON との情報量統一、JSON 形式の FATAL、検査 [5] の 0 件表示�
 
 ## 9. Disclaimer
 
-本記録は法的助言ではない。テスト素材の公開可能性、再配布の許否、準拠法域、権利者の確定を述べない。
+本記録は法的助言ではない。テスト素材の公開可能性、再配布の許否、適用される法域、権利者の確定を述べない。
 
 ---
 
@@ -151,6 +151,7 @@ JSON との情報量統一、JSON 形式の FATAL、検査 [5] の 0 件表示�
 | 0.1 | 2026-09-06 | 初版。RV-001〜RV-012 の最終判定、文書反映、未解決事項を記録。RV-006 / RV-008 / RV-009 は原レビュー定義に合わせて記録 | Takashi Oikawa |
 | 0.2 | 2026-09-06 | Status を Changes Requested へ変更。Reviewer を GEM_REVIEWER_PERSONA に統一。差し戻し事項と設計判断結果を記録。本 Version 記載時点では差し戻し反映コミット SHA は未記録であり Pending と記した | Takashi Oikawa |
 | 0.3 | 2026-09-06 | 差し戻し反映コミット `9965d36915e7a8df588a2bbef08ac6a7cd6fb9a8` と Version・Change History を整合。当該 SHA の記録を反映した後続コミットは `45b2004027df0f4c2efd465995d034a945d6c388`。公開判断の固定期限廃止と権利一次追跡先の統一を記録 | Takashi Oikawa |
+| 0.4 | 2026-09-06 | 日本語表現の明確化。判定・設計判断の変更なし | Takashi Oikawa |
 
 ---
 
@@ -167,6 +168,6 @@ Reviewer: `GEM_REVIEWER_PERSONA`
 | ID | 差し戻し事項 | 設計判断結果 |
 |---|---|---|
 | SB-001 | 複数 MusicXML 比較を実装対象にするか自体が TBD-001 として未確定のまま残っていた | 本実装確定スコープとする。対象は複数 MusicXML 入力、正規化、比較可能性判定、差分比較、差分可視化、比較レポート生成。現行プロトタイプは単一 MusicXML 構造検査のまま。未実装と未確定を混同しない。自動修正、自動統合、Web UI、原本 PDF 横並び表示は将来検討事項のまま。`01_REQUEST_DEFINITION.md` TBD-001 および `02_REQUIREMENTS_DEFINITION.md` TBD-001 を Resolved とする |
-| SB-002 | 公開中テスト素材について、最終判断責任者・判断期限・暫定措置が未確定のまま残っていた | 暫定公開継続。最終判断責任者: Takashi Oikawa。公開判断の固定期限は設けない。権利判断が完了するまでの暫定措置: 権利確認中・公開可否未確定であることを明示して公開継続。未解決として残すのは MusicXML エンコーディングの個別利用条件、再配布可否の法的確定、準拠法域（一次追跡先: `03_DATA_AND_SECURITY_DESIGN.md` TBD-005）。法的に公開可能とは断定しない |
+| SB-002 | 公開中テスト素材について、最終判断責任者・判断期限・暫定措置が未確定のまま残っていた | 暫定公開継続。最終判断責任者: Takashi Oikawa。公開判断の固定期限は設けない。権利判断が完了するまでの暫定措置: 権利確認中・公開可否未確定であることを明示して公開継続。未解決として残すのは MusicXML エンコーディングの個別利用条件、再配布可否の法的確定、適用される法域（一次追跡先: `03_DATA_AND_SECURITY_DESIGN.md` TBD-005）。法的に公開可能とは断定しない |
 | SB-003 | 性能要件で「数秒以内」と「定量基準は規定しない」が併記されていた | 「数秒以内」を削除する。プロトタイプ検証段階では性能の定量的な合否基準を設けない。実行時間は必要に応じて測定対象にできる。本実装段階の性能基準は必要時に別途定義する。`02_REQUIREMENTS_DEFINITION.md` TBD-004 を Resolved とする |
 | SB-004 | README の Reviewer が未定、レビュー記録 Status が Reviewed のままだった | README の Reviewer を `GEM_REVIEWER_PERSONA` に統一する。設計文書 Status は `Draft` を維持する。本レビュー記録 Status は `Changes Requested` とする |

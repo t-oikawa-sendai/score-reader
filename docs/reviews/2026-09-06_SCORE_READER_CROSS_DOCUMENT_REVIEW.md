@@ -4,7 +4,7 @@
 | Item（項目） | Value（値） |
 |---|---|
 | Document ID（文書ID） | REVIEW-SCORE-READER-20260906-002 |
-| Version（バージョン） | 0.3 |
+| Version（バージョン） | 0.4 |
 | Status（ステータス） | Resolved |
 | Review Date（レビュー日） | 2026-09-06 |
 | Created Date（作成日） | 2026-09-06 |
@@ -23,7 +23,7 @@
 
 本文書は、再レビュー RV-013〜RV-021 の検証結果と、プロジェクトオーナーが確定した設計判断を GitHub 管理対象として保存する。
 
-レビュー対象は `45b2004027df0f4c2efd465995d034a945d6c388` 時点の正本文書である。正本設計文書への反映内容は各設計文書を正とする。本文書はレビュー記録であり、法的助言ではない。
+レビュー対象は `45b2004027df0f4c2efd465995d034a945d6c388` 時点の正本文書である。正本設計文書への反映内容は各設計文書を正本として扱う。本文書はレビュー記録であり、法的助言ではない。
 
 修正結果の再レビューは完了した。RV-013〜RV-021 の成立部分は正本文書へ反映済みである。本記録の Status は `Resolved` とする。
 
@@ -48,7 +48,7 @@
 |---|---|---|---|
 | RV-013 | 一部成立 | 期限超過時運用の欠落と、公開判断期限情報の重複展開。固定期限 `2026-09-06` を廃止し、権利判断完了まで暫定公開を継続する。最終判断責任者は Takashi Oikawa。新しい期限は設定しない | README.md / NOTICE / 01 / 03 / 05 / 06 / 既存レビュー記録 |
 | RV-014 | 一部成立 | `docs/reviews/2026-09-06_SCORE_READER_DESIGN_REVIEW.md` の Version・Change History・`Pending` 表記が、差し戻し反映 SHA 追記後の状態へ追随していなかった | 既存レビュー記録 |
-| RV-015 | 成立 | 権利・法務未解決事項の一次追跡先を `03_DATA_AND_SECURITY_DESIGN.md` TBD-005 へ統一する。`05_ARCHITECTURE_DESIGN.md` TBD-005 はテスト素材の技術的由来確認に限定する | NOTICE / 01 / 03 / 05 / 06 / 既存レビュー記録 |
+| RV-015 | 成立 | 権利・法務未解決事項の一次追跡先を `03_DATA_AND_SECURITY_DESIGN.md` TBD-005 へ統一する。`05_ARCHITECTURE_DESIGN.md` TBD-005 はテスト素材の技術的な由来の確認に限定する | NOTICE / 01 / 03 / 05 / 06 / 既存レビュー記録 |
 | RV-016 | 成立 | 対応 OS は macOS のみ。実行環境は macOS 上で動作する Python 3.x。特定の macOS バージョンは固定しない。Windows および Linux の動作保証・動作検証は対象外。Windows 確認 TBD は削除する | 05_ARCHITECTURE_DESIGN.md / 06_OPERATION_AND_HANDOFF.md |
 | RV-017 | 成立 | SC-009 は「検査 [5] として Unpitched 件数を報告できる」ことだけに限定する。テキスト/JSON の現行表示差は `02` Appendix / FUT-003 で扱う | 01_REQUEST_DEFINITION.md / 02_REQUIREMENTS_DEFINITION.md |
 | RV-018 | 成立 | `NOTICE` の music21 ソフトウェア帰属表示を公式 `v10.3.0` LICENSE に一致させる。ソフトウェア本体のライセンスと corpus 内エンコーディングの権利は分離する | NOTICE |
@@ -88,8 +88,8 @@ RV-013、RV-014、RV-019 は一部成立である。次は成立範囲に含め�
 | 公開判断期限 | 固定期限 `2026-09-06` を廃止する。新しい期限は設定しない。「判断期限は未定」へ置き換えない |
 | 暫定公開 | 権利判断が完了するまで、現在公開中のテスト素材を暫定公開する。権利確認中・公開可否未確定である旨の表示を維持する |
 | 最終判断責任者 | Takashi Oikawa |
-| 権利一次追跡先 | `03_DATA_AND_SECURITY_DESIGN.md` TBD-005（個別利用条件、世界向け再配布可否の法的確定、準拠法域） |
-| 技術的由来 | `05_ARCHITECTURE_DESIGN.md` TBD-005 に限定する |
+| 権利一次追跡先 | `03_DATA_AND_SECURITY_DESIGN.md` TBD-005（個別利用条件、世界向け再配布可否の法的確定、適用される法域） |
+| 技術的な由来 | `05_ARCHITECTURE_DESIGN.md` TBD-005 に限定する |
 | 対応 OS | macOS のみ。特定バージョンは固定しない。実行環境は macOS 上で動作する Python 3.x |
 | Windows / Linux | 動作保証・動作検証の対象外。将来 TBD として追加しない |
 | SC-009 | Unpitched 件数の報告。現行表示差は含めない |
@@ -157,7 +157,7 @@ Owner、期限「未定」、Status `Open` は変更していない。
 
 ## 9. Disclaimer
 
-本記録は法的助言ではない。テスト素材の公開可能性、再配布の許否、準拠法域、権利者の確定を述べない。
+本記録は法的助言ではない。テスト素材の公開可能性、再配布の許否、適用される法域、権利者の確定を述べない。
 
 ---
 
@@ -168,3 +168,4 @@ Owner、期限「未定」、Status `Open` は変更していない。
 | 0.1 | 2026-09-06 | 初版。RV-013〜RV-021 の判定と確定した設計判断を記録。Status は Changes Requested | Takashi Oikawa |
 | 0.2 | 2026-09-06 | 修正結果を再レビューし、RV-013〜RV-021の成立部分が正本文書へ反映済みであることを確認。StatusをResolvedへ更新 | Takashi Oikawa |
 | 0.3 | 2026-09-06 | プロジェクトオーナーの追加決定を記録。原本 PDF 横並び画面を将来検討事項から外し、本リポジトリでは設計・実装方針を定義しない対象へ分割。自動修正・自動統合・Web UI は将来検討事項のまま。人間が MuseScore 等を使用して原本 PDF と目視照合する既存運用は維持。Status は Resolved を維持 | Takashi Oikawa |
+| 0.4 | 2026-09-06 | 日本語表現の明確化。判定・設計判断の変更なし | Takashi Oikawa |

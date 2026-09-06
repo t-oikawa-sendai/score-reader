@@ -4,7 +4,7 @@
 | Item（項目） | Value（値） |
 |---|---|
 | Document ID（文書ID） | ARCH-001 |
-| Version（バージョン） | 0.3.4 |
+| Version（バージョン） | 0.3.5 |
 | Status（ステータス） | Draft |
 | Created Date（作成日） | 2026-06-09 |
 | Last Updated（最終更新日） | 2026-09-06 |
@@ -176,7 +176,7 @@ prototype/
 | [7] 和音音数 | 構成音数分布の報告 | 全パート | 何音であるべきか |
 | [8] パート間小節数 | 小節数一致・不一致 | 全パート | どのパートが正しいか |
 
-検査 [3][4] は第 1 パートだけを参照する。現行 CLI 出力にはこの制約の注記がない。凍結中は受容済み制約とする。出力注記の実装は `02_REQUIREMENTS_DEFINITION.md` §5.7 FUT-004 へ移す。全パート対応の採用判断は `02_REQUIREMENTS_DEFINITION.md` TBD-002、実装方針は本文書 TBD-002 である。
+検査 [3][4] は第 1 パートだけを参照する。現行 CLI 出力にはこの制約の注記がない。コード凍結中に受容している既知の制約とする。出力注記の実装は `02_REQUIREMENTS_DEFINITION.md` §5.7 FUT-004 へ移す。全パート対応の採用判断は `02_REQUIREMENTS_DEFINITION.md` TBD-002、実装方針は本文書 TBD-002 である。
 
 ### 5.4 External Integration and API Design（外部システム連携・API設計方針）
 
@@ -208,7 +208,7 @@ prototype/
 |---|---|
 | music21 バージョン非互換 | `requirements.txt` で `10.3.0` に固定。更新時は再検証 |
 | 単一スクリプト肥大化 | 将来検討事項として Inspection Engine を関数分離（`05_ARCHITECTURE_DESIGN.md` TBD-004） |
-| [3][4] 第 1 パート限定 | 現行 CLI は制約注記を出力しない。凍結中は受容済み制約。出力注記の追加は `02_REQUIREMENTS_DEFINITION.md` §5.7 FUT-004。全パート対応の採用判断は `02_REQUIREMENTS_DEFINITION.md` TBD-002、実装方針は本文書 TBD-002 |
+| [3][4] 第 1 パート限定 | 現行 CLI は制約注記を出力しない。コード凍結中に受容している既知の制約。出力注記の追加は `02_REQUIREMENTS_DEFINITION.md` §5.7 FUT-004。全パート対応の採用判断は `02_REQUIREMENTS_DEFINITION.md` TBD-002、実装方針は本文書 TBD-002 |
 | OMR 出力の誤信 | Output Formatter で「完全無欠を保証しない」注記を必ず出力 |
 
 ### 5.6 Infrastructure and Environment（インフラ・環境構成）
@@ -231,9 +231,9 @@ prototype/
 | TBD-002 | `02_REQUIREMENTS_DEFINITION.md` TBD-002（親項目: 検査 [3][4] 全パート対応の採用可否）の子項目。全パート対応を採用した場合の実装方針を決定する。FUT-004（制約注記）とは別件 | Takashi Oikawa | 未定 | Open |
 | TBD-003 | 外部 OMR サービス API 連携のコンポーネント設計 | Takashi Oikawa | 未定 | Open |
 | TBD-004 | 単一スクリプトからのモジュール分割方針 | Takashi Oikawa | 未定 | Open |
-| TBD-005 | テスト素材（`prototype/tests/*.musicxml`）の技術的由来確認。権利・法務未解決事項の一次追跡先は `03_DATA_AND_SECURITY_DESIGN.md` TBD-005 | Takashi Oikawa | 未定 | Open |
+| TBD-005 | テスト素材（`prototype/tests/*.musicxml`）の技術的な由来の確認。権利・法務未解決事項の一次追跡先は `03_DATA_AND_SECURITY_DESIGN.md` TBD-005 | Takashi Oikawa | 未定 | Open |
 
-権利・法務未解決事項の一次追跡先は `03_DATA_AND_SECURITY_DESIGN.md` TBD-005 である。本文書 TBD-005 は技術的由来確認に限定する。
+権利・法務未解決事項の一次追跡先は `03_DATA_AND_SECURITY_DESIGN.md` TBD-005 である。本文書 TBD-005 は技術的な由来の確認に限定する。
 
 ---
 
@@ -257,3 +257,4 @@ prototype/
 | 0.3.2 | 2026-09-06 | 文書表現の整理。現行プロトタイプ・本実装確定スコープ・将来検討事項の区分を維持。仕様の追加・変更は行っていない | Takashi Oikawa |
 | 0.3.3 | 2026-09-06 | 横断レビュー反映。対応環境を macOS 上の Python 3.x に統一。TBD-005 を技術的由来に限定。全パート対応 TBD を 02 の子項目として明記 | Takashi Oikawa |
 | 0.3.4 | 2026-09-06 | 原本 PDF 横並び画面を将来検討事項から外し、本リポジトリでは設計・実装方針を定義しない対象へ変更。人間が MuseScore 等で原本 PDF と目視照合する既存運用は維持する | Takashi Oikawa |
+| 0.3.5 | 2026-09-06 | 日本語表現の明確化。仕様・設計判断の変更なし | Takashi Oikawa |
