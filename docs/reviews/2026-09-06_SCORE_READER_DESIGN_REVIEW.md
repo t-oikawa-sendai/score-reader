@@ -13,7 +13,7 @@
 | Branch（ブランチ） | main |
 | Baseline Commit（基準コミット） | 98a2a67d19146ea24dd4a5a9f3a5642f2e21c04b |
 | Previous Review Commit（前回反映コミット） | 92b0d42 |
-| Follow-up Commit SHA（差し戻し反映コミット） | Pending |
+| Follow-up Commit SHA（差し戻し反映コミット） | 9965d36915e7a8df588a2bbef08ac6a7cd6fb9a8 |
 | Owner（管理者） | Takashi Oikawa |
 | Reviewer（レビュアー） | GEM_REVIEWER_PERSONA |
 | Related Documents（関連文書） | README.md / SKILL.md / LICENSE-DOCS / docs/design/01_REQUEST_DEFINITION.md / docs/design/02_REQUIREMENTS_DEFINITION.md / docs/design/03_DATA_AND_SECURITY_DESIGN.md / docs/design/04_UI_AND_FLOW_DESIGN.md / docs/design/05_ARCHITECTURE_DESIGN.md / docs/design/06_OPERATION_AND_HANDOFF.md / NOTICE |
@@ -158,7 +158,7 @@ Reviewer: `GEM_REVIEWER_PERSONA`
 
 前回反映コミット: `92b0d42`（文書のみ。プロトタイプ凍結維持）
 
-差し戻し反映コミット: Pending（実commit後に SHA を記載する。仮SHAは記載しない）
+差し戻し反映コミット: `9965d36915e7a8df588a2bbef08ac6a7cd6fb9a8`
 
 設計文書本体（README / 01〜06）の Status は `Draft` のまま維持する。本レビュー記録の Status `Changes Requested` とは別概念である。
 
