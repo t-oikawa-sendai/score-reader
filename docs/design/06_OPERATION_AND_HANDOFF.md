@@ -4,12 +4,12 @@
 | Item（項目） | Value（値） |
 |---|---|
 | Document ID（文書ID） | OPS-001 |
-| Version（バージョン） | 0.3.2 |
+| Version（バージョン） | 0.3.4 |
 | Status（ステータス） | Draft |
 | Created Date（作成日） | 2026-06-09 |
 | Last Updated（最終更新日） | 2026-09-06 |
 | Owner（管理者） | Takashi Oikawa |
-| Related Documents（関連文書） | README.md / 01_REQUEST_DEFINITION.md / 02_REQUIREMENTS_DEFINITION.md / 03_DATA_AND_SECURITY_DESIGN.md / 04_UI_AND_FLOW_DESIGN.md / 05_ARCHITECTURE_DESIGN.md / docs/reviews/2026-09-06_SCORE_READER_DESIGN_REVIEW.md |
+| Related Documents（関連文書） | README.md / 01_REQUEST_DEFINITION.md / 02_REQUIREMENTS_DEFINITION.md / 03_DATA_AND_SECURITY_DESIGN.md / 04_UI_AND_FLOW_DESIGN.md / 05_ARCHITECTURE_DESIGN.md / docs/reviews/2026-09-06_SCORE_READER_DESIGN_REVIEW.md / docs/reviews/2026-09-06_SCORE_READER_CROSS_DOCUMENT_REVIEW.md |
 
 ---
 
@@ -55,7 +55,8 @@
 | 本番サービスのデプロイ・リリース手順 | プロトタイプ検証段階を対象とする |
 | クラウド・コンテナ環境での運用 | ローカル実行ツール |
 | 監視・アラート・インシデント対応 | ローカル実行ツール |
-| 自動修正・自動統合・Web UI・原本 PDF 横並び画面の運用手順 | 将来検討事項（`README.md` §1 Development Stage Classification 参照） |
+| 自動修正・自動統合・Web UI の運用手順 | 将来検討事項（`README.md` §1 Development Stage Classification 参照） |
+| 原本 PDF 横並び画面の運用手順 | 本リポジトリの対象外。本リポジトリでは設計・実装方針を定義しない。人間が MuseScore 等を使用して原本 PDF と目視照合する既存運用は維持する（`README.md` §1 Development Stage Classification 参照） |
 | MuseScore 等の外部ツール操作手順 | 外部ツールの操作は対象外 |
 
 ---
@@ -66,7 +67,7 @@
 
 **利用環境**
 
-- Python 3.x が動作するローカル環境（macOS / Linux）
+- macOS 上で動作する Python 3.x のローカル環境。特定の macOS バージョンは固定しない。Windows および Linux の動作保証・動作検証は対象外
 - Git リポジトリをローカルにクローン済み
 
 **Prototype の位置づけ**
@@ -97,13 +98,13 @@
 | ID | Handoff Item（引き継ぎ事項） | Details / Background（詳細・背景） |
 |---|---|---|
 | HO-001 | 「推測しない・断定しない」原則 | 確定できない結果は `[WARN]`/`[INFO]` で列挙。黙殺・自動補完を行わない |
-| HO-002 | [3][4] 第 1 パート限定制約 | 現行実装の参照範囲は第 1 パートのみ。現行 CLI は制約注記を出力しない。凍結中はこの欠落を受容する。将来実装時に出力注記を追加する（`02_REQUIREMENTS_DEFINITION.md` §5.7 FUT-004）。全パート対応は `05_ARCHITECTURE_DESIGN.md` TBD-002 / `06_OPERATION_AND_HANDOFF.md` TBD-001。現行実装で注記追加まで完了済みとは扱わない |
+| HO-002 | [3][4] 第 1 パート限定制約 | 現行実装の参照範囲は第 1 パートのみ。現行 CLI は制約注記を出力しない。凍結中はこの欠落を受容する。将来実装時に出力注記を追加する（`02_REQUIREMENTS_DEFINITION.md` §5.7 FUT-004）。全パート対応の採用判断は `02_REQUIREMENTS_DEFINITION.md` TBD-002（親）。実装方針は `05_ARCHITECTURE_DESIGN.md` TBD-002。運用・テスト手順は本文書 TBD-001。現行実装で注記追加まで完了済みとは扱わない |
 | HO-003 | 非破壊仕様 | 入力 MusicXML の読み取りのみ。派生ファイル生成禁止 |
 | HO-004 | 警告 0 件時の注記 | 「完全無欠を保証しない」注記を Output Formatter に組み込む |
 | HO-005 | music21 バージョン固定 | `music21==10.3.0`。変更時は全検査再検証 |
 | HO-006 | 著作権・秘密情報の非混入 | テスト素材は楽曲の権利、MusicXML エンコーディングの権利、加工・再配布条件を分けて確認する。現行公開中素材は権利確認中であり、公開可否は法的に未確定である |
-| HO-007 | 本実装確定スコープ | 複数 MusicXML 入力、正規化、比較可能性判定、差分比較、差分可視化、比較レポート生成。未実装であり、未確定ではない。現行プロトタイプは単一 MusicXML 構造検査のまま凍結する。自動修正、自動統合、Web UI、原本 PDF 横並び表示は将来検討事項 |
-| HO-008 | テスト素材公開の確定事項と未解決事項 | 最終判断責任者: Takashi Oikawa。判断期限: 2026-09-06。暫定措置: 権利確認中である旨を明示して公開継続。未解決: MusicXML エンコーディングの個別利用条件、再配布可否の法的確定、準拠法域（`03_DATA_AND_SECURITY_DESIGN.md` TBD-005） |
+| HO-007 | 本実装確定スコープ | 複数 MusicXML 入力、正規化、比較可能性判定、差分比較、差分可視化、比較レポート生成。未実装であり、未確定ではない。現行プロトタイプは単一 MusicXML 構造検査のまま凍結する。自動修正、自動統合、Web UI は将来検討事項。原本 PDF 横並び表示は本リポジトリの対象外であり、本リポジトリでは設計・実装方針を定義しない。人間が MuseScore 等を使用して原本 PDF と目視照合する既存運用は維持する |
+| HO-008 | テスト素材公開の確定事項と未解決事項 | 最終判断責任者: Takashi Oikawa。公開判断の固定期限は設けない。暫定措置: 権利確認中である旨を明示して公開継続。未解決: MusicXML エンコーディングの個別利用条件、再配布可否の法的確定、準拠法域（`03_DATA_AND_SECURITY_DESIGN.md` TBD-005）。技術的由来は `05_ARCHITECTURE_DESIGN.md` TBD-005 |
 | HO-009 | 性能の定量基準 | プロトタイプ検証段階では性能の定量的な合否基準を設けない。実行時間は必要に応じて測定対象にできる。本実装段階の性能基準は、必要時に別途定義する |
 
 #### プロトタイプ検証項目（技術検証済み [1]〜[8]）
@@ -217,7 +218,7 @@ python3 verify_score.py ../tests/<file>.musicxml --json
 | 項目 | 方針 |
 |---|---|
 | テスト素材 | `prototype/tests/` は楽曲の権利、MusicXML エンコーディングの権利、加工・再配布条件を分けて確認する。現行公開中素材は権利確認中の暫定公開継続 |
-| 著作権 | 著作権保護楽譜をリポジトリへ登録しない。公開可否の法的確定は `03_DATA_AND_SECURITY_DESIGN.md` TBD-005。最終判断責任者・判断期限・暫定措置は HO-008 |
+| 著作権 | 著作権保護楽譜をリポジトリへ登録しない。公開可否の法的確定は `03_DATA_AND_SECURITY_DESIGN.md` TBD-005。最終判断責任者・暫定措置は HO-008。公開判断の固定期限は設けない |
 | 秘密情報 | API キー・トークン・個人情報をソース・Git・出力に含めない |
 | 定期メンテナンス | プロトタイプ検証段階では対象外 |
 | データ保持 | score-reader は出力ファイルを生成しない。保存期間は利用者に委ねる |
@@ -229,12 +230,11 @@ python3 verify_score.py ../tests/<file>.musicxml --json
 
 | ID | Open Issue（未決事項） | Owner（担当者） | Due Date（期限） | Status（ステータス） |
 |---|---|---|---|---|
-| TBD-001 | 検査 [3][4] 全パート対応時の運用・テスト手順更新。現行 CLI の制約注記未実装（`02_REQUIREMENTS_DEFINITION.md` §5.7 FUT-004）とは別件 | Takashi Oikawa | 未定 | Open |
+| TBD-001 | `02_REQUIREMENTS_DEFINITION.md` TBD-002 および `05_ARCHITECTURE_DESIGN.md` TBD-002 に依存する子項目。全パート対応の採用判断と実装方針の確定後に、運用・テスト手順を定義する。FUT-004（制約注記）とは別件 | Takashi Oikawa | 未定 | Open |
 | TBD-002 | `[WARN]`/`[ANOMALY]` 発生パターンのナレッジ化 | Takashi Oikawa | 未定 | Open |
 | TBD-003 | 将来検討事項の本番運用手順（デプロイ・監視等） | Takashi Oikawa | 未定 | Open |
-| TBD-005 | Windows 環境での動作確認と手順書更新 | Takashi Oikawa | 未定 | Open |
 
-テスト素材の未解決権利事項は `03_DATA_AND_SECURITY_DESIGN.md` TBD-005、由来・個別利用条件は `05_ARCHITECTURE_DESIGN.md` TBD-005 を参照する。最終判断責任者・判断期限・暫定公開継続は `03_DATA_AND_SECURITY_DESIGN.md` で確定済みである。本節 TBD-005 は Windows 確認のみを対象とし、権利問題の追跡先ではない。
+テスト素材の未解決権利事項は `03_DATA_AND_SECURITY_DESIGN.md` TBD-005、技術的由来は `05_ARCHITECTURE_DESIGN.md` TBD-005 を参照する。最終判断責任者・暫定公開継続は `03_DATA_AND_SECURITY_DESIGN.md` で確定済みである。公開判断の固定期限は設けない。
 
 ### Resolved Issues（解決済み事項）
 
@@ -253,7 +253,7 @@ python3 verify_score.py ../tests/<file>.musicxml --json
 3. **著作権・秘密情報の非混入を設計レベルで保持する**（HO-006）
 4. **現行プロトタイプの受容済み制約と将来改善要求を混同しない**（HO-002）。凍結中は制約注記の欠落を受容し、将来実装時に注記を追加する。現行実装で完了済みと扱わない
 5. **本実装確定スコープを未確定と扱わない**（HO-007）。現行プロトタイプ凍結を維持する
-6. **本実装開始条件（権利）**: テスト素材の権利確認は未完了である（HO-008）。本実装を開始する前に、未解決権利事項（MusicXML エンコーディングの個別利用条件、再配布可否の法的確定、準拠法域）を解消するか、暫定公開継続のまま進めるかを Document Owner（Takashi Oikawa）が判断する。判断期限は 2026-09-06 である。判断完了までの暫定措置は公開継続である
+6. **本実装開始条件（権利）**: テスト素材の権利確認は未完了である（HO-008）。本実装を開始する前に、未解決権利事項（MusicXML エンコーディングの個別利用条件、再配布可否の法的確定、準拠法域）を解消するか、暫定公開継続のまま進めるかを Document Owner（Takashi Oikawa）が判断する。公開判断の固定期限は設けない。権利判断が完了するまでの暫定措置は公開継続である
 7. **性能の定量基準は現段階では未設定**（HO-009）。根拠のない秒数を合否基準として追加しない
 
 ---
@@ -267,3 +267,5 @@ python3 verify_score.py ../tests/<file>.musicxml --json
 | 0.3 | 2026-09-06 | 設計レビュー反映。分離ライセンス構成へ修正。HO-002 を現行未完了として記載。SC-001〜SC-009 参照を明示。ライセンス分離 TBD を Resolved へ変更 | Takashi Oikawa |
 | 0.3.1 | 2026-09-06 | 設計レビュー差し戻し反映。本実装確定スコープ・権利確認未完了・性能定量基準なしを引き継ぎ事項へ追加。現行プロトタイプ凍結を維持 | Takashi Oikawa |
 | 0.3.2 | 2026-09-06 | 文書表現の整理。機械と人間の境界判断を将来の開発者・保守者へ引き継ぐ思想を明示。仕様の追加・変更は行っていない | Takashi Oikawa |
+| 0.3.3 | 2026-09-06 | 横断レビュー反映。公開判断の固定期限を廃止。対応環境を macOS 上の Python 3.x に統一。全パート対応運用 TBD の依存を明記 | Takashi Oikawa |
+| 0.3.4 | 2026-09-06 | 原本 PDF 横並び画面を将来検討事項から外し、本リポジトリでは設計・実装方針を定義しない対象へ変更。人間が MuseScore 等で原本 PDF と目視照合する既存運用は維持する | Takashi Oikawa |

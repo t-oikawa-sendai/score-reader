@@ -4,12 +4,12 @@
 | Item（項目） | Value（値） |
 |---|---|
 | Document ID（文書ID） | REQS-001 |
-| Version（バージョン） | 0.3.2 |
+| Version（バージョン） | 0.3.4 |
 | Status（ステータス） | Draft |
 | Created Date（作成日） | 2026-06-09 |
 | Last Updated（最終更新日） | 2026-09-06 |
 | Owner（管理者） | Takashi Oikawa |
-| Related Documents（関連文書） | README.md / 01_REQUEST_DEFINITION.md / 03_DATA_AND_SECURITY_DESIGN.md / 04_UI_AND_FLOW_DESIGN.md / 05_ARCHITECTURE_DESIGN.md / docs/reviews/2026-09-06_SCORE_READER_DESIGN_REVIEW.md |
+| Related Documents（関連文書） | README.md / 01_REQUEST_DEFINITION.md / 03_DATA_AND_SECURITY_DESIGN.md / 04_UI_AND_FLOW_DESIGN.md / 05_ARCHITECTURE_DESIGN.md / docs/reviews/2026-09-06_SCORE_READER_DESIGN_REVIEW.md / docs/reviews/2026-09-06_SCORE_READER_CROSS_DOCUMENT_REVIEW.md |
 
 ---
 
@@ -31,7 +31,7 @@
 
 本文書は**現行プロトタイプ**における `verify_score.py`（単一 MusicXML 構造検査の検証実装）が満たすべき機能要件・非機能要件を定義し、実装・検証フェーズの基準とすることを目的とする。
 
-開発段階の分類は `README.md` §1 Development Stage Classification を参照する。機械と人間の役割境界は `README.md` および `01_REQUEST_DEFINITION.md` §1 を参照する。本実装確定スコープは §5.8 に分離する。詳細仕様は本実装時に定義する。現行プロトタイプの FR-001〜FR-012 と混在させない。自動修正、自動統合、Web UI、原本 PDF 横並び表示は将来検討事項のままとする。本文書の前提となる背景・課題・要求は `01_REQUEST_DEFINITION.md` に記載する。本文書の対象読者は、設計者・実装者・プロジェクトオーナーである。
+開発段階の分類は `README.md` §1 Development Stage Classification を参照する。機械と人間の役割境界は `README.md` および `01_REQUEST_DEFINITION.md` §1 を参照する。本実装確定スコープは §5.8 に分離する。詳細仕様は本実装時に定義する。現行プロトタイプの FR-001〜FR-012 と混在させない。自動修正、自動統合、Web UI は将来検討事項のままとする。原本 PDF 横並び表示は本リポジトリの対象外であり、本リポジトリでは設計・実装方針を定義しない。人間が MuseScore 等を使用して原本 PDF と目視照合する既存運用は維持する。本文書の前提となる背景・課題・要求は `01_REQUEST_DEFINITION.md` に記載する。本文書の対象読者は、設計者・実装者・プロジェクトオーナーである。
 
 ---
 
@@ -251,7 +251,7 @@
 
 ### 5.8 Production Implementation Confirmed Scope（本実装確定スコープ）
 
-本節は現行プロトタイプの FR-001〜FR-012 ではない。完成版MusicXML作成支援システムの本実装における確定機能である。未実装であり、未確定ではない。詳細仕様は本実装時に定義する。自動修正、自動統合、Web UI、原本 PDF 横並び表示は含めない。
+本節は現行プロトタイプの FR-001〜FR-012 ではない。完成版MusicXML作成支援システムの本実装における確定機能である。未実装であり、未確定ではない。詳細仕様は本実装時に定義する。自動修正、自動統合、Web UI は含めない。原本 PDF 横並び表示は本リポジトリの対象外であり、本リポジトリでは設計・実装方針を定義しない。
 
 | 本実装確定機能 | 内容 |
 |---|---|
@@ -268,7 +268,7 @@
 
 | ID | Open Issue（未決事項） | Owner（担当者） | Due Date（期限） | Status（ステータス） |
 |---|---|---|---|---|
-| TBD-002 | FR-004（調号）・FR-005（テンポ/拍子）の参照対象を「第 1 パートのみ」から「全パート」に拡張するか。出力注記の追加（§5.7 FUT-004）とは別件。 | Takashi Oikawa | 未定 | Open |
+| TBD-002 | FR-004（調号）・FR-005（テンポ/拍子）の参照対象を「第 1 パートのみ」から「全パート」に拡張するか。親項目。子項目は `05_ARCHITECTURE_DESIGN.md` TBD-002（実装方針）および `06_OPERATION_AND_HANDOFF.md` TBD-001（運用・テスト手順）。FUT-004（制約注記）とは別件。 | Takashi Oikawa | 未定 | Open |
 | TBD-003 | FR-006（Unpitched）の検出対象を `Unpitched` 以外（スラー欠落・連符崩れ等）に拡張するか。 | Takashi Oikawa | 未定 | Open |
 
 ### Resolved Issues（解決済み事項）
@@ -286,7 +286,7 @@
 
 1. **「推測しない」設計原則を実装に徹底すること**: 断定できない結果は `[WARN]` / `[INFO]` として列挙する。黙殺・自動補完・推測による埋め合わせを行わないこと（NFR §5.2 設計原則要件 参照）。
 
-2. **FR-004・FR-005 の参照対象の制約を引き継ぐこと**: 調号・テンポ/拍子の列挙は「第 1 パート（`score.parts[0]`）のみ」である。現行 CLI は制約注記を出力しない。凍結中はこの欠落を受容する。出力注記の追加は §5.7 FUT-004、全パート対応は `02_REQUIREMENTS_DEFINITION.md` TBD-002 として分離する。
+2. **FR-004・FR-005 の参照対象の制約を引き継ぐこと**: 調号・テンポ/拍子の列挙は「第 1 パート（`score.parts[0]`）のみ」である。現行 CLI は制約注記を出力しない。凍結中はこの欠落を受容する。出力注記の追加は §5.7 FUT-004。全パート対応の採用判断は本文書 TBD-002（親）、実装方針は `05_ARCHITECTURE_DESIGN.md` TBD-002、運用手順は `06_OPERATION_AND_HANDOFF.md` TBD-001。
 
 3. **非破壊仕様を実装レベルで保持すること**: 入力ファイルの読み取り専用・派生ファイル出力禁止・標準出力限定は実装レベルで変更しないこと（NFR §5.2 非破壊要件 参照）。
 
@@ -305,12 +305,14 @@
 | 0.3 | 2026-09-06 | 設計レビュー反映。FR を現仕様に一致させ、将来実装要求を §5.7 へ分離。SC-009 と FR-006 の対応を追加 | Takashi Oikawa |
 | 0.3.1 | 2026-09-06 | 設計レビュー差し戻し反映。TBD-001 を本実装確定スコープとして解消し §5.8 へ分離。性能要件から「数秒以内」を削除し TBD-004 を解消 | Takashi Oikawa |
 | 0.3.2 | 2026-09-06 | 文書表現の整理。FR-006 の機能名を Unpitched に統一。テキストと JSON の情報差を Appendix へ移動。仕様の追加・変更は行っていない | Takashi Oikawa |
+| 0.3.3 | 2026-09-06 | 横断レビュー反映。全パート対応 TBD の親子依存を明記。SC-009 は件数報告、表示差は Appendix / FUT-003 | Takashi Oikawa |
+| 0.3.4 | 2026-09-06 | 原本 PDF 横並び表示を将来検討事項から外し、本リポジトリでは設計・実装方針を定義しない対象へ変更。人間が MuseScore 等で原本 PDF と目視照合する既存運用は維持する | Takashi Oikawa |
 
 ---
 
 ## 9. Appendix / Known Limitations（付録・既知の限界）
 
-本付録は現行プロトタイプの実装事実である。機能要件（§5.1）そのものではなく、テキスト出力と JSON 出力の情報差を記録する。将来実装仕様は確定しない（§5.7 参照）。
+本付録は現行プロトタイプの実装事実である。機能要件（§5.1）そのものではなく、テキスト出力と JSON 出力の情報差を記録する。将来実装仕様は確定しない（§5.7 参照）。`01_REQUEST_DEFINITION.md` SC-009 は Unpitched 件数を報告できることだけを指す。検査 [5] のテキスト/JSON 表示差は本付録の現行実装事実であり、表示統一は §5.7 FUT-003 で扱う。
 
 #### テキストと JSON の情報差（現仕様）
 

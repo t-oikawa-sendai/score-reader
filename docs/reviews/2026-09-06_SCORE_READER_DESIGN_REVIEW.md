@@ -4,7 +4,7 @@
 | Item（項目） | Value（値） |
 |---|---|
 | Document ID（文書ID） | REVIEW-SCORE-READER-20260906-001 |
-| Version（バージョン） | 0.2 |
+| Version（バージョン） | 0.3 |
 | Status（ステータス） | Changes Requested |
 | Review Date（レビュー日） | 2026-09-06 |
 | Created Date（作成日） | 2026-09-06 |
@@ -16,7 +16,7 @@
 | Follow-up Commit SHA（差し戻し反映コミット） | 9965d36915e7a8df588a2bbef08ac6a7cd6fb9a8 |
 | Owner（管理者） | Takashi Oikawa |
 | Reviewer（レビュアー） | GEM_REVIEWER_PERSONA |
-| Related Documents（関連文書） | README.md / SKILL.md / LICENSE-DOCS / docs/design/01_REQUEST_DEFINITION.md / docs/design/02_REQUIREMENTS_DEFINITION.md / docs/design/03_DATA_AND_SECURITY_DESIGN.md / docs/design/04_UI_AND_FLOW_DESIGN.md / docs/design/05_ARCHITECTURE_DESIGN.md / docs/design/06_OPERATION_AND_HANDOFF.md / NOTICE |
+| Related Documents（関連文書） | README.md / SKILL.md / LICENSE-DOCS / docs/design/01_REQUEST_DEFINITION.md / docs/design/02_REQUIREMENTS_DEFINITION.md / docs/design/03_DATA_AND_SECURITY_DESIGN.md / docs/design/04_UI_AND_FLOW_DESIGN.md / docs/design/05_ARCHITECTURE_DESIGN.md / docs/design/06_OPERATION_AND_HANDOFF.md / NOTICE / docs/reviews/2026-09-06_SCORE_READER_CROSS_DOCUMENT_REVIEW.md |
 
 ---
 
@@ -36,7 +36,7 @@
 | 実施範囲 | 文書修正のみ |
 | コード凍結 | 現行プロトタイプは凍結を維持する。`SKILL.md` へ一般的な改修例外規定は追加しない |
 | 設計側の訂正 | project-bootstrap の全面導入は行わない。履歴保存の考え方だけを利用する |
-| commit / push | 本記録作成時点で未実施。差分確認後にプロジェクトオーナーが判断する |
+| commit / push | 初版（Version 0.1）作成時点で未実施。差分確認後にプロジェクトオーナーが判断する |
 
 ---
 
@@ -68,7 +68,7 @@
 | RV-011 | Adopted | FR-001〜FR-012 は現行プロトタイプの実際の動作を記載する。将来実装で実現したい仕様は独立した将来実装要求へ分離する | 02_REQUIREMENTS_DEFINITION.md |
 | RV-012 | Adopted / Open remainder | 楽曲・作曲物の権利、MusicXML エンコーディングの権利、派生成果物、公開 GitHub からの再配布範囲を分離して確認する。パブリックドメイン楽譜なら MusicXML も公開可能とは読ませない。準拠法域および公開可否の最終判断は未解決のまま残す | 01_REQUEST_DEFINITION.md / 03_DATA_AND_SECURITY_DESIGN.md / NOTICE / SKILL.md / LICENSE-DOCS |
 
-RV-012 のうち、最終判断責任者・判断期限・暫定公開継続は §11 SB-002 で確定した。公開可否の法的確定、MusicXML エンコーディングの個別利用条件、準拠法域は未解決のまま残す。
+RV-012 のうち、最終判断責任者・暫定公開継続は §11 SB-002 で確定した。公開判断の固定期限は設けない。公開可否の法的確定、MusicXML エンコーディングの個別利用条件、準拠法域は未解決のまま残す。一次追跡先は `03_DATA_AND_SECURITY_DESIGN.md` TBD-005 である。
 
 JSON との情報量統一、JSON 形式の FATAL、検査 [5] の 0 件表示統一は将来実装要求として分離した。フィールド名や JSON エラー構造は今回確定していない。
 
@@ -103,7 +103,7 @@ JSON との情報量統一、JSON 形式の FATAL、検査 [5] の 0 件表示�
 - `LICENSE-CODE`
 - その他のソースコード、依存関係、Git 設定
 
-コード変更はなく、commit および push は本記録作成時点で実施していない。
+コード変更はなく、commit および push は初版（Version 0.1）作成時点では実施していない。
 
 ---
 
@@ -123,9 +123,10 @@ JSON との情報量統一、JSON 形式の FATAL、検査 [5] の 0 件表示�
 
 | 項目 | 追跡先 |
 |---|---|
-| テスト素材エンコーディングの個別利用条件 | `05_ARCHITECTURE_DESIGN.md` TBD-005 / `NOTICE` |
+| テスト素材エンコーディングの個別利用条件 | `03_DATA_AND_SECURITY_DESIGN.md` TBD-005 / `NOTICE` |
 | 世界向け再配布可否の法的確定 | `03_DATA_AND_SECURITY_DESIGN.md` TBD-005 |
 | 準拠法域 | `03_DATA_AND_SECURITY_DESIGN.md` TBD-005 |
+| テスト素材の技術的由来 | `05_ARCHITECTURE_DESIGN.md` TBD-005 |
 | 2026-06-28 限定保守の明示的な承認記録 | `06_OPERATION_AND_HANDOFF.md` §5.2。確認できる記録からは特定できない |
 | 将来実装での JSON 仕様（情報量統一、JSON エラー形式、フィールド名） | `02_REQUIREMENTS_DEFINITION.md` §5.7 |
 | プロトタイプを再利用・置換・廃止する判断 | `01_REQUEST_DEFINITION.md` TBD-002 / `SKILL.md` §7（本文書ではコードを変更しない） |
@@ -133,7 +134,7 @@ JSON との情報量統一、JSON 形式の FATAL、検査 [5] の 0 件表示�
 | 本実装比較のアーキテクチャ詳細 | `05_ARCHITECTURE_DESIGN.md` TBD-001 |
 | 本実装比較結果ファイルの保存先・廃棄方針 | `03_DATA_AND_SECURITY_DESIGN.md` TBD-002 |
 
-最終判断責任者（Takashi Oikawa）、判断期限（2026-09-06）、暫定公開継続は未解決ではない。複数 MusicXML 比較を本実装対象にするか自体も未解決ではない。
+最終判断責任者（Takashi Oikawa）、暫定公開継続は未解決ではない。公開判断の固定期限は設けない。複数 MusicXML 比較を本実装対象にするか自体も未解決ではない。
 
 ---
 
@@ -148,7 +149,8 @@ JSON との情報量統一、JSON 形式の FATAL、検査 [5] の 0 件表示�
 | Version（バージョン） | Date（日付） | Changes（変更内容） | Author（変更者） |
 |---|---|---|---|
 | 0.1 | 2026-09-06 | 初版。RV-001〜RV-012 の最終判定、文書反映、未解決事項を記録。RV-006 / RV-008 / RV-009 は原レビュー定義に合わせて記録 | Takashi Oikawa |
-| 0.2 | 2026-09-06 | Status を Changes Requested へ変更。Reviewer を GEM_REVIEWER_PERSONA に統一。差し戻し事項と設計判断結果を記録。差し戻し反映コミットは Pending | Takashi Oikawa |
+| 0.2 | 2026-09-06 | Status を Changes Requested へ変更。Reviewer を GEM_REVIEWER_PERSONA に統一。差し戻し事項と設計判断結果を記録。本 Version 記載時点では差し戻し反映コミット SHA は未記録であり Pending と記した | Takashi Oikawa |
+| 0.3 | 2026-09-06 | 差し戻し反映コミット `9965d36915e7a8df588a2bbef08ac6a7cd6fb9a8` と Version・Change History を整合。当該 SHA の記録を反映した後続コミットは `45b2004027df0f4c2efd465995d034a945d6c388`。公開判断の固定期限廃止と権利一次追跡先の統一を記録 | Takashi Oikawa |
 
 ---
 
@@ -165,6 +167,6 @@ Reviewer: `GEM_REVIEWER_PERSONA`
 | ID | 差し戻し事項 | 設計判断結果 |
 |---|---|---|
 | SB-001 | 複数 MusicXML 比較を実装対象にするか自体が TBD-001 として未確定のまま残っていた | 本実装確定スコープとする。対象は複数 MusicXML 入力、正規化、比較可能性判定、差分比較、差分可視化、比較レポート生成。現行プロトタイプは単一 MusicXML 構造検査のまま。未実装と未確定を混同しない。自動修正、自動統合、Web UI、原本 PDF 横並び表示は将来検討事項のまま。`01_REQUEST_DEFINITION.md` TBD-001 および `02_REQUIREMENTS_DEFINITION.md` TBD-001 を Resolved とする |
-| SB-002 | 公開中テスト素材について、最終判断責任者・判断期限・暫定措置が未確定のまま残っていた | 暫定公開継続。最終判断責任者: Takashi Oikawa。判断期限: 2026-09-06。判断完了までの暫定措置: 権利確認中・公開可否未確定であることを明示して公開継続。未解決として残すのは MusicXML エンコーディングの個別利用条件、再配布可否の法的確定、準拠法域。法的に公開可能とは断定しない |
+| SB-002 | 公開中テスト素材について、最終判断責任者・判断期限・暫定措置が未確定のまま残っていた | 暫定公開継続。最終判断責任者: Takashi Oikawa。公開判断の固定期限は設けない。権利判断が完了するまでの暫定措置: 権利確認中・公開可否未確定であることを明示して公開継続。未解決として残すのは MusicXML エンコーディングの個別利用条件、再配布可否の法的確定、準拠法域（一次追跡先: `03_DATA_AND_SECURITY_DESIGN.md` TBD-005）。法的に公開可能とは断定しない |
 | SB-003 | 性能要件で「数秒以内」と「定量基準は規定しない」が併記されていた | 「数秒以内」を削除する。プロトタイプ検証段階では性能の定量的な合否基準を設けない。実行時間は必要に応じて測定対象にできる。本実装段階の性能基準は必要時に別途定義する。`02_REQUIREMENTS_DEFINITION.md` TBD-004 を Resolved とする |
 | SB-004 | README の Reviewer が未定、レビュー記録 Status が Reviewed のままだった | README の Reviewer を `GEM_REVIEWER_PERSONA` に統一する。設計文書 Status は `Draft` を維持する。本レビュー記録 Status は `Changes Requested` とする |

@@ -4,12 +4,12 @@
 | Item（項目） | Value（値） |
 |---|---|
 | Document ID（文書ID） | ARCH-001 |
-| Version（バージョン） | 0.3.2 |
+| Version（バージョン） | 0.3.4 |
 | Status（ステータス） | Draft |
 | Created Date（作成日） | 2026-06-09 |
 | Last Updated（最終更新日） | 2026-09-06 |
 | Owner（管理者） | Takashi Oikawa |
-| Related Documents（関連文書） | README.md / 02_REQUIREMENTS_DEFINITION.md / 03_DATA_AND_SECURITY_DESIGN.md / 04_UI_AND_FLOW_DESIGN.md / 06_OPERATION_AND_HANDOFF.md / docs/reviews/2026-09-06_SCORE_READER_DESIGN_REVIEW.md |
+| Related Documents（関連文書） | README.md / 02_REQUIREMENTS_DEFINITION.md / 03_DATA_AND_SECURITY_DESIGN.md / 04_UI_AND_FLOW_DESIGN.md / 06_OPERATION_AND_HANDOFF.md / docs/reviews/2026-09-06_SCORE_READER_DESIGN_REVIEW.md / docs/reviews/2026-09-06_SCORE_READER_CROSS_DOCUMENT_REVIEW.md |
 
 ---
 
@@ -30,7 +30,7 @@
 
 本文書は**現行プロトタイプ**における `verify_score.py`（単一 MusicXML 構造検査の検証実装）のシステム構成・技術スタック・処理フロー・アーキテクチャ制約を定義し、実装フェーズの基準とすることを目的とする。
 
-開発段階の分類は `README.md` §1 Development Stage Classification を参照する。本実装確定スコープ（複数 MusicXML 入力、正規化、比較可能性判定、差分比較、差分可視化、比較レポート生成）のアーキテクチャ詳細は、本文書の Open Issues（TBD-001）で管理する。比較機能の実装可否は確定済みである。プロトタイプアーキテクチャと本実装構想を混同しない。自動修正、自動統合、Web UI、原本 PDF 横並び画面は将来検討事項のままとする。本文書の対象読者は、設計者・実装者・プロジェクトオーナーである。
+開発段階の分類は `README.md` §1 Development Stage Classification を参照する。本実装確定スコープ（複数 MusicXML 入力、正規化、比較可能性判定、差分比較、差分可視化、比較レポート生成）のアーキテクチャ詳細は、本文書の Open Issues（TBD-001）で管理する。比較機能の実装可否は確定済みである。プロトタイプアーキテクチャと本実装構想を混同しない。自動修正、自動統合、Web UI は将来検討事項のままとする。原本 PDF 横並び画面は本リポジトリの対象外であり、本リポジトリでは設計・実装方針を定義しない。人間が MuseScore 等を使用して原本 PDF と目視照合する既存運用は維持する。本文書の対象読者は、設計者・実装者・プロジェクトオーナーである。
 
 ---
 
@@ -54,7 +54,8 @@
 | データベース設計 | データを永続化しない |
 | 複数 MusicXML の自動統合 | 自動修正、自動統合は将来検討事項。複数 MusicXML 比較自体は本実装確定スコープであり、アーキテクチャ詳細は `05_ARCHITECTURE_DESIGN.md` TBD-001 |
 | MusicXML 自動修正パイプライン | 同上 |
-| GUI・Web UI・原本 PDF 横並び画面 | 将来検討事項。検査 [3][4] 全パート対応（`05_ARCHITECTURE_DESIGN.md` TBD-002）とは別件 |
+| GUI・Web UI | 将来検討事項 |
+| 原本 PDF 横並び画面 | 本リポジトリの対象外。本リポジトリでは設計・実装方針を定義しない。人間が MuseScore 等を使用して原本 PDF と目視照合する既存運用は維持する |
 | 外部 OMR サービス API 連携 | プロトタイプ検証段階では外部 API 連携を持たない（`05_ARCHITECTURE_DESIGN.md` TBD-003） |
 | スケーリング・冗長化・クラウドデプロイ | ローカル実行ツールのためプロトタイプ検証段階では対象外 |
 
@@ -175,7 +176,7 @@ prototype/
 | [7] 和音音数 | 構成音数分布の報告 | 全パート | 何音であるべきか |
 | [8] パート間小節数 | 小節数一致・不一致 | 全パート | どのパートが正しいか |
 
-検査 [3][4] は第 1 パートだけを参照する。現行 CLI 出力にはこの制約の注記がない。凍結中は受容済み制約とする。出力注記の実装は `02_REQUIREMENTS_DEFINITION.md` §5.7 FUT-004 へ移す。全パート対応は `05_ARCHITECTURE_DESIGN.md` TBD-002 であり、制約注記の追加とは混同しない。
+検査 [3][4] は第 1 パートだけを参照する。現行 CLI 出力にはこの制約の注記がない。凍結中は受容済み制約とする。出力注記の実装は `02_REQUIREMENTS_DEFINITION.md` §5.7 FUT-004 へ移す。全パート対応の採用判断は `02_REQUIREMENTS_DEFINITION.md` TBD-002、実装方針は本文書 TBD-002 である。
 
 ### 5.4 External Integration and API Design（外部システム連携・API設計方針）
 
@@ -188,7 +189,7 @@ prototype/
 | 標準出力 | print / json.dumps | 検査結果出力 |
 | 外部 OMR サービス | score-reader スコープ外 | 利用者が PDF → MusicXML を取得 |
 
-本実装確定スコープ: 複数 MusicXML 比較（入力・正規化・比較可能性判定・差分比較・差分可視化・比較レポート生成）。アーキテクチャ詳細は `05_ARCHITECTURE_DESIGN.md` TBD-001。将来検討事項: 自動修正、自動統合、外部 OMR API 連携（`05_ARCHITECTURE_DESIGN.md` TBD-003）、Web UI（TBD-002 は検査 [3][4] 全パート対応であり、Web UI とは別件）。
+本実装確定スコープ: 複数 MusicXML 比較（入力・正規化・比較可能性判定・差分比較・差分可視化・比較レポート生成）。アーキテクチャ詳細は `05_ARCHITECTURE_DESIGN.md` TBD-001。将来検討事項: 自動修正、自動統合、外部 OMR API 連携（`05_ARCHITECTURE_DESIGN.md` TBD-003）、Web UI。
 
 ### 5.5 Scalability and Fault Tolerance（スケーラビリティ方針・障害対策）
 
@@ -207,18 +208,18 @@ prototype/
 |---|---|
 | music21 バージョン非互換 | `requirements.txt` で `10.3.0` に固定。更新時は再検証 |
 | 単一スクリプト肥大化 | 将来検討事項として Inspection Engine を関数分離（`05_ARCHITECTURE_DESIGN.md` TBD-004） |
-| [3][4] 第 1 パート限定 | 現行 CLI は制約注記を出力しない。凍結中は受容済み制約。出力注記の追加は `02_REQUIREMENTS_DEFINITION.md` §5.7 FUT-004。全パート対応は `05_ARCHITECTURE_DESIGN.md` TBD-002 |
+| [3][4] 第 1 パート限定 | 現行 CLI は制約注記を出力しない。凍結中は受容済み制約。出力注記の追加は `02_REQUIREMENTS_DEFINITION.md` §5.7 FUT-004。全パート対応の採用判断は `02_REQUIREMENTS_DEFINITION.md` TBD-002、実装方針は本文書 TBD-002 |
 | OMR 出力の誤信 | Output Formatter で「完全無欠を保証しない」注記を必ず出力 |
 
 ### 5.6 Infrastructure and Environment（インフラ・環境構成）
 
 | Environment（環境） | Configuration / Resources（構成・リソース概要） |
 |---|---|
-| Development / Verification（開発・検証） | Python 3.x（macOS / Linux）。`.venv`。`music21==10.3.0` |
+| Development / Verification（開発・検証） | macOS 上で動作する Python 3.x。`.venv`。`music21==10.3.0` |
 | Staging（ステージング） | プロトタイプ検証段階では対象外 |
 | Production（本番） | プロトタイプ検証段階では対象外 |
 
-環境構築の詳細手順は `06_OPERATION_AND_HANDOFF.md` を参照。Windows 確認は `06_OPERATION_AND_HANDOFF.md` TBD-005 を参照する。
+環境構築の詳細手順は `06_OPERATION_AND_HANDOFF.md` を参照。対応 OS は macOS のみとする。特定の macOS バージョンは固定しない。Windows および Linux の動作保証・動作検証は対象外である。
 
 ---
 
@@ -227,20 +228,19 @@ prototype/
 | ID | Open Issue（未決事項） | Owner（担当者） | Due Date（期限） | Status（ステータス） |
 |---|---|---|---|---|
 | TBD-001 | 本実装確定スコープである複数 MusicXML 比較（入力・正規化・比較可能性判定・差分比較・差分可視化・比較レポート生成）のアーキテクチャ詳細、および比較結果ファイル保存の設計。実装するか自体は確定済み。自動修正・自動統合は対象外（将来検討）。 | Takashi Oikawa | 未定 | Open |
-| TBD-002 | 検査 [3][4] を全パート対応へ拡張する実装方針。現行 CLI の制約注記未実装（FUT-004）とは別件 | Takashi Oikawa | 未定 | Open |
+| TBD-002 | `02_REQUIREMENTS_DEFINITION.md` TBD-002（親項目: 検査 [3][4] 全パート対応の採用可否）の子項目。全パート対応を採用した場合の実装方針を決定する。FUT-004（制約注記）とは別件 | Takashi Oikawa | 未定 | Open |
 | TBD-003 | 外部 OMR サービス API 連携のコンポーネント設計 | Takashi Oikawa | 未定 | Open |
 | TBD-004 | 単一スクリプトからのモジュール分割方針 | Takashi Oikawa | 未定 | Open |
-| TBD-005 | テスト素材（`prototype/tests/*.musicxml`）の由来、MusicXML エンコーディングの個別利用条件、再配布可否の法的確定。music21 ソフトウェア本体の BSD-3-Clause は corpus 内エンコーディングへ当然には適用されない。公開の最終判断責任者（Takashi Oikawa）、判断期限（2026-09-06）、暫定公開継続は `03_DATA_AND_SECURITY_DESIGN.md` で確定済み | Takashi Oikawa | 未定 | Open |
-| TBD-006 | Windows 環境での動作確認 | Takashi Oikawa | 未定 | Open |
+| TBD-005 | テスト素材（`prototype/tests/*.musicxml`）の技術的由来確認。権利・法務未解決事項の一次追跡先は `03_DATA_AND_SECURITY_DESIGN.md` TBD-005 | Takashi Oikawa | 未定 | Open |
 
-権利判断の分離確認は `03_DATA_AND_SECURITY_DESIGN.md` TBD-005 を参照する。
+権利・法務未解決事項の一次追跡先は `03_DATA_AND_SECURITY_DESIGN.md` TBD-005 である。本文書 TBD-005 は技術的由来確認に限定する。
 
 ---
 
 ## 7. Handoff to Detail Design（詳細設計への引き継ぎ）
 
 1. **「推測しない・断定しない」を実装で徹底**: 確定できない結果は `[WARN]` / `[INFO]` で列挙する。
-2. **[3][4] の第 1 パート限定**: 現行実装の参照範囲は第 1 パートのみ。現行 CLI は制約注記を出力しない。凍結中はこの欠落を受容する。出力注記の追加は将来実装要求（`02_REQUIREMENTS_DEFINITION.md` §5.7 FUT-004）。全パート対応は `05_ARCHITECTURE_DESIGN.md` TBD-002。
+2. **[3][4] の第 1 パート限定**: 現行実装の参照範囲は第 1 パートのみ。現行 CLI は制約注記を出力しない。凍結中はこの欠落を受容する。出力注記の追加は将来実装要求（`02_REQUIREMENTS_DEFINITION.md` §5.7 FUT-004）。全パート対応の採用判断は `02_REQUIREMENTS_DEFINITION.md` TBD-002、実装方針は本文書 TBD-002。
 3. **警告 0 件時の注記を省略しない**: Output Formatter に組み込む。
 4. **music21 バージョンを `10.3.0` に固定**: 変更時は全検査項目を再検証する。ソフトウェア本体の BSD-3-Clause と corpus 内エンコーディングの個別利用条件を混同しない。
 
@@ -255,3 +255,5 @@ prototype/
 | 0.3 | 2026-09-06 | 設計レビュー反映。[3][4] 制約注記の未実装を明記し全パート対応 TBD と分離。TBD-005 をテスト素材の由来・個別利用条件確認へ修正 | Takashi Oikawa |
 | 0.3.1 | 2026-09-06 | 設計レビュー差し戻し反映。複数 MusicXML 比較を本実装確定スコープとし、アーキテクチャ詳細のみ TBD-001 に残す。公開判断の確定事項を 03 と整合 | Takashi Oikawa |
 | 0.3.2 | 2026-09-06 | 文書表現の整理。現行プロトタイプ・本実装確定スコープ・将来検討事項の区分を維持。仕様の追加・変更は行っていない | Takashi Oikawa |
+| 0.3.3 | 2026-09-06 | 横断レビュー反映。対応環境を macOS 上の Python 3.x に統一。TBD-005 を技術的由来に限定。全パート対応 TBD を 02 の子項目として明記 | Takashi Oikawa |
+| 0.3.4 | 2026-09-06 | 原本 PDF 横並び画面を将来検討事項から外し、本リポジトリでは設計・実装方針を定義しない対象へ変更。人間が MuseScore 等で原本 PDF と目視照合する既存運用は維持する | Takashi Oikawa |

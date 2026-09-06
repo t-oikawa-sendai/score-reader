@@ -1,13 +1,35 @@
 # score-reader
 
-score-reader は、OMR が生成した MusicXML の確認対象を絞り込むための検証プロジェクトである。
+> **現行プロトタイプ（`prototype/src/verify_score.py`）はコード凍結中です。**<br>
+> 本リポジトリでは設計文書の検証・更新を継続しています。
 
-現行技術では自動化できない楽譜データ化の問題に対し、「機械にできること」「機械では確定できないこと」「人間が判断すべきこと」の境界を明示する。その判断根拠を将来の開発者・保守者へ引き継ぐことが、本プロジェクトの設計思想である。
+score-readerは、OMR（楽譜認識）が出力したMusicXMLの構造検査を行うCLIツールです。
 
-- 現行 `prototype/src/verify_score.py` はコード凍結中である
-- 設計文書の更新・検証は継続中である
-- 正本設計文書は [docs/design/01](docs/design/01_REQUEST_DEFINITION.md)〜[06](docs/design/06_OPERATION_AND_HANDOFF.md) である
-- `prototype/` は正式実装ではなく技術検証用である
+本リポジトリの本質は、**現行技術では自動化できない楽譜データ化の問題について、「機械にできること・できないこと・人間に委ねるべきこと」の境界を検証し、その設計判断を後世に引き継ぐバトンとして残す**ことにあります。
+
+楽譜PDFのデータ化において、現状の技術では、本プロジェクトが対象とするMusicXMLの構造検査だけで、音高・音価・声部が原本譜と一致しているかを機械的に確定することはできません。<br>
+score-readerは「機械にできる構造検査の範囲」を最大化しつつ、「人間が原本PDFと照合すべき領域」を明確に絞り込むことで、確認作業の省力化を目指します。ここでいう「最大化」は設計上の目標であり、現段階の定量的な要件または合否基準ではありません。
+
+> 「人間確認をゼロにする」のではなく、<br>
+> 「人間が確認すべき箇所を絞り込む」ことで作業効率を最大化する。
+
+## 現行の位置づけ
+
+- **プロトタイプ検証段階**：単一MusicXMLの構造検査CLI（`prototype/src/verify_score.py`）
+- **本実装の確定スコープ**：複数MusicXML比較・差分可視化・比較レポート生成
+- **将来検討事項**：自動修正、自動統合、Web UI
+- **本リポジトリの対象外**：原本PDF横並び画面。本リポジトリでは設計・実装方針を定義しません
+
+原本PDF横並び画面を本リポジトリ内へ実装することは対象外ですが、人間がMuseScore等を使用して原本PDFと目視照合する既存運用は維持します。
+
+## 使い方
+
+リポジトリルートから実行します。
+
+```bash
+python3 prototype/src/verify_score.py prototype/tests/<file>.musicxml
+python3 prototype/src/verify_score.py prototype/tests/<file>.musicxml --json
+```
 
 <!--
 README Writing Policy（README作成方針）
@@ -21,20 +43,22 @@ README Writing Policy（README作成方針）
 | Item（項目） | Value（値） |
 |---|---|
 | Document ID（文書ID） | README-001 |
-| Version（バージョン） | 0.4.2 |
+| Version（バージョン） | 0.4.4 |
 | Status（ステータス） | Draft |
 | Created Date（作成日） | 2026-06-09 |
 | Last Updated（最終更新日） | 2026-09-06 |
 | Owner（管理者） | Takashi Oikawa |
-| Related Documents（関連文書） | SKILL.md / docs/design/01_REQUEST_DEFINITION.md 〜 06_OPERATION_AND_HANDOFF.md / docs/reviews/2026-09-06_SCORE_READER_DESIGN_REVIEW.md |
+| Related Documents（関連文書） | SKILL.md / docs/design/01_REQUEST_DEFINITION.md 〜 06_OPERATION_AND_HANDOFF.md / docs/reviews/2026-09-06_SCORE_READER_DESIGN_REVIEW.md / docs/reviews/2026-09-06_SCORE_READER_CROSS_DOCUMENT_REVIEW.md |
 
 ---
 
 ## Table of Contents（目次）
 
-1. [Project Overview（プロジェクト・機能の概要）](#1-project-overviewプロジェクト機能の概要)
+- [現行の位置づけ](#現行の位置づけ)
+- [使い方](#使い方)
+1. [Project Overview Detail（開発段階の詳細分類）](#1-project-overview-detail開発段階の詳細分類)
 2. [Problem / Solution / Benefit Summary（問題・解決・効果の概要）](#2-problem-solution-benefit-summary問題解決効果の概要)
-3. [Screen Overview（画面概要）](#3-screen-overview画面概要)
+3. [Screen Overview Detail（CLIインターフェース詳細）](#3-screen-overview-detailcliインターフェース詳細)
 4. [Design Documents Index（設計書一覧）](#4-design-documents-index設計書一覧)
 5. [Overall Design Policy（設計上の全体方針・前提）](#5-overall-design-policy設計上の全体方針前提)
 6. [Glossary（用語集・略語定義）](#6-glossary用語集略語定義)
@@ -43,19 +67,18 @@ README Writing Policy（README作成方針）
 
 ---
 
-## 1. Project Overview（プロジェクト・機能の概要）
+## 1. Project Overview Detail（開発段階の詳細分類）
 
-score-reader は、OMR（Optical Music Recognition）が出力した MusicXML の内部整合性を検査する検証支援 CLI ツールである。機械的に検出できる構造的異常・要確認箇所を列挙し、人間の原本 PDF 照合作業の対象を絞り込む。
-
-開発段階の整理は下表を参照する。設計思想は冒頭、全体方針は §5、要求上の境界分類は [01_REQUEST_DEFINITION.md](docs/design/01_REQUEST_DEFINITION.md) を参照する。
+開発段階ごとの詳細分類を下表に示す。読み手が最初に理解すべき概要、設計思想、現在位置、基本実行例は冒頭（現行の位置づけ・使い方）を参照する。全体方針は §5、要求上の境界分類は [01_REQUEST_DEFINITION.md](docs/design/01_REQUEST_DEFINITION.md) を参照する。正本設計文書は [docs/design/01](docs/design/01_REQUEST_DEFINITION.md)〜[06](docs/design/06_OPERATION_AND_HANDOFF.md) である。`prototype/` は正式実装ではなく技術検証用である。score-reader は、OMR（Optical Music Recognition）が出力した MusicXML の内部整合性を検査する検証支援 CLI ツールである。機械的に検出できる構造的異常・要確認箇所を列挙し、人間の原本 PDF 照合作業の対象を絞り込む。
 
 ### Development Stage Classification（開発段階の分類）
 
 | Development Stage（開発段階） | Main Scope（主な対象） | Representative Implementation（代表実装） | Not Included / Future Consideration（含めないもの / 将来検討事項） |
 |---|---|---|---|
-| 現行プロトタイプ（プロトタイプ検証段階） | 単一 MusicXML の構造検査。検証結果・設計判断・未確定事項の記録 | `prototype/src/verify_score.py`（単一 MusicXML 構造検査の検証実装）。検査結果の標準出力（テキスト / JSON）。コード凍結中 | 本実装確定スコープ（複数 MusicXML 比較一式）は現行プロトタイプに含めない。自動修正、自動統合、Web UI、原本 PDF 横並び画面は将来検討事項 |
-| 完成版MusicXML作成支援システムの本実装（確定スコープ） | 複数 MusicXML 入力、正規化、比較可能性判定、差分比較、差分可視化、比較レポート生成 | 未実装（確定スコープ。詳細は本実装時に定義する） | 自動修正、自動統合、Web UI、原本 PDF 横並び画面は、現時点で定義する本実装段階には含めず、将来検討事項として扱う |
-| 将来検討事項 | 対象外。本実装確定スコープにも現行プロトタイプにも含めない | 未実装 | 自動修正、自動統合、Web UI、原本 PDF 横並び画面 |
+| 現行プロトタイプ（プロトタイプ検証段階） | 単一 MusicXML の構造検査。検証結果・設計判断・未確定事項の記録 | `prototype/src/verify_score.py`（単一 MusicXML 構造検査の検証実装）。検査結果の標準出力（テキスト / JSON）。コード凍結中 | 本実装確定スコープ（複数 MusicXML 比較一式）は現行プロトタイプに含めない。自動修正、自動統合、Web UI は将来検討事項。原本 PDF 横並び画面は本リポジトリの対象外であり、本リポジトリでは設計・実装方針を定義しない |
+| 完成版MusicXML作成支援システムの本実装（確定スコープ） | 複数 MusicXML 入力、正規化、比較可能性判定、差分比較、差分可視化、比較レポート生成 | 未実装（確定スコープ。詳細は本実装時に定義する） | 自動修正、自動統合、Web UI は、現時点で定義する本実装段階には含めず、将来検討事項として扱う。原本 PDF 横並び画面は本リポジトリの対象外であり、本リポジトリでは設計・実装方針を定義しない |
+| 将来検討事項 | 対象外。本実装確定スコープにも現行プロトタイプにも含めない | 未実装 | 自動修正、自動統合、Web UI |
+| 本リポジトリの対象外 | 原本 PDF 横並び画面。本リポジトリでは設計・実装方針を定義しない | 定義しない | 原本 PDF 横並び画面を本リポジトリ内へ実装することは対象外である。人間が MuseScore 等を使用して原本 PDF と目視照合する既存運用は維持する |
 
 ---
 
@@ -74,14 +97,9 @@ score-reader は、OMR（Optical Music Recognition）が出力した MusicXML �
 
 ---
 
-## 3. Screen Overview（画面概要）
+## 3. Screen Overview Detail（CLIインターフェース詳細）
 
-プロトタイプ検証段階は GUI / Web UI を持たない CLI ツールのため、代表インターフェースはターミナル上の実行例とする。
-
-```bash
-python3 verify_score.py ../tests/<file>.musicxml
-python3 verify_score.py ../tests/<file>.musicxml --json
-```
+プロトタイプ検証段階は GUI / Web UI を持たない CLI ツールのため、代表インターフェースはターミナル上の実行である。基本実行例（リポジトリルート起点）は冒頭「使い方」を参照する。
 
 詳細（CLI 仕様・業務フロー・出力確認・人間レビューチェックリスト）: [04_UI_AND_FLOW_DESIGN.md](docs/design/04_UI_AND_FLOW_DESIGN.md)
 
@@ -91,14 +109,14 @@ python3 verify_score.py ../tests/<file>.musicxml --json
 
 | File（ファイル名） | Document Name（文書名） | Status（ステータス） | Version（バージョン） | Owner（担当者） |
 |---|---|---|---|---|
-| [01_REQUEST_DEFINITION.md](docs/design/01_REQUEST_DEFINITION.md) | Request Definition（要求定義） | Draft | 0.3.2 | Takashi Oikawa |
-| [02_REQUIREMENTS_DEFINITION.md](docs/design/02_REQUIREMENTS_DEFINITION.md) | Requirements Definition（要件定義） | Draft | 0.3.2 | Takashi Oikawa |
-| [03_DATA_AND_SECURITY_DESIGN.md](docs/design/03_DATA_AND_SECURITY_DESIGN.md) | Data and Security Design（データ・セキュリティ設計） | Draft | 0.3.2 | Takashi Oikawa |
-| [04_UI_AND_FLOW_DESIGN.md](docs/design/04_UI_AND_FLOW_DESIGN.md) | UI and Flow Design（UI・フロー設計） | Draft | 0.3.2 | Takashi Oikawa |
-| [05_ARCHITECTURE_DESIGN.md](docs/design/05_ARCHITECTURE_DESIGN.md) | Architecture Design（アーキテクチャ設計） | Draft | 0.3.2 | Takashi Oikawa |
-| [06_OPERATION_AND_HANDOFF.md](docs/design/06_OPERATION_AND_HANDOFF.md) | Operation and Handoff Design（運用・詳細設計引き継ぎ） | Draft | 0.3.2 | Takashi Oikawa |
+| [01_REQUEST_DEFINITION.md](docs/design/01_REQUEST_DEFINITION.md) | Request Definition（要求定義） | Draft | 0.3.4 | Takashi Oikawa |
+| [02_REQUIREMENTS_DEFINITION.md](docs/design/02_REQUIREMENTS_DEFINITION.md) | Requirements Definition（要件定義） | Draft | 0.3.4 | Takashi Oikawa |
+| [03_DATA_AND_SECURITY_DESIGN.md](docs/design/03_DATA_AND_SECURITY_DESIGN.md) | Data and Security Design（データ・セキュリティ設計） | Draft | 0.3.3 | Takashi Oikawa |
+| [04_UI_AND_FLOW_DESIGN.md](docs/design/04_UI_AND_FLOW_DESIGN.md) | UI and Flow Design（UI・フロー設計） | Draft | 0.3.3 | Takashi Oikawa |
+| [05_ARCHITECTURE_DESIGN.md](docs/design/05_ARCHITECTURE_DESIGN.md) | Architecture Design（アーキテクチャ設計） | Draft | 0.3.4 | Takashi Oikawa |
+| [06_OPERATION_AND_HANDOFF.md](docs/design/06_OPERATION_AND_HANDOFF.md) | Operation and Handoff Design（運用・詳細設計引き継ぎ） | Draft | 0.3.4 | Takashi Oikawa |
 
-各文書は Draft ステータスであり、**プロトタイプ検証段階**の設計記録として位置づける。開発段階の分類は §1 Development Stage Classification を参照する。作業ルールは [SKILL.md](SKILL.md) を参照する。設計レビュー記録は [docs/reviews/2026-09-06_SCORE_READER_DESIGN_REVIEW.md](docs/reviews/2026-09-06_SCORE_READER_DESIGN_REVIEW.md) を参照する。
+各文書は Draft ステータスであり、**プロトタイプ検証段階**の設計記録として位置づける。開発段階の分類は §1 Development Stage Classification を参照する。作業ルールは [SKILL.md](SKILL.md) を参照する。設計レビュー記録は [docs/reviews/2026-09-06_SCORE_READER_DESIGN_REVIEW.md](docs/reviews/2026-09-06_SCORE_READER_DESIGN_REVIEW.md) および [docs/reviews/2026-09-06_SCORE_READER_CROSS_DOCUMENT_REVIEW.md](docs/reviews/2026-09-06_SCORE_READER_CROSS_DOCUMENT_REVIEW.md) を参照する。
 
 ---
 
@@ -107,10 +125,11 @@ python3 verify_score.py ../tests/<file>.musicxml --json
 | 前提 | 内容 |
 |---|---|
 | 設計ガイドラインの位置づけ | 完成版 MusicXML 作成支援システムへ到達するための検証結果・設計判断・未確定事項を整理したプロトタイプ段階の設計ガイドライン。詳細は [01](docs/design/01_REQUEST_DEFINITION.md)〜[06](docs/design/06_OPERATION_AND_HANDOFF.md) |
-| 開発段階の分類 | §1 Development Stage Classification を参照。現行プロトタイプ、本実装確定スコープ、将来検討事項の3区分 |
+| 開発段階の分類 | §1 Development Stage Classification を参照。現行プロトタイプ、本実装確定スコープ、将来検討事項、本リポジトリの対象外 |
 | 現行プロトタイプのスコープ | 単一 MusicXML の内部整合性検査 CLI（`verify_score.py`）のみ。コード凍結中。機能要件は [02_REQUIREMENTS_DEFINITION.md](docs/design/02_REQUIREMENTS_DEFINITION.md) |
 | 本実装確定スコープ | 複数 MusicXML 入力、正規化、比較可能性判定、差分比較、差分可視化、比較レポート生成。未実装であり、未確定ではない。[02](docs/design/02_REQUIREMENTS_DEFINITION.md) §5.8 / [05](docs/design/05_ARCHITECTURE_DESIGN.md) |
-| 将来検討事項 | 自動修正、自動統合、Web UI、原本 PDF 横並び画面。本実装確定スコープには含めない。§1 を参照 |
+| 将来検討事項 | 自動修正、自動統合、Web UI。本実装確定スコープには含めない。§1 を参照 |
+| 本リポジトリの対象外 | 原本 PDF 横並び画面。本リポジトリでは設計・実装方針を定義しない。人間が MuseScore 等を使用して原本 PDF と目視照合する既存運用は維持する。§1 を参照 |
 | 完全自動化しない | 音高・音価・声部・タイ/スラー等の正誤を機械的に確定できない。[01_REQUEST_DEFINITION.md](docs/design/01_REQUEST_DEFINITION.md) §5.5 |
 | 人間確認を省略しない | 確認対象を絞り込むことが目的であり、原本 PDF との目視照合は必須 |
 | 推測しない・断定しない | 確定できない結果は `[WARN]` / `[INFO]` で列挙し、黙殺・自動補完を行わない。引き継ぎは [06_OPERATION_AND_HANDOFF.md](docs/design/06_OPERATION_AND_HANDOFF.md) |
@@ -127,7 +146,7 @@ python3 verify_score.py ../tests/<file>.musicxml --json
 | ソースコード | MIT License | [LICENSE-CODE](LICENSE-CODE) |
 | 設計文書・README・作業ルール | CC BY-NC-SA 4.0 | [LICENSE-DOCS](LICENSE-DOCS) |
 | 旧ライセンス記録 | 移行前の単一ライセンス記録として残置 | [LICENSE](LICENSE) |
-| テスト素材（`prototype/tests/`） | 上記2区分のいずれにも自動的に含めない。由来と個別利用条件の確認を要する | [NOTICE](NOTICE) / [03_DATA_AND_SECURITY_DESIGN.md](docs/design/03_DATA_AND_SECURITY_DESIGN.md) |
+| テスト素材（`prototype/tests/`） | 上記2区分のいずれにも自動的に含めない。権利・法務未解決事項は 03 TBD-005、技術的由来は 05 TBD-005 で追跡する | [NOTICE](NOTICE) / [03_DATA_AND_SECURITY_DESIGN.md](docs/design/03_DATA_AND_SECURITY_DESIGN.md) / [05_ARCHITECTURE_DESIGN.md](docs/design/05_ARCHITECTURE_DESIGN.md) |
 
 - テスト素材は、楽曲の権利、MusicXML エンコーディングの権利、加工・再配布条件を分けて確認する
 - 現在公開中のテスト素材は権利確認中であり、暫定的に公開継続する。公開可否の法的確定は未完了である
@@ -188,3 +207,5 @@ README.md → 01 → 02 → 03 → 04 → 05 → 06
 | 0.4.0 | 2026-09-06 | 設計レビュー反映。分離ライセンス構成への修正、成功基準を SC-001〜SC-009 に更新、存在しない標準文書リンクとスクリーンショット運用記述の削除 | Takashi Oikawa |
 | 0.4.1 | 2026-09-06 | 設計レビュー差し戻し反映。本実装確定スコープ（複数 MusicXML 比較一式）と現行プロトタイプ・将来検討事項の3区分を統一。Reviewer を GEM_REVIEWER_PERSONA に統一。テスト素材は権利確認中の暫定公開継続として関連文書へ誘導 | Takashi Oikawa |
 | 0.4.2 | 2026-09-06 | 文書表現の整理。設計思想（機械と人間の役割境界）の明示、コード凍結の明記、Glossary の短縮。仕様の追加・変更は行っていない | Takashi Oikawa |
+| 0.4.3 | 2026-09-06 | 横断レビュー反映。実行例をリポジトリルート起点へ統一。権利追跡先と設計文書 Version を整合 | Takashi Oikawa |
+| 0.4.4 | 2026-09-06 | 冒頭へ設計思想・現行位置・基本実行例を全文掲載。原本 PDF 横並び画面を将来検討事項から外し、本リポジトリでは設計・実装方針を定義しない対象へ変更。人間が MuseScore 等で原本 PDF と目視照合する既存運用は維持する | Takashi Oikawa |

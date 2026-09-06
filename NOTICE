@@ -31,38 +31,32 @@ apply to musical encodings contained in the music21 corpus or to files
 derived from that corpus. Those encodings may have their own rights and
 terms of use.
 
-  Copyright (c) 2006-2024, The music21 Project Authors
-  All rights reserved.
+Copyright (c) 2006-2026 Michael Scott Asato Cuthbert
 
-  Redistribution and use in source and binary forms, with or without
-  modification, are permitted provided that the following conditions are met:
+Redistribution and use in source and binary forms, with or without modification,
+are permitted provided that the following conditions are met:
 
-  1. Redistributions of source code must retain the above copyright notice,
-     this list of conditions and the following disclaimer.
+1. Redistributions of source code must retain the above copyright notice, this
+   list of conditions and the following disclaimer.
 
-  2. Redistributions in binary form must reproduce the above copyright notice,
-     this list of conditions and the following disclaimer in the documentation
-     and/or other materials provided with the distribution.
+2. Redistributions in binary form must reproduce the above copyright notice,
+   this list of conditions and the following disclaimer in the documentation
+   and/or other materials provided with the distribution.
 
-  3. Neither the name of the music21 project nor the names of its contributors
-     may be used to endorse or promote products derived from this software
-     without specific prior written permission.
+3. Neither the name of the copyright holder nor the names of its
+   contributors may be used to endorse or promote products derived from
+   this software without specific prior written permission.
 
-  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-  ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
-  LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
-  SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
-  INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
-  CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
-  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-  POSSIBILITY OF SUCH DAMAGE.
-
-Note: The exact copyright year range and list of authors for music21 10.3.0
-should be confirmed against the official music21 repository
-(https://github.com/cuthbertLab/music21).
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS”
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 -------------------------------------------------------------------------------
 Test Materials (prototype/tests/*.musicxml)
@@ -89,8 +83,8 @@ operational decisions, not a legal clearance:
   - Currently published test materials remain public as an interim measure
     while rights review is in progress
   - Final publication decision owner: Takashi Oikawa
-  - Decision deadline: 2026-09-06
-  - Until that decision is completed: continue publication, while stating
+  - No fixed publication-decision deadline is set
+  - Until rights determination is completed: continue publication, while stating
     that rights review is in progress and publication eligibility is not
     legally determined
 
@@ -105,8 +99,9 @@ pre-redistribution checks:
     GitHub repository is permitted
   - Governing law
 
-The final decision owner, the decision deadline, the interim measure, and
-the current continue-to-publish policy are not unresolved.
+The final decision owner, the interim measure, and the current
+continue-to-publish policy are not unresolved. A fixed decision deadline
+is not used.
 
 These encodings are not automatically covered by LICENSE-CODE (MIT) or
 LICENSE-DOCS (CC BY-NC-SA 4.0). They are not automatically covered by the
@@ -122,8 +117,9 @@ availability is an interim measure, not a legal determination.
 Tracking:
 
   - docs/design/03_DATA_AND_SECURITY_DESIGN.md TBD-005
-    (unresolved: encoding terms, legal redistributability, governing law;
-     determined: decision owner, deadline, interim continue-to-publish)
+    (primary tracker for unresolved rights/legal items: encoding terms,
+     legal redistributability, governing law;
+     determined: decision owner, interim continue-to-publish;
+     no fixed publication-decision deadline)
   - docs/design/05_ARCHITECTURE_DESIGN.md TBD-005
-    (origin, individual terms of use, and legal redistributability of
-     test materials)
+    (technical origin of test materials only)

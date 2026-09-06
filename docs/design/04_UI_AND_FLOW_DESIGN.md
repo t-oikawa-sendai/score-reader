@@ -4,7 +4,7 @@
 | Item（項目） | Value（値） |
 |---|---|
 | Document ID（文書ID） | UI-001 |
-| Version（バージョン） | 0.3.2 |
+| Version（バージョン） | 0.3.3 |
 | Status（ステータス） | Draft |
 | Created Date（作成日） | 2026-06-09 |
 | Last Updated（最終更新日） | 2026-09-06 |
@@ -53,8 +53,8 @@
 |---|---|
 | GUI 画面設計・ワイヤーフレーム | score-reader は CLI ツールであり、画面を持たない |
 | Web UI・モバイル UI | プロトタイプ検証段階は CLI のみ対象とする |
-| 原本 PDF 横並び画面 | 将来検討事項（`README.md` §1 Development Stage Classification 参照） |
-| MusicXML 自動修正 UI | 同上。score-reader は検査結果の出力のみ |
+| 原本 PDF 横並び画面 | 本リポジトリの対象外。本リポジトリでは設計・実装方針を定義しない。人間が MuseScore 等を使用して原本 PDF と目視照合する既存運用は維持する（`README.md` §1 Development Stage Classification 参照） |
+| MusicXML 自動修正 UI | 将来検討事項。score-reader は検査結果の出力のみ |
 | 外部 OMR サービスの操作 UI | score-reader のスコープ外 |
 | 完全自動化フロー（人間確認を省略するフロー） | 設計原則に反する |
 
@@ -132,7 +132,7 @@ flowchart TD
 
 ### 5.3 Wireframes and Layout Policy（主要画面のワイヤーフレーム・レイアウト方針）
 
-本文書では対象外。理由: プロトタイプ検証段階は CLI ツールであり、画面・レイアウト・原本 PDF 横並び UI を持たない。
+本文書では対象外。理由: プロトタイプ検証段階は CLI ツールであり、画面・レイアウトを持たない。原本 PDF 横並び画面は本リポジトリの対象外であり、本リポジトリでは設計・実装方針を定義しない。
 
 ### 5.4 Operation Flow and User Scenarios（操作フロー・ユーザーシナリオ）
 
@@ -207,3 +207,4 @@ JSON エラー形式は `02_REQUIREMENTS_DEFINITION.md` §5.7 FUT-002 で未確�
 | 0.3 | 2026-09-06 | 設計レビュー反映。分離ライセンス構成へ修正。操作シナリオ ID を FLOW-001〜FLOW-005 に変更。`--json` 時のパース失敗が非 JSON である現行制約を明記 | Takashi Oikawa |
 | 0.3.1 | 2026-09-06 | 設計レビュー差し戻し反映。複数 MusicXML 比較を本実装確定スコープとし、CLI フロー詳細のみ TBD-001 に残す。Web UI は将来検討のまま | Takashi Oikawa |
 | 0.3.2 | 2026-09-06 | 文書表現の整理。CLI 現行・Web UI 将来検討・複数 MusicXML 比較の本実装確定を維持。仕様の追加・変更は行っていない | Takashi Oikawa |
+| 0.3.3 | 2026-09-06 | 原本 PDF 横並び画面を将来検討事項から外し、本リポジトリでは設計・実装方針を定義しない対象へ変更。人間が MuseScore 等で原本 PDF と目視照合する既存運用は維持する | Takashi Oikawa |
