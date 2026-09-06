@@ -4,12 +4,12 @@
 | Item（項目） | Value（値） |
 |---|---|
 | Document ID（文書ID） | OPS-001 |
-| Version（バージョン） | 0.2 |
+| Version（バージョン） | 0.3 |
 | Status（ステータス） | Draft |
 | Created Date（作成日） | 2026-06-09 |
-| Last Updated（最終更新日） | 2026-06-28 |
+| Last Updated（最終更新日） | 2026-09-06 |
 | Owner（管理者） | Takashi Oikawa |
-| Related Documents（関連文書） | README.md / 01_REQUEST_DEFINITION.md / 02_REQUIREMENTS_DEFINITION.md / 03_DATA_AND_SECURITY_DESIGN.md / 04_UI_AND_FLOW_DESIGN.md / 05_ARCHITECTURE_DESIGN.md |
+| Related Documents（関連文書） | README.md / 01_REQUEST_DEFINITION.md / 02_REQUIREMENTS_DEFINITION.md / 03_DATA_AND_SECURITY_DESIGN.md / 04_UI_AND_FLOW_DESIGN.md / 05_ARCHITECTURE_DESIGN.md / docs/reviews/2026-09-06_SCORE_READER_DESIGN_REVIEW.md |
 
 ---
 
@@ -70,6 +70,7 @@
 **Prototype の位置づけ**
 
 - `verify_score.py` は技術検証用プロトタイプであり、正式完成版ではない
+- 現行プロトタイプは凍結中である。今回はコードを変更しない
 - **`[WARN]` / `[ANOMALY]` が 0 件であっても、MusicXML の完全無欠を保証しない**
 - 最終的な正確性の担保は原本 PDF との人間による目視照合で行う
 
@@ -78,9 +79,10 @@
 | 限界 | 内容 |
 |---|---|
 | 音高正誤の自動判定不可 | MusicXML のみでは確定できない |
-| [3][4] は第 1 パートのみ参照 | 他パートの調号・拍子/テンポ変化は検出されない |
+| [3][4] は第 1 パートのみ参照 | 他パートの調号・拍子/テンポ変化は検出されない。現行 CLI はこの制約の注記を出力しない |
 | 和音・パート不一致の正解断定不可 | 原本 PDF 照合が必要 |
 | タイ・スラー・連符・装飾音 | プロトタイプ検証段階の検査スコープ外 |
+| `--json` 時のパース失敗 | 現行は JSON ではなくプレーンテキスト `[FATAL]` |
 
 ---
 
@@ -91,11 +93,11 @@
 | ID | Handoff Item（引き継ぎ事項） | Details / Background（詳細・背景） |
 |---|---|---|
 | HO-001 | 「推測しない・断定しない」原則 | 確定できない結果は `[WARN]`/`[INFO]` で列挙。黙殺・自動補完を行わない |
-| HO-002 | [3][4] 第 1 パート限定制約 | 実装コメントと出力注記に明示（TBD-001） |
+| HO-002 | [3][4] 第 1 パート限定制約 | 現行実装の参照範囲は第 1 パートのみ。現行 CLI は制約注記を出力しない。凍結中はこの欠落を受容する。将来実装時に出力注記を追加する（`02_REQUIREMENTS_DEFINITION.md` §5.7 FUT-004）。全パート対応は `05_ARCHITECTURE_DESIGN.md` TBD-002 / `06_OPERATION_AND_HANDOFF.md` TBD-001。現行実装で注記追加まで完了済みとは扱わない |
 | HO-003 | 非破壊仕様 | 入力 MusicXML の読み取りのみ。派生ファイル生成禁止 |
 | HO-004 | 警告 0 件時の注記 | 「完全無欠を保証しない」注記を Output Formatter に組み込む |
 | HO-005 | music21 バージョン固定 | `music21==10.3.0`。変更時は全検査再検証 |
-| HO-006 | 著作権・秘密情報の非混入 | テスト素材はパブリックドメイン限定 |
+| HO-006 | 著作権・秘密情報の非混入 | テスト素材は楽曲の権利、MusicXML エンコーディングの権利、加工・再配布条件を分けて確認する |
 
 #### プロトタイプ検証項目（技術検証済み [1]〜[8]）
 
@@ -122,6 +124,7 @@
 | 非破壊 | 入力 MusicXML を変更・上書きしない |
 | 派生 MusicXML 禁止 | 修正済み MusicXML を出力しない |
 | 依存ライブラリ | `music21==10.3.0` に固定 |
+| コード凍結 | 現行プロトタイプは凍結中。文書修正は凍結対象ではない |
 
 #### プロトタイプ保守履歴（2026-06-28）
 
@@ -132,12 +135,14 @@
 | 対象 | `prototype/src/verify_score.py` |
 | 内容 | アウフタクト判定の誤判定リスク低減 / 空パート入力時のクラッシュ防止 / テンポ表示の None 安全化 / 和音処理の可読性改善 |
 | 位置づけ | 正式実装化ではない。技術検証用プロトタイプの検証継続性を保つための限定修正 |
+| 承認記録 | 承認者および承認経緯は、確認できる記録からは特定できない。推測で補完しない |
 
 #### 将来課題（Prototype 実装）
 
 - 人間可読出力と JSON コレクタの二重実装は将来統合候補である。現時点では全面統合しない。
 - Web UI 化する場合は `load(path)` に許可ディレクトリ検証を追加する。
 - 現時点の CLI ローカル実行では path 検証強化は本修正対象外とする。
+- テキストと JSON の情報量統一、JSON 形式の FATAL、検査 [5] の 0 件表示統一は `02_REQUIREMENTS_DEFINITION.md` §5.7 を参照する。
 
 #### 環境構築・実行（概要）
 
@@ -152,14 +157,14 @@ python3 verify_score.py ../tests/<file>.musicxml --json
 
 ### 5.3 Test Policy and Acceptance Criteria（テスト方針・受け入れ基準）
 
-ビジネス観点での成功基準は `01_REQUEST_DEFINITION.md` §5.5 に記載する。
+ビジネス観点での成功基準は `01_REQUEST_DEFINITION.md` §5.5 の SC-001〜SC-009 に記載する。
 
 | Type（種別） | Policy / Criteria（方針・基準） |
 |---|---|
-| Unit Test（単体テスト） | プロトタイプ検証段階では正式な単体テストフレームワークを整備しない。パブリックドメイン素材で手動確認 |
+| Unit Test（単体テスト） | プロトタイプ検証段階では正式な単体テストフレームワークを整備しない。権利確認済み素材で手動確認 |
 | Integration Test（結合テスト） | `verify_score.py` を実際に実行し、検査 [1]〜[8] の出力・終了コードを目視確認 |
 | System Test（システムテスト） | 正常系（警告あり・なし）と異常系（パース失敗）を手動確認 |
-| Acceptance Test（受け入れテスト） | SC-001〜SC-008 を満たすこと。HC-001〜HC-005 の「判定しないこと」を出力で確認 |
+| Acceptance Test（受け入れテスト） | `01_REQUEST_DEFINITION.md` SC-001〜SC-009 を満たすこと。HC-001〜HC-005 の「判定しないこと」を出力で確認 |
 
 #### 人間レビューチェックリスト（Human Review Checklist）
 
@@ -203,12 +208,12 @@ python3 verify_score.py ../tests/<file>.musicxml --json
 
 | 項目 | 方針 |
 |---|---|
-| テスト素材 | `prototype/tests/` はパブリックドメインのみ |
-| 著作権 | 著作権保護楽譜をリポジトリへ登録しない |
+| テスト素材 | `prototype/tests/` は楽曲の権利、MusicXML エンコーディングの権利、加工・再配布条件を分けて確認する |
+| 著作権 | 著作権保護楽譜をリポジトリへ登録しない。公開可否は `03_DATA_AND_SECURITY_DESIGN.md` TBD-005 |
 | 秘密情報 | API キー・トークン・個人情報をソース・Git・出力に含めない |
 | 定期メンテナンス | プロトタイプ検証段階では対象外 |
 | データ保持 | score-reader は出力ファイルを生成しない。保存期間は利用者に委ねる |
-| ライセンス | score-reader 本体は CC BY-NC-SA 4.0（LICENSE 参照） |
+| ライセンス | ソースコードは MIT License（`LICENSE-CODE`）。設計文書・README・作業ルールは CC BY-NC-SA 4.0（`LICENSE-DOCS`）。`LICENSE` は旧ライセンス記録。テスト素材は両区分に自動含めない |
 
 ---
 
@@ -216,11 +221,18 @@ python3 verify_score.py ../tests/<file>.musicxml --json
 
 | ID | Open Issue（未決事項） | Owner（担当者） | Due Date（期限） | Status（ステータス） |
 |---|---|---|---|---|
-| TBD-001 | 検査 [3][4] 全パート対応時の運用・テスト手順更新 | Takashi Oikawa | 未定 | Open |
+| TBD-001 | 検査 [3][4] 全パート対応時の運用・テスト手順更新。現行 CLI の制約注記未実装（`02_REQUIREMENTS_DEFINITION.md` §5.7 FUT-004）とは別件 | Takashi Oikawa | 未定 | Open |
 | TBD-002 | `[WARN]`/`[ANOMALY]` 発生パターンのナレッジ化 | Takashi Oikawa | 未定 | Open |
 | TBD-003 | 将来検討事項の本番運用手順（デプロイ・監視等） | Takashi Oikawa | 未定 | Open |
-| TBD-004 | ソースコード用と設計文書用ライセンスの分離 | Takashi Oikawa | 未定 | Open |
 | TBD-005 | Windows 環境での動作確認と手順書更新 | Takashi Oikawa | 未定 | Open |
+
+テスト素材の権利判断は `03_DATA_AND_SECURITY_DESIGN.md` TBD-005、由来・個別利用条件は `05_ARCHITECTURE_DESIGN.md` TBD-005 を参照する。本節 TBD-005 は Windows 確認のみを対象とし、権利問題の追跡先ではない。
+
+### Resolved Issues（解決済み事項）
+
+| ID | Resolved Issue（解決済み事項） | Resolution（解決内容） | Status（ステータス） |
+|---|---|---|---|
+| TBD-004 | ソースコード用と設計文書用ライセンスの分離 | 2026-06-22 の git commit `77ea651` で分離構成を決定した。ソースコードは MIT（`LICENSE-CODE`）、設計文書・README・作業ルールは CC BY-NC-SA 4.0（`LICENSE-DOCS`）。`LICENSE` は旧ライセンス記録として残置。テスト素材は両区分に自動含めない。 | Resolved |
 
 ---
 
@@ -231,6 +243,7 @@ python3 verify_score.py ../tests/<file>.musicxml --json
 1. **「推測しない・断定しない」原則は変更しない**（HO-001）
 2. **「完全無欠を保証しない」注記は省略しない**（HO-004）
 3. **著作権・秘密情報の非混入を設計レベルで保持する**（HO-006）
+4. **HO-002 は現行実装で完了済みと扱わない**。凍結中は制約注記の欠落を受容し、将来実装時に注記を追加する
 
 ---
 
@@ -240,3 +253,4 @@ python3 verify_score.py ../tests/<file>.musicxml --json
 |---|---|---|---|
 | 0.1 | 2026-06-09 | 初版作成 | Takashi Oikawa |
 | 0.2 | 2026-06-28 | 正本記入・開発段階分類表記統一・将来検討事項表記統一 | Takashi Oikawa |
+| 0.3 | 2026-09-06 | 設計レビュー反映。分離ライセンス構成へ修正。HO-002 を現行未完了として記載。SC-001〜SC-009 参照を明示。ライセンス分離 TBD を Resolved へ変更 | Takashi Oikawa |

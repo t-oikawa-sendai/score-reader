@@ -8,19 +8,28 @@ This product includes software and data developed by third parties.
 The following notices are required by the licenses of those third-party
 components.
 
+This NOTICE is not legal advice. It does not assert that any test
+material is cleared for publication or redistribution.
+
 -------------------------------------------------------------------------------
-music21
+music21 software
 -------------------------------------------------------------------------------
 
-score-reader depends on music21 (version 10.3.0).
+score-reader depends on the music21 software toolkit (version 10.3.0).
 
   Project : music21 — A Toolkit for Computer-Aided Musical Analysis
   URL     : https://web.mit.edu/music21/
-  License : BSD 3-Clause License
+  License : BSD 3-Clause License (software)
 
-When redistributing score-reader or any derivative work, you must retain
-the music21 copyright notice, the list of conditions below, and the
-disclaimer that follows — as required by the BSD 3-Clause License.
+When redistributing score-reader or any derivative work that includes the
+music21 software, you must retain the music21 copyright notice, the list of
+conditions below, and the disclaimer that follows — as required by the
+BSD 3-Clause License applicable to the music21 software.
+
+The BSD 3-Clause License of the music21 software does not automatically
+apply to musical encodings contained in the music21 corpus or to files
+derived from that corpus. Those encodings may have their own rights and
+terms of use.
 
   Copyright (c) 2006-2024, The music21 Project Authors
   All rights reserved.
@@ -53,30 +62,47 @@ disclaimer that follows — as required by the BSD 3-Clause License.
 
 Note: The exact copyright year range and list of authors for music21 10.3.0
 should be confirmed against the official music21 repository
-(https://github.com/cuthbertLab/music21) before redistribution.
+(https://github.com/cuthbertLab/music21).
 
 -------------------------------------------------------------------------------
 Test Materials (prototype/tests/*.musicxml)
 -------------------------------------------------------------------------------
 
-The MusicXML files under prototype/tests/ are derived from the BWV 66
-(Johann Sebastian Bach, 1685–1750) chorale. Bach's compositions are in the
-public domain as the copyright protection period has expired.
+The repository currently contains three MusicXML files under prototype/tests/:
 
-The specific MusicXML encodings in this repository were generated or derived
-using music21. Because music21 itself is distributed under the BSD 3-Clause
-License (see above), any encoding produced by or distributed with music21 may
-carry music21's license obligations.
+  - bwv66_6.musicxml
+  - bwv66_with_rehearsal.musicxml
+  - bwv66_with_clarinet.musicxml
 
-Action required before redistribution:
-  - Confirm whether the specific .musicxml files in prototype/tests/ are
-    directly sourced from the music21 corpus or were independently generated.
-  - If music21 corpus files are included, ensure the music21 BSD 3-Clause
-    attribution notice is preserved.
-  - If independently generated from public-domain source material, confirm
-    that no proprietary encoding or notation software imposes additional
-    restrictions.
+Technical observation (not a rights determination):
+  Pitch sequences of these files match music21 corpus data associated with
+  BWV 66.6. It is therefore likely that the encodings derive from that
+  corpus family. This is a technical origin finding, not a conclusion about
+  license, ownership, or permission to redistribute.
 
-This confirmation has not been completed as of the initial repository setup.
-It is tracked as an open issue (05_ARCHITECTURE_DESIGN.md TBD-005 /
-06_OPERATION_AND_HANDOFF.md TBD-005).
+The value of the MusicXML <creator> element is not used here to determine
+the composer or rights holder.
+
+The following matters remain unresolved and are currently relevant because
+this repository is already public. They are not deferred solely as
+pre-redistribution checks:
+
+  - Rights status of the musical work / composition
+  - Rights and terms of use of the MusicXML encodings
+  - Treatment of derivative encodings produced by OMR, conversion, or editing
+  - The scope of redistribution permitted from a public GitHub repository
+  - Governing law and the person responsible for the final publication decision
+
+These encodings are not automatically covered by LICENSE-CODE (MIT) or
+LICENSE-DOCS (CC BY-NC-SA 4.0). They are not automatically covered by the
+BSD 3-Clause License of the music21 software.
+
+This NOTICE does not state that legal review is complete, or that the files
+may be published or redistributed.
+
+Tracking:
+
+  - docs/design/03_DATA_AND_SECURITY_DESIGN.md TBD-005
+    (separated rights review and unresolved publication decision)
+  - docs/design/05_ARCHITECTURE_DESIGN.md TBD-005
+    (origin, individual terms of use, and redistributability of test materials)

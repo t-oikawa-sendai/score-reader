@@ -13,10 +13,12 @@ in this repository:
   - docs/design/04_UI_AND_FLOW_DESIGN.md
   - docs/design/05_ARCHITECTURE_DESIGN.md
   - docs/design/06_OPERATION_AND_HANDOFF.md
+  - docs/reviews/2026-09-06_SCORE_READER_DESIGN_REVIEW.md
 
 Source code is licensed separately under the MIT License (see LICENSE-CODE).
-Test materials in prototype/tests/ are derived from public-domain sources;
-see NOTICE for music21-related attribution obligations.
+Test materials in prototype/tests/ are not automatically covered by this
+CC BY-NC-SA 4.0 license. Rights, terms of use, and whether publication is
+permitted are described in NOTICE.
 
 License Text
 -------------

@@ -9,11 +9,6 @@
 README Writing Policy（README作成方針）
 - README は設計書群の表紙・入口とする
 - 文章は最短にする。詳細は個別 Doc へ誘導する
-- スクリーンショットは最小サイズの代表画像のみ掲載する
-- `docs/design/screenshots/thumbnail/` は README 用の小さい代表スクリーンショットを配置する
-- `docs/design/screenshots/full/` は個別 Doc 用の大きいスクリーンショットを配置する
-- README では thumbnail の代表画像のみを使用し、詳細画像は 04_UI_AND_FLOW_DESIGN.md から full を参照する
-- 大きいスクリーンショット・画面項目説明・操作フローは 04_UI_AND_FLOW_DESIGN.md へ分離する
 - 個人情報・機密情報・APIキー・トークンが写る画像は使用禁止
 - Change History は作業メモにしない
 -->
@@ -22,12 +17,12 @@ README Writing Policy（README作成方針）
 | Item（項目） | Value（値） |
 |---|---|
 | Document ID（文書ID） | README-001 |
-| Version（バージョン） | 0.3.3 |
+| Version（バージョン） | 0.4.0 |
 | Status（ステータス） | Draft |
 | Created Date（作成日） | 2026-06-09 |
-| Last Updated（最終更新日） | 2026-06-28 |
+| Last Updated（最終更新日） | 2026-09-06 |
 | Owner（管理者） | Takashi Oikawa |
-| Related Documents（関連文書） | docs/standards/DESIGN_DOCUMENT_STANDARD.md |
+| Related Documents（関連文書） | SKILL.md / docs/design/01_REQUEST_DEFINITION.md 〜 06_OPERATION_AND_HANDOFF.md / docs/reviews/2026-09-06_SCORE_READER_DESIGN_REVIEW.md |
 
 ---
 
@@ -72,13 +67,11 @@ score-reader は、OMR（Optical Music Recognition）が出力した MusicXML �
 | Solution Approach（解決方針） | 完成版MusicXML作成支援システムに向け、複数 OMR 結果の比較、MusicXML 内部構造検査、比較不能箇所の明示を組み合わせ、人間が原本 PDF と照合すべき箇所を絞り込む。推測による自動補完や入力ファイルの上書きは行わない。 | [01_REQUEST_DEFINITION.md](docs/design/01_REQUEST_DEFINITION.md) |
 | System Functions（システム機能） | MusicXML パース、移調・小節長・調号・拍子/テンポ・未確定要素・リハーサルマーク・和音音数・パート間小節数の検査、テキスト/JSON 出力、終了コード管理。 | [02_REQUIREMENTS_DEFINITION.md](docs/design/02_REQUIREMENTS_DEFINITION.md) |
 | Expected Benefits（期待効果） | 構造的異常の早期発見、確認箇所の優先順位付け、設計意図の記録による将来の引き継ぎ。削減効果の定量値はプロトタイプ検証段階では未実測。 | [01_REQUEST_DEFINITION.md](docs/design/01_REQUEST_DEFINITION.md) |
-| Completion Criteria（完成判定基準） | SC-001〜SC-008（パース判定・各検査項目の出力・テキスト/JSON 出力）を満たすこと。`[WARN]`/`[ANOMALY]` 0 件でも完全無欠を保証しない（HC-005）。 | [01_REQUEST_DEFINITION.md](docs/design/01_REQUEST_DEFINITION.md) |
+| Completion Criteria（完成判定基準） | SC-001〜SC-009（パース判定・各検査項目の出力・Unpitched 件数の報告・テキスト/JSON 出力）を満たすこと。`[WARN]`/`[ANOMALY]` 0 件でも完全無欠を保証しない（HC-005）。 | [01_REQUEST_DEFINITION.md](docs/design/01_REQUEST_DEFINITION.md) |
 
 ---
 
 ## 3. Screen Overview（画面概要）
-
-<!-- 代表画面のみ thumbnail で掲載。full の詳細画像・画面項目・操作フローは 04 へ分離 -->
 
 プロトタイプ検証段階は GUI / Web UI を持たない CLI ツールのため、代表インターフェースはターミナル上の実行例とする。
 
@@ -95,14 +88,14 @@ python3 verify_score.py ../tests/<file>.musicxml --json
 
 | File（ファイル名） | Document Name（文書名） | Status（ステータス） | Version（バージョン） | Owner（担当者） |
 |---|---|---|---|---|
-| [01_REQUEST_DEFINITION.md](docs/design/01_REQUEST_DEFINITION.md) | Request Definition（要求定義） | Draft | 0.2 | Takashi Oikawa |
-| [02_REQUIREMENTS_DEFINITION.md](docs/design/02_REQUIREMENTS_DEFINITION.md) | Requirements Definition（要件定義） | Draft | 0.2 | Takashi Oikawa |
-| [03_DATA_AND_SECURITY_DESIGN.md](docs/design/03_DATA_AND_SECURITY_DESIGN.md) | Data and Security Design（データ・セキュリティ設計） | Draft | 0.2 | Takashi Oikawa |
-| [04_UI_AND_FLOW_DESIGN.md](docs/design/04_UI_AND_FLOW_DESIGN.md) | UI and Flow Design（UI・フロー設計） | Draft | 0.2 | Takashi Oikawa |
-| [05_ARCHITECTURE_DESIGN.md](docs/design/05_ARCHITECTURE_DESIGN.md) | Architecture Design（アーキテクチャ設計） | Draft | 0.2 | Takashi Oikawa |
-| [06_OPERATION_AND_HANDOFF.md](docs/design/06_OPERATION_AND_HANDOFF.md) | Operation and Handoff Design（運用・詳細設計引き継ぎ） | Draft | 0.2 | Takashi Oikawa |
+| [01_REQUEST_DEFINITION.md](docs/design/01_REQUEST_DEFINITION.md) | Request Definition（要求定義） | Draft | 0.3 | Takashi Oikawa |
+| [02_REQUIREMENTS_DEFINITION.md](docs/design/02_REQUIREMENTS_DEFINITION.md) | Requirements Definition（要件定義） | Draft | 0.3 | Takashi Oikawa |
+| [03_DATA_AND_SECURITY_DESIGN.md](docs/design/03_DATA_AND_SECURITY_DESIGN.md) | Data and Security Design（データ・セキュリティ設計） | Draft | 0.3 | Takashi Oikawa |
+| [04_UI_AND_FLOW_DESIGN.md](docs/design/04_UI_AND_FLOW_DESIGN.md) | UI and Flow Design（UI・フロー設計） | Draft | 0.3 | Takashi Oikawa |
+| [05_ARCHITECTURE_DESIGN.md](docs/design/05_ARCHITECTURE_DESIGN.md) | Architecture Design（アーキテクチャ設計） | Draft | 0.3 | Takashi Oikawa |
+| [06_OPERATION_AND_HANDOFF.md](docs/design/06_OPERATION_AND_HANDOFF.md) | Operation and Handoff Design（運用・詳細設計引き継ぎ） | Draft | 0.3 | Takashi Oikawa |
 
-各文書は Draft ステータスであり、**プロトタイプ検証段階**の設計記録として位置づける。開発段階の分類は §1 Development Stage Classification を参照する。
+各文書は Draft ステータスであり、**プロトタイプ検証段階**の設計記録として位置づける。開発段階の分類は §1 Development Stage Classification を参照する。作業ルールは [SKILL.md](SKILL.md) を参照する。今回の設計レビュー記録は [docs/reviews/2026-09-06_SCORE_READER_DESIGN_REVIEW.md](docs/reviews/2026-09-06_SCORE_READER_DESIGN_REVIEW.md) を参照する。
 
 ---
 
@@ -124,9 +117,17 @@ python3 verify_score.py ../tests/<file>.musicxml --json
 
 **ライセンス・著作権（概要）**
 
-- score-reader のライセンスは **CC BY-NC-SA 4.0**（`LICENSE` 参照）
-- 著作権保護楽譜を公開リポジトリへ登録しない。テスト素材（`prototype/tests/`）はパブリックドメインに限定
-- 詳細は [03_DATA_AND_SECURITY_DESIGN.md](docs/design/03_DATA_AND_SECURITY_DESIGN.md)
+現在の分離構成を正とする。
+
+| 対象 | ライセンス | 参照 |
+|---|---|---|
+| ソースコード | MIT License | [LICENSE-CODE](LICENSE-CODE) |
+| 設計文書・README・作業ルール | CC BY-NC-SA 4.0 | [LICENSE-DOCS](LICENSE-DOCS) |
+| 旧ライセンス記録 | 移行前の単一ライセンス記録として残置 | [LICENSE](LICENSE) |
+| テスト素材（`prototype/tests/`） | 上記2区分のいずれにも自動的に含めない。由来と個別利用条件の確認を要する | [NOTICE](NOTICE) / [03_DATA_AND_SECURITY_DESIGN.md](docs/design/03_DATA_AND_SECURITY_DESIGN.md) |
+
+- テスト素材は、楽曲の権利、MusicXML エンコーディングの権利、加工・再配布条件を分けて確認する
+- 詳細は [03_DATA_AND_SECURITY_DESIGN.md](docs/design/03_DATA_AND_SECURITY_DESIGN.md) および [NOTICE](NOTICE)
 
 **推奨参照順**
 
@@ -155,8 +156,10 @@ README.md → 01 → 02 → 03 → 04 → 05 → 06
 | `[WARN]` | 要確認の疑いがある箇所を示す出力レベル |
 | `[INFO]` | 参考情報を示す出力レベル |
 | 確認対象データ | OMR 出力 MusicXML の位置づけ。「正解データ」ではなく人間が確認すべきデータ |
-| パブリックドメイン | 著作権保護期間が満了または権利放棄された楽譜。テスト素材として使用可能 |
-| CC BY-NC-SA 4.0 | score-reader 本体のライセンス。非商用・継承・帰属の3条件が適用される |
+| パブリックドメイン | 著作権保護期間の満了または権利放棄により、楽曲・作曲物として自由利用できる状態を指すことがある。MusicXML エンコーディングの権利・再配布条件とは別であり、テスト素材への自動適用はしない |
+| MIT License | ソースコード（`LICENSE-CODE`）に適用するライセンス |
+| CC BY-NC-SA 4.0 | 設計文書・README・作業ルール（`LICENSE-DOCS`）に適用するライセンス。非商用・継承・帰属の3条件が適用される |
+| LICENSE | 旧ライセンス記録。現行の適用ライセンスそのものではない |
 
 ---
 
@@ -175,3 +178,5 @@ README.md → 01 → 02 → 03 → 04 → 05 → 06
 |---|---|---|---|
 | 0.1 | 2026-06-09 | 初版作成 | Takashi Oikawa |
 | 0.2 | 2026-06-28 | 設計書群正本記入・Development Stage Classification 追加・開発段階分類表記統一・将来検討事項表記統一・Document Info 日付統一 | Takashi Oikawa |
+| 0.3.3 | 2026-06-28 | Document Info の Version を 0.3.3 とした。正本構造の修正と legacy 文書参照の削除（git: 279459c）。solution approach の整合およびトップレベル見出し修正（git: c2d1f52, d936730） | Takashi Oikawa |
+| 0.4.0 | 2026-09-06 | 設計レビュー反映。分離ライセンス構成への修正、成功基準を SC-001〜SC-009 に更新、存在しない標準文書リンクとスクリーンショット運用記述の削除 | Takashi Oikawa |
