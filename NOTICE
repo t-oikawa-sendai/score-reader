@@ -83,26 +83,47 @@ Technical observation (not a rights determination):
 The value of the MusicXML <creator> element is not used here to determine
 the composer or rights holder.
 
-The following matters remain unresolved and are currently relevant because
+The following matters have been determined as of 2026-09-06. They are
+operational decisions, not a legal clearance:
+
+  - Currently published test materials remain public as an interim measure
+    while rights review is in progress
+  - Final publication decision owner: Takashi Oikawa
+  - Decision deadline: 2026-09-06
+  - Until that decision is completed: continue publication, while stating
+    that rights review is in progress and publication eligibility is not
+    legally determined
+
+The following matters remain unresolved. They are currently relevant because
 this repository is already public. They are not deferred solely as
 pre-redistribution checks:
 
   - Rights status of the musical work / composition
-  - Rights and terms of use of the MusicXML encodings
+  - Rights and individual terms of use of the MusicXML encodings
   - Treatment of derivative encodings produced by OMR, conversion, or editing
-  - The scope of redistribution permitted from a public GitHub repository
-  - Governing law and the person responsible for the final publication decision
+  - Legal determination of whether worldwide redistribution from a public
+    GitHub repository is permitted
+  - Governing law
+
+The final decision owner, the decision deadline, the interim measure, and
+the current continue-to-publish policy are not unresolved.
 
 These encodings are not automatically covered by LICENSE-CODE (MIT) or
 LICENSE-DOCS (CC BY-NC-SA 4.0). They are not automatically covered by the
 BSD 3-Clause License of the music21 software.
 
-This NOTICE does not state that legal review is complete, or that the files
-may be published or redistributed.
+This NOTICE does not state that legal review is complete. It does not state
+that MusicXML encodings may be redistributed, that worldwide GitHub
+publication is legally cleared, that public-domain musical works make their
+MusicXML encodings publishable, or that the music21 corpus license alone
+determines redistributability of the current test materials. Current public
+availability is an interim measure, not a legal determination.
 
 Tracking:
 
   - docs/design/03_DATA_AND_SECURITY_DESIGN.md TBD-005
-    (separated rights review and unresolved publication decision)
+    (unresolved: encoding terms, legal redistributability, governing law;
+     determined: decision owner, deadline, interim continue-to-publish)
   - docs/design/05_ARCHITECTURE_DESIGN.md TBD-005
-    (origin, individual terms of use, and redistributability of test materials)
+    (origin, individual terms of use, and legal redistributability of
+     test materials)
