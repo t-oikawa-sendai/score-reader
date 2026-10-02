@@ -1,44 +1,48 @@
 # score-reader
 
-<!-- Document Information（文書情報） -->
+Document Information（文書情報）
 
 | Item（項目） | Value（値） |
 |---|---|
 | Document ID（文書ID） | README-001 |
-| Version（バージョン） | 0.4.7 |
+| Version（バージョン） | 0.4.8 |
 | Status（ステータス） | Draft |
 | Created Date（作成日） | 2026-06-09 |
 | Last Updated（最終更新日） | 2026-10-02 |
 | Owner（管理者） | Takashi Oikawa |
 | Related Documents（関連文書） | SKILL.md / docs/design/01_REQUEST_DEFINITION.md 〜 06_OPERATION_AND_HANDOFF.md |
 
+## 1. Project Overview（プロジェクト概要）
+
 score-reader は、OMR（Optical Music Recognition）が生成した MusicXML の構造的異常や要確認箇所を検出し、人間による原本 PDF との確認範囲を絞り込むための CLI ツールです。
 
 OMR で楽譜 PDF を MusicXML 化し、MuseScore 等で確認・修正する人が、原本との照合に入る前に、機械的に検出できる箇所を先に把握するために使います。
 
+### 1.1 Current Status（現状）
+
 > **Current Status（現状）**: 現行プロトタイプ（`prototype/src/verify_score.py`）はコード凍結中です。本リポジトリでは設計文書の検証・更新を継続しています。
 
-## Background and Issues（背景・課題）
+## 2. Background and Issues（背景・課題）
 
-### Target Users（対象利用者）
+### 2.1 Target Users（対象利用者）
 
 OMR を利用して楽譜 PDF を MusicXML 化し、MuseScore 等で確認・修正する利用者です。
 
-### Current Issues（現在の課題）
+### 2.2 Current Issues（現在の課題）
 
 - OMR 出力は、そのまま完成版 MusicXML として扱えるとは限りません。
 - 音高・音価・声部・記号等が原本譜と一致しているかは、MusicXML だけでは完全には判定できません。
 - 人間が原本 PDF と照合する作業が必要になります。
 
-### Improvement by score-reader（score-readerによる改善）
+### 2.3 Improvement by score-reader（score-readerによる改善）
 
 機械的に検出できる構造的異常や要確認候補を先に抽出し、人間が確認する範囲を絞り込みます。
 
 背景・課題・目的・対象範囲の詳細は [01_REQUEST_DEFINITION.md](docs/design/01_REQUEST_DEFINITION.md) を参照してください。
 
-## Main Features（主な機能）
+## 3. Main Features（主な機能）
 
-### Current Prototype（現行プロトタイプ）
+### 3.1 Current Prototype（現行プロトタイプ）
 
 現在の `prototype/src/verify_score.py` は、単一の MusicXML に対して次を行います。
 
@@ -48,13 +52,13 @@ OMR を利用して楽譜 PDF を MusicXML 化し、MuseScore 等で確認・修
 - 和音音数・パート間小節数の検査
 - テキスト / JSON 出力
 
-### Production Implementation（今後の本実装）
+### 3.2 Production Implementation（今後の本実装）
 
 複数 MusicXML を比較し、人間が確認すべき箇所を絞り込む機能を、本実装として設計しています。現行プロトタイプには未実装です。
 
 機能要件・非機能要件、および本実装の範囲は [02_REQUIREMENTS_DEFINITION.md](docs/design/02_REQUIREMENTS_DEFINITION.md) を参照してください。
 
-## Design and Development Principles（設計・開発上の考え方）
+## 4. Design and Development Principles（設計・開発上の考え方）
 
 score-reader は、検出できることと人間が判断することを分けて設計しています。
 
@@ -71,16 +75,16 @@ score-reader は、検出できることと人間が判断することを分け�
 - [02_REQUIREMENTS_DEFINITION.md](docs/design/02_REQUIREMENTS_DEFINITION.md)
 - [05_ARCHITECTURE_DESIGN.md](docs/design/05_ARCHITECTURE_DESIGN.md)
 
-## Technical Information and Usage（技術情報・使い方）
+## 5. Technical Information and Usage（技術情報・使い方）
 
-### Technology Stack（技術構成）
+### 5.1 Technology Stack（技術構成）
 
 リポジトリ上で確認できる構成は次のとおりです。
 
 - Python
 - music21 `10.3.0`（`prototype/requirements.txt` で固定）
 
-### Execution Method（実行方法）
+### 5.2 Execution Method（実行方法）
 
 リポジトリルートで実行します。
 
@@ -91,7 +95,9 @@ python3 prototype/src/verify_score.py prototype/tests/<file>.musicxml --json
 
 操作フローの詳細は [04_UI_AND_FLOW_DESIGN.md](docs/design/04_UI_AND_FLOW_DESIGN.md) を参照してください。
 
-## Design Documents（設計文書）
+## 6. Documentation and Repository（文書・リポジトリ構成）
+
+### 6.1 Design Documents（設計文書）
 
 詳細仕様の正本は `docs/design/` です。README は入口であり、仕様の再掲ではありません。
 
@@ -105,7 +111,7 @@ python3 prototype/src/verify_score.py prototype/tests/<file>.musicxml --json
 | [06_OPERATION_AND_HANDOFF.md](docs/design/06_OPERATION_AND_HANDOFF.md) | テスト・運用・詳細設計への引き継ぎ |
 | [SKILL.md](SKILL.md) | AI/Cursor が作業するときのルール |
 
-## Repository Structure（リポジトリ構成）
+### 6.2 Repository Structure（リポジトリ構成）
 
 ```text
 score-reader/
@@ -134,7 +140,7 @@ score-reader/
 
 `docs/reviews/` には過去のレビュー記録があります。テスト用 MusicXML は `prototype/tests/` にあります。
 
-## License（ライセンス）
+### 6.3 License（ライセンス）
 
 ライセンス本文は各ファイルが正本です。
 
@@ -145,7 +151,7 @@ score-reader/
 
 権利判断とテスト素材の詳細は [03_DATA_AND_SECURITY_DESIGN.md](docs/design/03_DATA_AND_SECURITY_DESIGN.md) を参照してください。
 
-## AI Usage（AI利用）
+## 7. AI Usage（AI利用）
 
 要求整理、設計、文書更新、レビューの各工程で AI を利用しています。生成結果は Project Owner が確認し、採用する内容を決めています。
 
@@ -158,7 +164,7 @@ score-reader/
 | 最終判断 | Project Owner が確認・承認 |
 ※ README作成に関しては全文Ownerからの指示
 
-## Change History（変更履歴）
+## 8. Change History（変更履歴）
 
 | Version（バージョン） | Date（日付） | Changes（変更内容） | Author（変更者） |
 |---|---|---|---|
@@ -173,3 +179,4 @@ score-reader/
 | 0.4.5 | 2026-09-06 | 日本語表現の修正。設計記録の表現、最大化の位置づけ、原本 PDF 横並び画面の実装対象外の言い回し、読者表記、分離構成の表現を自然な日本語へ統一。Document Info を末尾の折りたたみ領域へ移動。仕様の追加・変更は行っていない | Takashi Oikawa |
 | 0.4.6 | 2026-10-02 | READMEをプロジェクト入口として再構成。主要情報、設計文書への導線、Repository構成、ライセンス、AI利用を整理し、人間向け表示を English（日本語）へ統一。仕様変更なし | Takashi Oikawa |
 | 0.4.7 | 2026-10-02 | AI利用範囲とOwnerの責任範囲を明確化。仕様変更なし | Takashi Oikawa |
+| 0.4.8 | 2026-10-02 | READMEの見出し階層を整理し、大項目・中項目の構造を統一。仕様変更なし | Takashi Oikawa |
