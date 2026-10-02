@@ -4,10 +4,10 @@
 | Item（項目） | Value（値） |
 |---|---|
 | Document ID（文書ID） | UI-001 |
-| Version（バージョン） | 0.3.4 |
+| Version（バージョン） | 0.3.5 |
 | Status（ステータス） | Draft |
 | Created Date（作成日） | 2026-06-09 |
-| Last Updated（最終更新日） | 2026-09-06 |
+| Last Updated（最終更新日） | 2026-10-02 |
 | Owner（管理者） | Takashi Oikawa |
 | Related Documents（関連文書） | README.md / 02_REQUIREMENTS_DEFINITION.md / 03_DATA_AND_SECURITY_DESIGN.md / 05_ARCHITECTURE_DESIGN.md / docs/reviews/2026-09-06_SCORE_READER_DESIGN_REVIEW.md |
 
@@ -30,7 +30,7 @@
 
 本文書は**現行プロトタイプ**における `verify_score.py`（単一 MusicXML 構造検査の検証実装）の CLI 操作フロー・出力確認フロー・人間レビューフローを定義し、実装・運用フェーズの基準とすることを目的とする。
 
-開発段階の分類は `README.md` §1 Development Stage Classification を参照する。現行は CLI である。Web UI は将来検討事項である。本実装確定スコープ（複数 MusicXML 入力、正規化、比較可能性判定、差分比較、差分可視化、比較レポート生成）の CLI フロー詳細は、本文書の Open Issues（TBD-001）で管理する。比較機能の実装可否は確定済みである。最終的な正確性の担保は人間による原本 PDF 照合で行う。本文書の対象読者は、設計者・実装者・利用者・プロジェクトオーナーである。
+開発段階の境界は `01_REQUEST_DEFINITION.md` §2 Development Stage Classification を参照する。現行は CLI である。本実装確定スコープ（`02_REQUIREMENTS_DEFINITION.md` §5.8）の CLI フロー詳細は、本文書の Open Issues（TBD-001）で管理する。比較機能の実装可否は確定済みである。最終的な正確性の担保は人間による原本 PDF 照合で行う。本文書の対象読者は、設計者・実装者・利用者・プロジェクトオーナーである。
 
 ---
 
@@ -53,7 +53,7 @@
 |---|---|
 | GUI 画面設計・ワイヤーフレーム | score-reader は CLI ツールであり、画面を持たない |
 | Web UI・モバイル UI | プロトタイプ検証段階は CLI のみ対象とする |
-| 原本 PDF 横並び画面 | 本リポジトリの対象外。本リポジトリでは設計・実装方針を定義しない。人間が MuseScore 等を使用して原本 PDF と目視照合する既存運用は維持する（`README.md` §1 Development Stage Classification 参照） |
+| 原本PDF横並び画面 | 本リポジトリの対象外。境界は `01_REQUEST_DEFINITION.md` §2 Development Stage Classification を参照する |
 | MusicXML 自動修正 UI | 将来検討事項。score-reader は検査結果の出力のみ |
 | 外部 OMR サービスの操作 UI | score-reader のスコープ外 |
 | 完全自動化フロー（人間確認を省略するフロー） | 設計原則に反する |
@@ -67,7 +67,7 @@
 - 利用者は Python 実行環境・仮想環境のセットアップが完了していること（環境構築手順は `06_OPERATION_AND_HANDOFF.md` に記載）
 - 利用者は MuseScore 等の楽譜編集ソフトを別途用意し、原本 PDF との照合を行う意図があること
 - score-reader の CLI 出力は「確認対象情報」であり、正解として採用しないこと
-- ライセンスは現在の分離構成を正式な構成として扱う。ソースコードは MIT License（`LICENSE-CODE`）、設計文書・README・作業ルールは CC BY-NC-SA 4.0（`LICENSE-DOCS`）。`LICENSE` は旧ライセンス記録として残置する。テスト素材は両区分に自動含めない
+- ライセンス構成の決定記録は `03_DATA_AND_SECURITY_DESIGN.md` TBD-004 を参照する
 
 ---
 
@@ -132,7 +132,7 @@ flowchart TD
 
 ### 5.3 Wireframes and Layout Policy（主要画面のワイヤーフレーム・レイアウト方針）
 
-本文書では対象外。理由: プロトタイプ検証段階は CLI ツールであり、画面・レイアウトを持たない。原本 PDF 横並び画面は本リポジトリの対象外であり、本リポジトリでは設計・実装方針を定義しない。
+本文書では対象外。理由: プロトタイプ検証段階は CLI ツールであり、画面・レイアウトを持たない。原本PDF横並び画面は本リポジトリの対象外である（`01_REQUEST_DEFINITION.md` §2 Development Stage Classification 参照）。
 
 ### 5.4 Operation Flow and User Scenarios（操作フロー・ユーザーシナリオ）
 
@@ -180,7 +180,7 @@ flowchart TD
 
 | ID | Open Issue（未決事項） | Owner（担当者） | Due Date（期限） | Status（ステータス） |
 |---|---|---|---|---|
-| TBD-001 | 本実装確定スコープである複数 MusicXML 比較の CLI フロー（引数設計・出力形式）の詳細化。実装するか自体は確定済み。Web UI は将来検討であり本 TBD の対象外。 | Takashi Oikawa | 未定 | Open |
+| TBD-001 | 本実装確定スコープ（`02_REQUIREMENTS_DEFINITION.md` §5.8）の CLI フロー（引数設計・出力形式）の詳細化。実装するか自体は確定済み。Web UI は将来検討であり本 TBD の対象外。 | Takashi Oikawa | 未定 | Open |
 | TBD-002 | `[WARN]` / `[ANOMALY]` の優先度付けフローを設計書として定義するか。 | Takashi Oikawa | 未定 | Open |
 | TBD-003 | 著作権確認チェックリストを正式化・運用化するか。 | Takashi Oikawa | 未定 | Open |
 
@@ -209,3 +209,4 @@ JSON エラー形式は `02_REQUIREMENTS_DEFINITION.md` §5.7 FUT-002 で未確�
 | 0.3.2 | 2026-09-06 | 文書表現の整理。CLI 現行・Web UI 将来検討・複数 MusicXML 比較の本実装確定を維持。仕様の追加・変更は行っていない | Takashi Oikawa |
 | 0.3.3 | 2026-09-06 | 原本 PDF 横並び画面を将来検討事項から外し、本リポジトリでは設計・実装方針を定義しない対象へ変更。人間が MuseScore 等で原本 PDF と目視照合する既存運用は維持する | Takashi Oikawa |
 | 0.3.4 | 2026-09-06 | 日本語表現の明確化。仕様・設計判断の変更なし | Takashi Oikawa |
+| 0.3.5 | 2026-10-02 | 文書間重複を整理し、正本参照へ統一。仕様変更なし | Takashi Oikawa |

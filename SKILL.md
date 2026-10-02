@@ -12,15 +12,16 @@
 
 ## 2. 正本となる設計文書
 
-正本:
+設計仕様の正本:
 
-- [README.md](README.md)（設計Doc群のインデックス・全体方針）
-- [docs/design/01_REQUEST_DEFINITION.md](docs/design/01_REQUEST_DEFINITION.md)
-- [docs/design/02_REQUIREMENTS_DEFINITION.md](docs/design/02_REQUIREMENTS_DEFINITION.md)
-- [docs/design/03_DATA_AND_SECURITY_DESIGN.md](docs/design/03_DATA_AND_SECURITY_DESIGN.md)
-- [docs/design/04_UI_AND_FLOW_DESIGN.md](docs/design/04_UI_AND_FLOW_DESIGN.md)
-- [docs/design/05_ARCHITECTURE_DESIGN.md](docs/design/05_ARCHITECTURE_DESIGN.md)
-- [docs/design/06_OPERATION_AND_HANDOFF.md](docs/design/06_OPERATION_AND_HANDOFF.md)
+- [docs/design/01_REQUEST_DEFINITION.md](docs/design/01_REQUEST_DEFINITION.md)（要求定義。開発段階の境界）
+- [docs/design/02_REQUIREMENTS_DEFINITION.md](docs/design/02_REQUIREMENTS_DEFINITION.md)（要件定義。本実装確定スコープの機能）
+- [docs/design/03_DATA_AND_SECURITY_DESIGN.md](docs/design/03_DATA_AND_SECURITY_DESIGN.md)（データ・セキュリティ設計。テスト素材の権利、ライセンス決定）
+- [docs/design/04_UI_AND_FLOW_DESIGN.md](docs/design/04_UI_AND_FLOW_DESIGN.md)（UI・フロー設計）
+- [docs/design/05_ARCHITECTURE_DESIGN.md](docs/design/05_ARCHITECTURE_DESIGN.md)（アーキテクチャ設計）
+- [docs/design/06_OPERATION_AND_HANDOFF.md](docs/design/06_OPERATION_AND_HANDOFF.md)（運用・引き継ぎ設計）
+
+[README.md](README.md) はリポジトリの入口である。設計仕様の正本ではない。
 
 ## 3. 利用方法
 
@@ -67,10 +68,10 @@ docs/design/06_OPERATION_AND_HANDOFF.md
 | 文書 | 役割 |
 |------|------|
 | `SKILL.md` | 作業ルール、禁止事項、停止条件 |
-| `README.md` | 設計Doc群のインデックス・全体方針（正本） |
-| `docs/design/01_REQUEST_DEFINITION.md` | 要求定義（正本） |
-| `docs/design/02_REQUIREMENTS_DEFINITION.md` | 要件定義（正本） |
-| `docs/design/03_DATA_AND_SECURITY_DESIGN.md` | データ・セキュリティ設計（正本） |
+| `README.md` | リポジトリの入口。設計仕様の正本ではない |
+| `docs/design/01_REQUEST_DEFINITION.md` | 要求定義（正本）。開発段階の境界 |
+| `docs/design/02_REQUIREMENTS_DEFINITION.md` | 要件定義（正本）。本実装確定スコープの機能 |
+| `docs/design/03_DATA_AND_SECURITY_DESIGN.md` | データ・セキュリティ設計（正本）。権利・ライセンス |
 | `docs/design/04_UI_AND_FLOW_DESIGN.md` | UI・フロー設計（正本） |
 | `docs/design/05_ARCHITECTURE_DESIGN.md` | アーキテクチャ設計（正本） |
 | `docs/design/06_OPERATION_AND_HANDOFF.md` | 運用・引き継ぎ設計（正本） |
@@ -97,18 +98,15 @@ docs/design/06_OPERATION_AND_HANDOFF.md
 
 ## 4. プロジェクトの目的
 
+作業上の目的は次のとおりとする。設計上の詳細は正本設計書を確認し、本書だけで補完しない。
+
 - OMR により生成された MusicXML の誤りが混入しやすい箇所を機械的に検査する。
 - 疑わしい箇所、判定不能箇所を黙殺しない。
 - 人間が確認すべき箇所へ優先順位を付ける。
 - アラートがない箇所について、誤認識が存在しないことを保証しない。
 - 最終的な品質保証には、原本 PDF との照合を必要とする。
 
-開発段階の扱いは次のとおりとする。詳細は正本設計文書を優先する。
-
-- 現行プロトタイプ: 単一 MusicXML の構造検査。凍結中。改修しない。
-- 本実装確定スコープ: 複数 MusicXML 入力、正規化、比較可能性判定、差分比較、差分可視化、比較レポート生成。未実装であり、未確定ではない。
-- 将来検討事項: 自動修正、自動統合、Web UI。本実装確定スコープに含めない。
-- 本リポジトリの対象外: 原本 PDF 横並び表示。本リポジトリでは設計・実装方針を定義しない。人間が MuseScore 等を使用して原本 PDF と目視照合する既存運用は維持する。
+開発段階の境界は [docs/design/01_REQUEST_DEFINITION.md](docs/design/01_REQUEST_DEFINITION.md) §2 Development Stage Classification を参照する。本実装確定スコープの機能は [docs/design/02_REQUIREMENTS_DEFINITION.md](docs/design/02_REQUIREMENTS_DEFINITION.md) §5.8 を参照する。
 
 ## 5. 必須遵守事項
 
@@ -165,12 +163,7 @@ prototype/tests/
 
 - API キー、パスワード、トークン、秘密鍵、個人情報を、ソース、ログ、Git 管理対象へ含めない。
 - 著作権保護された譜面を GitHub へ登録しない。
-- 現在公開中のテスト素材は権利確認中である。公開可否の法的確定は未完了である。判断完了までの暫定措置として公開を継続する。詳細は [NOTICE](NOTICE) および [docs/design/03_DATA_AND_SECURITY_DESIGN.md](docs/design/03_DATA_AND_SECURITY_DESIGN.md) を参照する。
-- GitHub 上のテスト素材は、次を分けて確認する。楽曲がパブリックドメインであることだけでは公開可能としない。
-  - 楽曲・作曲物の権利状態
-  - MusicXMLエンコーディングの権利・利用条件
-  - OMR・変換・編集による派生成果物の扱い
-  - GitHub上での公開・再配布可否
+- テスト素材の権利方針・現在の扱い、および未解決事項は [docs/design/03_DATA_AND_SECURITY_DESIGN.md](docs/design/03_DATA_AND_SECURITY_DESIGN.md) §5.4 および TBD-005 を参照する。
 - 外部 OMR サービスへ譜面を送信する場合は、利用規約と著作権条件を確認する。
 - 市販譜由来の中間ファイルの保存場所と管理方法は、詳細設計前に確定する。
 
