@@ -4,29 +4,29 @@ score-reader は、OMR（Optical Music Recognition）が生成した MusicXML �
 
 OMR で楽譜 PDF を MusicXML 化し、MuseScore 等で確認・修正する人が、原本との照合に入る前に、機械的に検出できる箇所を先に把握するために使います。
 
-> **現状**: 現行プロトタイプ（`prototype/src/verify_score.py`）はコード凍結中です。本リポジトリでは設計文書の検証・更新を継続しています。
+> **Current Status（現状）**: 現行プロトタイプ（`prototype/src/verify_score.py`）はコード凍結中です。本リポジトリでは設計文書の検証・更新を継続しています。
 
-## 背景・課題
+## Background and Issues（背景・課題）
 
-### 対象利用者
+### Target Users（対象利用者）
 
 OMR を利用して楽譜 PDF を MusicXML 化し、MuseScore 等で確認・修正する利用者です。
 
-### 現在の課題
+### Current Issues（現在の課題）
 
 - OMR 出力は、そのまま完成版 MusicXML として扱えるとは限りません。
 - 音高・音価・声部・記号等が原本譜と一致しているかは、MusicXML だけでは完全には判定できません。
 - 人間が原本 PDF と照合する作業が必要になります。
 
-### score-reader による改善
+### Improvement by score-reader（score-readerによる改善）
 
 機械的に検出できる構造的異常や要確認候補を先に抽出し、人間が確認する範囲を絞り込みます。
 
 背景・課題・目的・対象範囲の詳細は [01_REQUEST_DEFINITION.md](docs/design/01_REQUEST_DEFINITION.md) を参照してください。
 
-## 主な機能
+## Main Features（主な機能）
 
-### 現行プロトタイプ
+### Current Prototype（現行プロトタイプ）
 
 現在の `prototype/src/verify_score.py` は、単一の MusicXML に対して次を行います。
 
@@ -36,13 +36,13 @@ OMR を利用して楽譜 PDF を MusicXML 化し、MuseScore 等で確認・修
 - 和音音数・パート間小節数の検査
 - テキスト / JSON 出力
 
-### 今後の本実装
+### Production Implementation（今後の本実装）
 
 複数 MusicXML を比較し、人間が確認すべき箇所を絞り込む機能を、本実装として設計しています。現行プロトタイプには未実装です。
 
 機能要件・非機能要件、および本実装の範囲は [02_REQUIREMENTS_DEFINITION.md](docs/design/02_REQUIREMENTS_DEFINITION.md) を参照してください。
 
-## 設計・開発上の考え方
+## Design and Development Principles（設計・開発上の考え方）
 
 score-reader は、検出できることと人間が判断することを分けて設計しています。
 
@@ -59,16 +59,16 @@ score-reader は、検出できることと人間が判断することを分け�
 - [02_REQUIREMENTS_DEFINITION.md](docs/design/02_REQUIREMENTS_DEFINITION.md)
 - [05_ARCHITECTURE_DESIGN.md](docs/design/05_ARCHITECTURE_DESIGN.md)
 
-## 技術情報・使い方
+## Technical Information and Usage（技術情報・使い方）
 
-### 技術構成
+### Technology Stack（技術構成）
 
 リポジトリ上で確認できる構成は次のとおりです。
 
 - Python
 - music21 `10.3.0`（`prototype/requirements.txt` で固定）
 
-### 実行方法
+### Execution Method（実行方法）
 
 リポジトリルートで実行します。
 
@@ -79,11 +79,11 @@ python3 prototype/src/verify_score.py prototype/tests/<file>.musicxml --json
 
 操作フローの詳細は [04_UI_AND_FLOW_DESIGN.md](docs/design/04_UI_AND_FLOW_DESIGN.md) を参照してください。
 
-## 設計文書
+## Design Documents（設計文書）
 
 詳細仕様の正本は `docs/design/` です。README は入口であり、仕様の再掲ではありません。
 
-| 文書 | 内容 |
+| Document（文書） | Description（内容） |
 |---|---|
 | [01_REQUEST_DEFINITION.md](docs/design/01_REQUEST_DEFINITION.md) | 要求定義：背景・課題・目的・対象範囲 |
 | [02_REQUIREMENTS_DEFINITION.md](docs/design/02_REQUIREMENTS_DEFINITION.md) | 要件定義：機能要件・非機能要件 |
@@ -93,7 +93,7 @@ python3 prototype/src/verify_score.py prototype/tests/<file>.musicxml --json
 | [06_OPERATION_AND_HANDOFF.md](docs/design/06_OPERATION_AND_HANDOFF.md) | テスト・運用・詳細設計への引き継ぎ |
 | [SKILL.md](SKILL.md) | AI/Cursor が作業するときのルール |
 
-## リポジトリ構成
+## Repository Structure（リポジトリ構成）
 
 ```text
 score-reader/
@@ -122,7 +122,7 @@ score-reader/
 
 `docs/reviews/` には過去のレビュー記録があります。テスト用 MusicXML は `prototype/tests/` にあります。
 
-## ライセンス
+## License（ライセンス）
 
 ライセンス本文は各ファイルが正本です。
 
@@ -133,11 +133,11 @@ score-reader/
 
 権利判断とテスト素材の詳細は [03_DATA_AND_SECURITY_DESIGN.md](docs/design/03_DATA_AND_SECURITY_DESIGN.md) を参照してください。
 
-## AI 利用
+## AI Usage（AI利用）
 
 要求整理、設計、文書更新、レビューの各工程で AI を利用しています。生成結果は Project Owner が確認し、採用する内容を決めています。
 
-| 工程 | AI 利用 |
+| Phase（工程） | AI Usage（AI利用） |
 |---|---|
 | 要求・要件整理 | AI による整理・論点確認・レビュー支援 |
 | 設計 | ChatGPT による設計整理・実装指示作成 |
