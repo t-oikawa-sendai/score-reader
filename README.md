@@ -1,5 +1,17 @@
 # score-reader
 
+<!-- Document Information（文書情報） -->
+
+| Item（項目） | Value（値） |
+|---|---|
+| Document ID（文書ID） | README-001 |
+| Version（バージョン） | 0.4.6 |
+| Status（ステータス） | Draft |
+| Created Date（作成日） | 2026-06-09 |
+| Last Updated（最終更新日） | 2026-10-02 |
+| Owner（管理者） | Takashi Oikawa |
+| Related Documents（関連文書） | SKILL.md / docs/design/01_REQUEST_DEFINITION.md 〜 06_OPERATION_AND_HANDOFF.md |
+
 score-reader は、OMR（Optical Music Recognition）が生成した MusicXML の構造的異常や要確認箇所を検出し、人間による原本 PDF との確認範囲を絞り込むための CLI ツールです。
 
 OMR で楽譜 PDF を MusicXML 化し、MuseScore 等で確認・修正する人が、原本との照合に入る前に、機械的に検出できる箇所を先に把握するために使います。
@@ -144,3 +156,18 @@ score-reader/
 | 実装・文書更新 | Cursor による編集・検証作業 |
 | レビュー | AI による独立レビューを利用 |
 | 最終判断 | Project Owner が確認・決定 |
+
+## Change History（変更履歴）
+
+| Version（バージョン） | Date（日付） | Changes（変更内容） | Author（変更者） |
+|---|---|---|---|
+| 0.1 | 2026-06-09 | 初版作成 | Takashi Oikawa |
+| 0.2 | 2026-06-28 | 設計書群正本記入・Development Stage Classification 追加・開発段階分類表記統一・将来検討事項表記統一・Document Info 日付統一 | Takashi Oikawa |
+| 0.3.3 | 2026-06-28 | Document Info の Version を 0.3.3 とした。正本構造の修正と legacy 文書参照の削除（git: 279459c）。solution approach の整合およびトップレベル見出し修正（git: c2d1f52, d936730） | Takashi Oikawa |
+| 0.4.0 | 2026-09-06 | 設計レビュー反映。分離ライセンス構成への修正、成功基準を SC-001〜SC-009 に更新、存在しない標準文書リンクとスクリーンショット運用記述の削除 | Takashi Oikawa |
+| 0.4.1 | 2026-09-06 | 設計レビュー差し戻し反映。本実装確定スコープ（複数 MusicXML 比較一式）と現行プロトタイプ・将来検討事項の3区分を統一。Reviewer を GEM_REVIEWER_PERSONA に統一。テスト素材は権利確認中の暫定公開継続として関連文書へ誘導 | Takashi Oikawa |
+| 0.4.2 | 2026-09-06 | 文書表現の整理。設計思想（機械と人間の役割境界）の明示、コード凍結の明記、Glossary の短縮。仕様の追加・変更は行っていない | Takashi Oikawa |
+| 0.4.3 | 2026-09-06 | 横断レビュー反映。実行例をリポジトリルート起点へ統一。権利追跡先と設計文書 Version を整合 | Takashi Oikawa |
+| 0.4.4 | 2026-09-06 | 冒頭へ設計思想・現行位置・基本実行例を全文掲載。原本 PDF 横並び画面を将来検討事項から外し、本リポジトリでは設計・実装方針を定義しない対象へ変更。人間が MuseScore 等で原本 PDF と目視照合する既存運用は維持する | Takashi Oikawa |
+| 0.4.5 | 2026-09-06 | 日本語表現の修正。設計記録の表現、最大化の位置づけ、原本 PDF 横並び画面の実装対象外の言い回し、読者表記、分離構成の表現を自然な日本語へ統一。Document Info を末尾の折りたたみ領域へ移動。仕様の追加・変更は行っていない | Takashi Oikawa |
+| 0.4.6 | 2026-10-02 | READMEをプロジェクト入口として再構成。主要情報、設計文書への導線、Repository構成、ライセンス、AI利用を整理し、人間向け表示を English（日本語）へ統一。仕様変更なし | Takashi Oikawa |
