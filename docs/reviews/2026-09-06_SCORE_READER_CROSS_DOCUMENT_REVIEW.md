@@ -1,6 +1,10 @@
 # score-reader Cross-Document Review Record（2026-09-06）
 
+<details>
+<summary>Document Info（文書情報）</summary>
+
 <!-- Document Info（文書情報） -->
+
 | Item（項目） | Value（値） |
 |---|---|
 | Document ID（文書ID） | REVIEW-SCORE-READER-20260906-002 |
@@ -16,6 +20,8 @@
 | Owner（管理者） | Takashi Oikawa |
 | Reviewer（レビュアー） | GEM_REVIEWER_PERSONA |
 | Related Documents（関連文書） | README.md / SKILL.md / NOTICE / docs/design/01_REQUEST_DEFINITION.md / docs/design/02_REQUIREMENTS_DEFINITION.md / docs/design/03_DATA_AND_SECURITY_DESIGN.md / docs/design/04_UI_AND_FLOW_DESIGN.md / docs/design/05_ARCHITECTURE_DESIGN.md / docs/design/06_OPERATION_AND_HANDOFF.md / docs/reviews/2026-09-06_SCORE_READER_DESIGN_REVIEW.md |
+
+</details>
 
 ---
 

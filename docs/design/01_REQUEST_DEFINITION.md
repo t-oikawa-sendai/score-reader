@@ -1,6 +1,10 @@
 # Request Definition（要求定義）
 
+<details>
+<summary>Document Info（文書情報）</summary>
+
 <!-- Document Info（文書情報） -->
+
 | Item（項目） | Value（値） |
 |---|---|
 | Document ID（文書ID） | REQ-001 |
@@ -10,6 +14,8 @@
 | Last Updated（最終更新日） | 2026-10-02 |
 | Owner（管理者） | Takashi Oikawa |
 | Related Documents（関連文書） | README.md / 02_REQUIREMENTS_DEFINITION.md / docs/reviews/2026-09-06_SCORE_READER_DESIGN_REVIEW.md / docs/reviews/2026-09-06_SCORE_READER_CROSS_DOCUMENT_REVIEW.md |
+
+</details>
 
 ---
 
