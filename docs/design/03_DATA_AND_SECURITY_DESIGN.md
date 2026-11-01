@@ -8,12 +8,12 @@
 | Item（項目） | Value（値） |
 |---|---|
 | Document ID（文書ID） | DATA-001 |
-| Version（バージョン） | 0.3.5 |
+| Version（バージョン） | 0.3.6 |
 | Status（ステータス） | Draft |
 | Created Date（作成日） | 2026-06-09 |
-| Last Updated（最終更新日） | 2026-10-02 |
+| Last Updated（最終更新日） | 2026-11-01 |
 | Owner（管理者） | Takashi Oikawa |
-| Related Documents（関連文書） | README.md / 02_REQUIREMENTS_DEFINITION.md / 05_ARCHITECTURE_DESIGN.md / NOTICE / docs/reviews/2026-09-06_SCORE_READER_DESIGN_REVIEW.md / docs/reviews/2026-09-06_SCORE_READER_CROSS_DOCUMENT_REVIEW.md |
+| Related Documents（関連文書） | [AGENTS.md](../../AGENTS.md) / README.md / 02_REQUIREMENTS_DEFINITION.md / 05_ARCHITECTURE_DESIGN.md / NOTICE / docs/reviews/2026-09-06_SCORE_READER_DESIGN_REVIEW.md / docs/reviews/2026-09-06_SCORE_READER_CROSS_DOCUMENT_REVIEW.md |
 
 </details>
 
@@ -271,3 +271,4 @@ score-reader 自体は外部ネットワーク通信を行わない。入力 Mus
 | 0.3.3 | 2026-09-06 | 横断レビュー反映。公開判断の固定期限を廃止。権利・法務未解決事項の一次追跡先を TBD-005 に統一 | Takashi Oikawa |
 | 0.3.4 | 2026-09-06 | 日本語表現の明確化。仕様・設計判断の変更なし | Takashi Oikawa |
 | 0.3.5 | 2026-10-02 | 文書間重複を整理し、正本参照へ統一。仕様変更なし | Takashi Oikawa |
+| 0.3.6 | 2026-11-01 | 作業ルールの移行先 AGENTS.md を関連文書に追加。仕様・設計判断の変更なし | Work |

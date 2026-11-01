@@ -8,12 +8,12 @@ Document Information（文書情報）
 | Item（項目） | Value（値） |
 |---|---|
 | Document ID（文書ID） | README-001 |
-| Version（バージョン） | 0.4.8 |
+| Version（バージョン） | 0.4.9 |
 | Status（ステータス） | Draft |
 | Created Date（作成日） | 2026-06-09 |
-| Last Updated（最終更新日） | 2026-10-02 |
+| Last Updated（最終更新日） | 2026-11-01 |
 | Owner（管理者） | Takashi Oikawa |
-| Related Documents（関連文書） | SKILL.md / docs/design/01_REQUEST_DEFINITION.md 〜 06_OPERATION_AND_HANDOFF.md |
+| Related Documents（関連文書） | AGENTS.md / docs/design/01_REQUEST_DEFINITION.md 〜 06_OPERATION_AND_HANDOFF.md |
 
 </details>
 
@@ -114,14 +114,15 @@ python3 prototype/src/verify_score.py prototype/tests/<file>.musicxml --json
 | [04_UI_AND_FLOW_DESIGN.md](docs/design/04_UI_AND_FLOW_DESIGN.md) | CLI・操作フロー |
 | [05_ARCHITECTURE_DESIGN.md](docs/design/05_ARCHITECTURE_DESIGN.md) | アーキテクチャ・構成 |
 | [06_OPERATION_AND_HANDOFF.md](docs/design/06_OPERATION_AND_HANDOFF.md) | テスト・運用・詳細設計への引き継ぎ |
-| [SKILL.md](SKILL.md) | AI/Cursor が作業するときのルール |
+| [AGENTS.md](AGENTS.md) | Work 等の AI が作業するときのルール |
 
 ### 6.2 Repository Structure（リポジトリ構成）
 
 ```text
 score-reader/
 ├── README.md
-├── SKILL.md
+├── AGENTS.md
+├── SKILL.md（AGENTS.md への移行案内）
 ├── LICENSE
 ├── LICENSE-CODE
 ├── LICENSE-DOCS
@@ -164,7 +165,7 @@ score-reader/
 |---|---|
 | 要求・要件整理 | Ownerの指示により、ChatGPTが整理・論点確認 |
 | 設計 | 概要設計はOwner、ChatGPT による設計整理・実装指示作成 |
-| 実装・文書更新 | Cursor による編集・検証作業 |
+| 実装・文書更新 | Work による編集・検証作業 |
 | レビュー | AI による独立レビューを利用、Ownerが実機確認検証 |
 | 最終判断 | Project Owner が確認・承認 |
 ※ README作成に関しては全文Ownerからの指示
@@ -185,3 +186,4 @@ score-reader/
 | 0.4.6 | 2026-10-02 | READMEをプロジェクト入口として再構成。主要情報、設計文書への導線、Repository構成、ライセンス、AI利用を整理し、人間向け表示を English（日本語）へ統一。仕様変更なし | Takashi Oikawa |
 | 0.4.7 | 2026-10-02 | AI利用範囲とOwnerの責任範囲を明確化。仕様変更なし | Takashi Oikawa |
 | 0.4.8 | 2026-10-02 | READMEの見出し階層を整理し、大項目・中項目の構造を統一。仕様変更なし | Takashi Oikawa |
+| 0.4.9 | 2026-11-01 | 作業ルールの現行参照を AGENTS.md へ移行し、実装・文書更新担当を Work に更新。旧 SKILL.md は移行案内として保持。仕様変更なし | Work |

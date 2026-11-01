@@ -8,12 +8,12 @@
 | Item（項目） | Value（値） |
 |---|---|
 | Document ID（文書ID） | UI-001 |
-| Version（バージョン） | 0.3.5 |
+| Version（バージョン） | 0.3.6 |
 | Status（ステータス） | Draft |
 | Created Date（作成日） | 2026-06-09 |
-| Last Updated（最終更新日） | 2026-10-02 |
+| Last Updated（最終更新日） | 2026-11-01 |
 | Owner（管理者） | Takashi Oikawa |
-| Related Documents（関連文書） | README.md / 02_REQUIREMENTS_DEFINITION.md / 03_DATA_AND_SECURITY_DESIGN.md / 05_ARCHITECTURE_DESIGN.md / docs/reviews/2026-09-06_SCORE_READER_DESIGN_REVIEW.md |
+| Related Documents（関連文書） | [AGENTS.md](../../AGENTS.md) / README.md / 02_REQUIREMENTS_DEFINITION.md / 03_DATA_AND_SECURITY_DESIGN.md / 05_ARCHITECTURE_DESIGN.md / docs/reviews/2026-09-06_SCORE_READER_DESIGN_REVIEW.md |
 
 </details>
 
@@ -216,3 +216,4 @@ JSON エラー形式は `02_REQUIREMENTS_DEFINITION.md` §5.7 FUT-002 で未確�
 | 0.3.3 | 2026-09-06 | 原本 PDF 横並び画面を将来検討事項から外し、本リポジトリでは設計・実装方針を定義しない対象へ変更。人間が MuseScore 等で原本 PDF と目視照合する既存運用は維持する | Takashi Oikawa |
 | 0.3.4 | 2026-09-06 | 日本語表現の明確化。仕様・設計判断の変更なし | Takashi Oikawa |
 | 0.3.5 | 2026-10-02 | 文書間重複を整理し、正本参照へ統一。仕様変更なし | Takashi Oikawa |
+| 0.3.6 | 2026-11-01 | 作業ルールの移行先 AGENTS.md を関連文書に追加。仕様・設計判断の変更なし | Work |
