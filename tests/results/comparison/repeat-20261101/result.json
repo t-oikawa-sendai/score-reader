@@ -1,0 +1,553 @@
+{
+  "run_id": "repeat-20261101",
+  "created_utc": "2026-11-01T14:06:18.461167+00:00",
+  "platform": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+  "python": "3.14.3 (main, Feb  3 2026, 15:32:20) [Clang 17.0.0 (clang-1700.6.3.2)]",
+  "implementation_commit": "55071569ec865d8e17dfdd6a7edf6177b3206fa4",
+  "dirty": true,
+  "source_state_sha256": "3f5d36ba3c08ae00720e3a19bbaeb0204956001d7d558fec1af7aed1ca951725",
+  "tracked_patch_sha256": "c1e9879cdd63031e878d08e7b8be99c8ca4c7cb3e8f3251254a55e448fbb60db",
+  "untracked_archive_sha256": "17fb7d986c98633565b336127ee218b7adc75a0b9a1b267e5b56fcdec89d0ac9",
+  "suite_version": "v003",
+  "suite_sha256": "b43053f43ed93f04ad2d106e9a263af261f743f341737b9c2974057e5012af1e",
+  "stable_sources": true,
+  "boundary_tests_passed": true,
+  "macos_verified": true,
+  "cases": [
+    {
+      "id": "SYN-001",
+      "passed": true,
+      "errors": [],
+      "missing": 0,
+      "unnecessary": 0,
+      "misalignment": 0,
+      "reviews": 0,
+      "reasons": 0,
+      "case_sha256": "a95feed030f7333a9a806a933b471515e6ea2b4d49c3ef44fa1f68e994cd4c25",
+      "expected_sha256": "d6311b9cd7d7dd7f3c05db178ef63072427e4f1f5445506bd27ef48e3aea1e67",
+      "inputs_sha256": [
+        "6a9295a2c4a300b6fa5b0c07777231976bd1be34413cbd95d4a45226b4316a56",
+        "6a9295a2c4a300b6fa5b0c07777231976bd1be34413cbd95d4a45226b4316a56"
+      ]
+    },
+    {
+      "id": "SYN-002",
+      "passed": true,
+      "errors": [],
+      "missing": 0,
+      "unnecessary": 0,
+      "misalignment": 0,
+      "reviews": 1,
+      "reasons": 2,
+      "case_sha256": "1b7d6cf9fa7e58b20345fe7ee30ebd52e15847125a735bd22612f3991e8a2677",
+      "expected_sha256": "5c9db1a5277b23be2b49181aad4336c633fd880ec2d31dfaffa70a0c0e8c2483",
+      "inputs_sha256": [
+        "6a9295a2c4a300b6fa5b0c07777231976bd1be34413cbd95d4a45226b4316a56",
+        "7b92eb306cd85368bb576ef5034b3694baac5c2574e73786d0f5e20fb9194735"
+      ]
+    },
+    {
+      "id": "SYN-003",
+      "passed": true,
+      "errors": [],
+      "missing": 0,
+      "unnecessary": 0,
+      "misalignment": 0,
+      "reviews": 1,
+      "reasons": 1,
+      "case_sha256": "1147a2ab4d4c76f43f4f2f9f71d08c98dbeec1b227e8f7dbfa34f6bf9ef464af",
+      "expected_sha256": "e6b2c3ce2a0e9df5cbd9bbdeb1e7d8364ef3a885f507117e27711035ac635dc2",
+      "inputs_sha256": [
+        "6a9295a2c4a300b6fa5b0c07777231976bd1be34413cbd95d4a45226b4316a56",
+        "4a35c01e59d7f3850fda987663d426594c8b21595ad111f96fa224dc7286ba25"
+      ]
+    },
+    {
+      "id": "SYN-004",
+      "passed": true,
+      "errors": [],
+      "missing": 0,
+      "unnecessary": 0,
+      "misalignment": 0,
+      "reviews": 1,
+      "reasons": 2,
+      "case_sha256": "8c319c8863b0bf0bd8ea2fba6746aa4429bc6725c4b7cb01183da786b9025f8d",
+      "expected_sha256": "fa4a98974a3c43827a397174cb24f1b68695b8da679585e832f9746f82de3071",
+      "inputs_sha256": [
+        "6a9295a2c4a300b6fa5b0c07777231976bd1be34413cbd95d4a45226b4316a56",
+        "700685d8b0c2402e1d2eb2309e09762eb09f7f2598c1752484e5fa3f938173d9"
+      ]
+    },
+    {
+      "id": "SYN-005",
+      "passed": true,
+      "errors": [],
+      "missing": 0,
+      "unnecessary": 0,
+      "misalignment": 0,
+      "reviews": 3,
+      "reasons": 3,
+      "case_sha256": "60fdb34d9bfbb48ddbe41b9d1404e1581572c919d902f335fca1c90b3a7a67bc",
+      "expected_sha256": "91f4b05b1ea066568a3e3909b53ba2f53d34e97909b0bc7027f8936be0b997ba",
+      "inputs_sha256": [
+        "6a9295a2c4a300b6fa5b0c07777231976bd1be34413cbd95d4a45226b4316a56",
+        "81a9a59eb664411ba3abd799c90a7af467becad7b532125fc8023585c33b7b9d"
+      ]
+    },
+    {
+      "id": "SYN-006",
+      "passed": true,
+      "errors": [],
+      "missing": 0,
+      "unnecessary": 0,
+      "misalignment": 0,
+      "reviews": 1,
+      "reasons": 1,
+      "case_sha256": "580ff9c230dd746173145f26f4af7aacd99431f638f341d81880193a3ed83adf",
+      "expected_sha256": "0a7b6e34c4f990063748daebf055e98a8955c94872208477a5fa53f5720b5da3",
+      "inputs_sha256": [
+        "6a9295a2c4a300b6fa5b0c07777231976bd1be34413cbd95d4a45226b4316a56",
+        "5fc4e5c76d060d9db564a19ceeb01f89fc37798698332718e057b93d971fe6f4"
+      ]
+    },
+    {
+      "id": "SYN-007",
+      "passed": true,
+      "errors": [],
+      "missing": 0,
+      "unnecessary": 0,
+      "misalignment": 0,
+      "reviews": 1,
+      "reasons": 1,
+      "case_sha256": "8175c12d4a1cc3b0454c0f411da481df79947a016fab85fcf0f5f03939561ddc",
+      "expected_sha256": "0a7b6e34c4f990063748daebf055e98a8955c94872208477a5fa53f5720b5da3",
+      "inputs_sha256": [
+        "6a9295a2c4a300b6fa5b0c07777231976bd1be34413cbd95d4a45226b4316a56",
+        "c05b83e2a0d8f15afa2b44c218ba40df0d589598875bf711e0b6c2ad64701643"
+      ]
+    },
+    {
+      "id": "SYN-008",
+      "passed": true,
+      "errors": [],
+      "missing": 0,
+      "unnecessary": 0,
+      "misalignment": 0,
+      "reviews": 4,
+      "reasons": 4,
+      "case_sha256": "0d98c9c16c9a406d46b03b0f5150b09d604d9233714e34fd78bc312b010274a9",
+      "expected_sha256": "25a2b0de255c3dac593ecb4d2642f1ec2b4cbedeecea731bde3c65772a51d08a",
+      "inputs_sha256": [
+        "925b1309a4fb2cb8d7ca2b4f0dccba482fbde09f5456cf5ba1cd6dd17cb54c3f",
+        "5cb126e87930c1565a233c6029d3ce3ccde3ba026c2b89c10e19f8b1f1be4026"
+      ]
+    },
+    {
+      "id": "SYN-009",
+      "passed": true,
+      "errors": [],
+      "missing": 0,
+      "unnecessary": 0,
+      "misalignment": 0,
+      "reviews": 0,
+      "reasons": 0,
+      "case_sha256": "942f158ad24f4730d0f15dc359f3948dc9b78b69deeb5e9b806d8a6469981fff",
+      "expected_sha256": "ed4ce4a78bd24de220d65d920bf9232b6dee68db16d9519a563969055cfceb87",
+      "inputs_sha256": [
+        "6a9295a2c4a300b6fa5b0c07777231976bd1be34413cbd95d4a45226b4316a56",
+        "76b84591b688ebf43cb6cd97a4c01dfdba3c74661da0456f1159299327ac384b"
+      ]
+    },
+    {
+      "id": "SYN-010",
+      "passed": true,
+      "errors": [],
+      "missing": 0,
+      "unnecessary": 0,
+      "misalignment": 0,
+      "reviews": 0,
+      "reasons": 0,
+      "case_sha256": "0124fa4b50182fcb492c524323159a1b88d3e5a5a7eac9b62ad9dc7c7dc04380",
+      "expected_sha256": "d6311b9cd7d7dd7f3c05db178ef63072427e4f1f5445506bd27ef48e3aea1e67",
+      "inputs_sha256": [
+        "6a9295a2c4a300b6fa5b0c07777231976bd1be34413cbd95d4a45226b4316a56",
+        "46fb84216c7553e61ca0193413110e3a7975865e43c32abc59f3b034a01fe5fc"
+      ]
+    },
+    {
+      "id": "SYN-011",
+      "passed": true,
+      "errors": [],
+      "missing": 0,
+      "unnecessary": 0,
+      "misalignment": 0,
+      "reviews": 12,
+      "reasons": 12,
+      "case_sha256": "82efda2638bea6b83675cd43b5c0c060c0a69d5a7e9b22e19368d834357e3bfb",
+      "expected_sha256": "1d3213160334412f0ce11f8116f574cd950e04e7143313902a08cf6694bd9849",
+      "inputs_sha256": [
+        "6a9295a2c4a300b6fa5b0c07777231976bd1be34413cbd95d4a45226b4316a56",
+        "0aec97dd5e10a39a8098f13175311806da2cfe705a0705e7ede71d0096681887"
+      ]
+    },
+    {
+      "id": "SYN-012",
+      "passed": true,
+      "errors": [],
+      "missing": 0,
+      "unnecessary": 0,
+      "misalignment": 0,
+      "reviews": 12,
+      "reasons": 12,
+      "case_sha256": "f7d416e673cf1fa9d2443e496b59a43f7a97c0601a1b4e48ae35194c4d61ae92",
+      "expected_sha256": "db91819b0ca79f9f83bf2d8850cae9cb9ea1ae9bdb2b23ab82d88c21aa84ae57",
+      "inputs_sha256": [
+        "6713e149a5cc36d18ad8cd79739fc5fa5ffb533d93ab8d7ddfc3b1cd318e4bc0",
+        "ad26b28e2cdd9f687df244d699e14b117b046b0cfc52d583d274ad3e30a3cf18"
+      ]
+    },
+    {
+      "id": "SYN-013",
+      "passed": true,
+      "errors": [],
+      "missing": 0,
+      "unnecessary": 0,
+      "misalignment": 0,
+      "reviews": 6,
+      "reasons": 8,
+      "case_sha256": "c874d6a935e1b04d45c56972ebac76f5fb605a1cffd9c550d2a3c5e20c757436",
+      "expected_sha256": "4a146f34db1803d788177a268eab5c85d871b9abe6034997bde774a78900807f",
+      "inputs_sha256": [
+        "6a9295a2c4a300b6fa5b0c07777231976bd1be34413cbd95d4a45226b4316a56",
+        "3e0ad1169165fb6e67a8fc5c0c30feb1cb6d5b911449192e306148ce523b0345"
+      ]
+    },
+    {
+      "id": "SYN-014",
+      "passed": true,
+      "errors": [],
+      "missing": 0,
+      "unnecessary": 0,
+      "misalignment": 0,
+      "reviews": 2,
+      "reasons": 2,
+      "case_sha256": "0edede99f484cc0a34d13bd34815a80451d5335568dcf1bad7c71d44efdbfa47",
+      "expected_sha256": "23d8781f90d857a81eafb3e6df7707d998d9e7f87f7cf33cb63617053ceb9e69",
+      "inputs_sha256": [
+        "06b7b66fd03413b2c2cd239a66918800e6200503762519390161edcbc7a34218",
+        "06b7b66fd03413b2c2cd239a66918800e6200503762519390161edcbc7a34218"
+      ]
+    },
+    {
+      "id": "SYN-015",
+      "passed": true,
+      "errors": [],
+      "missing": 0,
+      "unnecessary": 0,
+      "misalignment": 0,
+      "reviews": 1,
+      "reasons": 1,
+      "case_sha256": "9caa2ea7c2a61ec7f65e733f823d85876309a783452e46d899125c2636725590",
+      "expected_sha256": "6e38f5ac83c4ce4be33cc8fb9cb772a96bcf87ec354d326b26fdcac0bafe12fe",
+      "inputs_sha256": [
+        "6a9295a2c4a300b6fa5b0c07777231976bd1be34413cbd95d4a45226b4316a56",
+        "77ba524550158905924eefcbd1b0506f1bdfc33b400df31925fb275df9c426d3"
+      ]
+    }
+  ],
+  "passed": true,
+  "limits": "人工ケースの動作検証。実OMRの精度・時間削減は未評価。",
+  "comparison": {
+    "common_cases": [
+      {
+        "id": "SYN-001",
+        "before": {
+          "passed": true,
+          "missing": 0,
+          "unnecessary": 0,
+          "misalignment": 0,
+          "reviews": 0,
+          "reasons": 0
+        },
+        "after": {
+          "passed": true,
+          "missing": 0,
+          "unnecessary": 0,
+          "misalignment": 0,
+          "reviews": 0,
+          "reasons": 0
+        }
+      },
+      {
+        "id": "SYN-002",
+        "before": {
+          "passed": true,
+          "missing": 0,
+          "unnecessary": 0,
+          "misalignment": 0,
+          "reviews": 1,
+          "reasons": 2
+        },
+        "after": {
+          "passed": true,
+          "missing": 0,
+          "unnecessary": 0,
+          "misalignment": 0,
+          "reviews": 1,
+          "reasons": 2
+        }
+      },
+      {
+        "id": "SYN-003",
+        "before": {
+          "passed": true,
+          "missing": 0,
+          "unnecessary": 0,
+          "misalignment": 0,
+          "reviews": 1,
+          "reasons": 1
+        },
+        "after": {
+          "passed": true,
+          "missing": 0,
+          "unnecessary": 0,
+          "misalignment": 0,
+          "reviews": 1,
+          "reasons": 1
+        }
+      },
+      {
+        "id": "SYN-004",
+        "before": {
+          "passed": true,
+          "missing": 0,
+          "unnecessary": 0,
+          "misalignment": 0,
+          "reviews": 1,
+          "reasons": 2
+        },
+        "after": {
+          "passed": true,
+          "missing": 0,
+          "unnecessary": 0,
+          "misalignment": 0,
+          "reviews": 1,
+          "reasons": 2
+        }
+      },
+      {
+        "id": "SYN-005",
+        "before": {
+          "passed": true,
+          "missing": 0,
+          "unnecessary": 0,
+          "misalignment": 0,
+          "reviews": 3,
+          "reasons": 3
+        },
+        "after": {
+          "passed": true,
+          "missing": 0,
+          "unnecessary": 0,
+          "misalignment": 0,
+          "reviews": 3,
+          "reasons": 3
+        }
+      },
+      {
+        "id": "SYN-006",
+        "before": {
+          "passed": true,
+          "missing": 0,
+          "unnecessary": 0,
+          "misalignment": 0,
+          "reviews": 1,
+          "reasons": 1
+        },
+        "after": {
+          "passed": true,
+          "missing": 0,
+          "unnecessary": 0,
+          "misalignment": 0,
+          "reviews": 1,
+          "reasons": 1
+        }
+      },
+      {
+        "id": "SYN-007",
+        "before": {
+          "passed": true,
+          "missing": 0,
+          "unnecessary": 0,
+          "misalignment": 0,
+          "reviews": 1,
+          "reasons": 1
+        },
+        "after": {
+          "passed": true,
+          "missing": 0,
+          "unnecessary": 0,
+          "misalignment": 0,
+          "reviews": 1,
+          "reasons": 1
+        }
+      },
+      {
+        "id": "SYN-008",
+        "before": {
+          "passed": true,
+          "missing": 0,
+          "unnecessary": 0,
+          "misalignment": 0,
+          "reviews": 4,
+          "reasons": 4
+        },
+        "after": {
+          "passed": true,
+          "missing": 0,
+          "unnecessary": 0,
+          "misalignment": 0,
+          "reviews": 4,
+          "reasons": 4
+        }
+      },
+      {
+        "id": "SYN-009",
+        "before": {
+          "passed": true,
+          "missing": 0,
+          "unnecessary": 0,
+          "misalignment": 0,
+          "reviews": 0,
+          "reasons": 0
+        },
+        "after": {
+          "passed": true,
+          "missing": 0,
+          "unnecessary": 0,
+          "misalignment": 0,
+          "reviews": 0,
+          "reasons": 0
+        }
+      },
+      {
+        "id": "SYN-010",
+        "before": {
+          "passed": true,
+          "missing": 0,
+          "unnecessary": 0,
+          "misalignment": 0,
+          "reviews": 0,
+          "reasons": 0
+        },
+        "after": {
+          "passed": true,
+          "missing": 0,
+          "unnecessary": 0,
+          "misalignment": 0,
+          "reviews": 0,
+          "reasons": 0
+        }
+      },
+      {
+        "id": "SYN-011",
+        "before": {
+          "passed": true,
+          "missing": 0,
+          "unnecessary": 0,
+          "misalignment": 0,
+          "reviews": 12,
+          "reasons": 12
+        },
+        "after": {
+          "passed": true,
+          "missing": 0,
+          "unnecessary": 0,
+          "misalignment": 0,
+          "reviews": 12,
+          "reasons": 12
+        }
+      },
+      {
+        "id": "SYN-012",
+        "before": {
+          "passed": true,
+          "missing": 0,
+          "unnecessary": 0,
+          "misalignment": 0,
+          "reviews": 12,
+          "reasons": 12
+        },
+        "after": {
+          "passed": true,
+          "missing": 0,
+          "unnecessary": 0,
+          "misalignment": 0,
+          "reviews": 12,
+          "reasons": 12
+        }
+      },
+      {
+        "id": "SYN-013",
+        "before": {
+          "passed": true,
+          "missing": 0,
+          "unnecessary": 0,
+          "misalignment": 0,
+          "reviews": 6,
+          "reasons": 8
+        },
+        "after": {
+          "passed": true,
+          "missing": 0,
+          "unnecessary": 0,
+          "misalignment": 0,
+          "reviews": 6,
+          "reasons": 8
+        }
+      },
+      {
+        "id": "SYN-014",
+        "before": {
+          "passed": true,
+          "missing": 0,
+          "unnecessary": 0,
+          "misalignment": 0,
+          "reviews": 2,
+          "reasons": 2
+        },
+        "after": {
+          "passed": true,
+          "missing": 0,
+          "unnecessary": 0,
+          "misalignment": 0,
+          "reviews": 2,
+          "reasons": 2
+        }
+      },
+      {
+        "id": "SYN-015",
+        "before": {
+          "passed": true,
+          "missing": 0,
+          "unnecessary": 0,
+          "misalignment": 0,
+          "reviews": 1,
+          "reasons": 1
+        },
+        "after": {
+          "passed": true,
+          "missing": 0,
+          "unnecessary": 0,
+          "misalignment": 0,
+          "reviews": 1,
+          "reasons": 1
+        }
+      }
+    ],
+    "added_cases": [],
+    "changed_cases": [],
+    "removed_cases": [],
+    "note": "警告数の減少だけで精度向上とは判定しない。人工データのみ。"
+  }
+}

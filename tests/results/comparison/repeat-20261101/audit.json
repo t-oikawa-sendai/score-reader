@@ -1,0 +1,17 @@
+{
+  "protected_file_differences": [],
+  "document_broken_links": [],
+  "old_history_rows_preserved": true,
+  "current_sources_equal_snapshot": true,
+  "restored_source_hashes_match": true,
+  "restored_tests_passed": true,
+  "common_cases_identical": 15,
+  "platform": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+  "prototype_hashes": {
+    "prototype/requirements.txt": "40e12586961f6c0bbae446530c91af732f90e24fdc5177389d11bc1be4280ea6",
+    "prototype/src/verify_score.py": "60afaa24ad10f79b641bac938d6e298e919b515c051a3b7d58d28ea6226e3b31",
+    "prototype/tests/bwv66_6.musicxml": "414d2440d4c0081742a057a6df6c9f1bd8955e73e28925b1e0b45fd5d12accec",
+    "prototype/tests/bwv66_with_clarinet.musicxml": "e8525071ceda0f5d613e4ec17336c2574a64895fc666dbcc184e7279a723ff2d",
+    "prototype/tests/bwv66_with_rehearsal.musicxml": "ceb698d2ec230e8d2c6e7d0ae150e23f0cc1c988da4c014cfc7e51093c9430d2"
+  }
+}

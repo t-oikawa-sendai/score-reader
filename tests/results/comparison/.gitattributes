@@ -1,0 +1,3 @@
+# Stored restoration patches preserve significant unified-diff context spaces.
+# Source files and other verification records retain normal whitespace checks.
+*/tracked.patch -whitespace

@@ -1,0 +1,284 @@
+{
+  "schema_version": "1",
+  "rule_version": "initial-2026-11-01-v1",
+  "status": "partial",
+  "inputs": [
+    {
+      "id": "A",
+      "sha256": "925b1309a4fb2cb8d7ca2b4f0dccba482fbde09f5456cf5ba1cd6dd17cb54c3f"
+    },
+    {
+      "id": "B",
+      "sha256": "5cb126e87930c1565a233c6029d3ce3ccde3ba026c2b89c10e19f8b1f1be4026"
+    }
+  ],
+  "matches": [],
+  "records": [
+    {
+      "id": "R00001",
+      "scope": "part",
+      "locations": [
+        {
+          "input": "A",
+          "part": "P1",
+          "part_order": 1,
+          "measure": null,
+          "measure_number": null,
+          "position": null,
+          "staff": null,
+          "voice": null,
+          "elements": []
+        }
+      ],
+      "axes": {},
+      "reasons": [
+        {
+          "code": "alignment.part",
+          "priority": "P1",
+          "detail": "パートID・名称・譜表構成から一意に対応できない",
+          "a": null,
+          "b": null,
+          "check_original": "原本のパート・譜表・声部と小節の並び、欠落・重複、各入力の対応を確認してください。"
+        }
+      ],
+      "detail": null
+    },
+    {
+      "id": "R00002",
+      "scope": "part",
+      "locations": [
+        {
+          "input": "A",
+          "part": "P2",
+          "part_order": 2,
+          "measure": null,
+          "measure_number": null,
+          "position": null,
+          "staff": null,
+          "voice": null,
+          "elements": []
+        }
+      ],
+      "axes": {},
+      "reasons": [
+        {
+          "code": "alignment.part",
+          "priority": "P1",
+          "detail": "パートID・名称・譜表構成から一意に対応できない",
+          "a": null,
+          "b": null,
+          "check_original": "原本のパート・譜表・声部と小節の並び、欠落・重複、各入力の対応を確認してください。"
+        }
+      ],
+      "detail": null
+    },
+    {
+      "id": "R00003",
+      "scope": "part",
+      "locations": [
+        {
+          "input": "B",
+          "part": "X1",
+          "part_order": 1,
+          "measure": null,
+          "measure_number": null,
+          "position": null,
+          "staff": null,
+          "voice": null,
+          "elements": []
+        }
+      ],
+      "axes": {},
+      "reasons": [
+        {
+          "code": "alignment.part",
+          "priority": "P1",
+          "detail": "対応先パートが一意に成立しない",
+          "a": null,
+          "b": null,
+          "check_original": "原本のパート・譜表・声部と小節の並び、欠落・重複、各入力の対応を確認してください。"
+        }
+      ],
+      "detail": null
+    },
+    {
+      "id": "R00004",
+      "scope": "part",
+      "locations": [
+        {
+          "input": "B",
+          "part": "X2",
+          "part_order": 2,
+          "measure": null,
+          "measure_number": null,
+          "position": null,
+          "staff": null,
+          "voice": null,
+          "elements": []
+        }
+      ],
+      "axes": {},
+      "reasons": [
+        {
+          "code": "alignment.part",
+          "priority": "P1",
+          "detail": "対応先パートが一意に成立しない",
+          "a": null,
+          "b": null,
+          "check_original": "原本のパート・譜表・声部と小節の並び、欠落・重複、各入力の対応を確認してください。"
+        }
+      ],
+      "detail": null
+    }
+  ],
+  "presence": [],
+  "errors": [],
+  "limitations": [
+    "2入力・非圧縮score-partwise。対応可能な各パート1譜表・1声部が初回対象。",
+    "タイ結合・連符・装飾音・多声部・複数小節休符の意味的な同一視は未対応。",
+    "音高・音価・種類・和音・臨時記号表示以外（強弱・歌詞・奏法等）の内容比較は未対応。",
+    "原本PDF位置は不明。原本との正誤判定・自動修正は行わない。",
+    "差分0・比較一致でも完全無欠を保証しない。最終確認には人間による原本PDF照合が必要。",
+    "人工データの動作検証は実OMRの精度・確認時間の効果を証明しない。"
+  ],
+  "reviews": [
+    {
+      "scope": "part",
+      "locations": [
+        {
+          "input": "A",
+          "part": "P1",
+          "part_order": 1,
+          "measure": null,
+          "measure_number": null,
+          "position": null,
+          "staff": null,
+          "voice": null,
+          "elements": []
+        }
+      ],
+      "record_ids": [
+        "R00001"
+      ],
+      "reasons": [
+        {
+          "code": "alignment.part",
+          "priority": "P1",
+          "detail": "パートID・名称・譜表構成から一意に対応できない",
+          "a": null,
+          "b": null,
+          "check_original": "原本のパート・譜表・声部と小節の並び、欠落・重複、各入力の対応を確認してください。"
+        }
+      ],
+      "pdf_position": null,
+      "representative_priority": "P1",
+      "has_unknown_priority": false,
+      "display_priority": "P1"
+    },
+    {
+      "scope": "part",
+      "locations": [
+        {
+          "input": "A",
+          "part": "P2",
+          "part_order": 2,
+          "measure": null,
+          "measure_number": null,
+          "position": null,
+          "staff": null,
+          "voice": null,
+          "elements": []
+        }
+      ],
+      "record_ids": [
+        "R00002"
+      ],
+      "reasons": [
+        {
+          "code": "alignment.part",
+          "priority": "P1",
+          "detail": "パートID・名称・譜表構成から一意に対応できない",
+          "a": null,
+          "b": null,
+          "check_original": "原本のパート・譜表・声部と小節の並び、欠落・重複、各入力の対応を確認してください。"
+        }
+      ],
+      "pdf_position": null,
+      "representative_priority": "P1",
+      "has_unknown_priority": false,
+      "display_priority": "P1"
+    },
+    {
+      "scope": "part",
+      "locations": [
+        {
+          "input": "B",
+          "part": "X1",
+          "part_order": 1,
+          "measure": null,
+          "measure_number": null,
+          "position": null,
+          "staff": null,
+          "voice": null,
+          "elements": []
+        }
+      ],
+      "record_ids": [
+        "R00003"
+      ],
+      "reasons": [
+        {
+          "code": "alignment.part",
+          "priority": "P1",
+          "detail": "対応先パートが一意に成立しない",
+          "a": null,
+          "b": null,
+          "check_original": "原本のパート・譜表・声部と小節の並び、欠落・重複、各入力の対応を確認してください。"
+        }
+      ],
+      "pdf_position": null,
+      "representative_priority": "P1",
+      "has_unknown_priority": false,
+      "display_priority": "P1"
+    },
+    {
+      "scope": "part",
+      "locations": [
+        {
+          "input": "B",
+          "part": "X2",
+          "part_order": 2,
+          "measure": null,
+          "measure_number": null,
+          "position": null,
+          "staff": null,
+          "voice": null,
+          "elements": []
+        }
+      ],
+      "record_ids": [
+        "R00004"
+      ],
+      "reasons": [
+        {
+          "code": "alignment.part",
+          "priority": "P1",
+          "detail": "対応先パートが一意に成立しない",
+          "a": null,
+          "b": null,
+          "check_original": "原本のパート・譜表・声部と小節の並び、欠落・重複、各入力の対応を確認してください。"
+        }
+      ],
+      "pdf_position": null,
+      "representative_priority": "P1",
+      "has_unknown_priority": false,
+      "display_priority": "P1"
+    }
+  ],
+  "summary": {
+    "review_locations": 4,
+    "reasons": 4,
+    "matched_measures": 0,
+    "compared_events": 0
+  }
+}

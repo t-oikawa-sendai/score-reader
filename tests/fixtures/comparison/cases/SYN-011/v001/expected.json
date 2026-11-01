@@ -1,0 +1,214 @@
+{
+  "version": "v001",
+  "approval_date": "2026-11-01",
+  "design": "06_OPERATION_AND_HANDOFF.md §5.8.1",
+  "issues_exact": [
+    {
+      "part": "P1",
+      "measure": 1,
+      "position": "0",
+      "scope": "event",
+      "code": "sounding_pitch.unavailable",
+      "priority": "P2"
+    },
+    {
+      "part": "P1",
+      "measure": 1,
+      "position": "1",
+      "scope": "event",
+      "code": "sounding_pitch.unavailable",
+      "priority": "P2"
+    },
+    {
+      "part": "P1",
+      "measure": 1,
+      "position": "3",
+      "scope": "event",
+      "code": "sounding_pitch.unavailable",
+      "priority": "P2"
+    },
+    {
+      "part": "P1",
+      "measure": 2,
+      "position": "0",
+      "scope": "event",
+      "code": "sounding_pitch.unavailable",
+      "priority": "P2"
+    },
+    {
+      "part": "P1",
+      "measure": 2,
+      "position": "1",
+      "scope": "event",
+      "code": "sounding_pitch.unavailable",
+      "priority": "P2"
+    },
+    {
+      "part": "P1",
+      "measure": 2,
+      "position": "3",
+      "scope": "event",
+      "code": "sounding_pitch.unavailable",
+      "priority": "P2"
+    },
+    {
+      "part": "P1",
+      "measure": 3,
+      "position": "0",
+      "scope": "event",
+      "code": "sounding_pitch.unavailable",
+      "priority": "P2"
+    },
+    {
+      "part": "P1",
+      "measure": 3,
+      "position": "1",
+      "scope": "event",
+      "code": "sounding_pitch.unavailable",
+      "priority": "P2"
+    },
+    {
+      "part": "P1",
+      "measure": 3,
+      "position": "3",
+      "scope": "event",
+      "code": "sounding_pitch.unavailable",
+      "priority": "P2"
+    },
+    {
+      "part": "P1",
+      "measure": 4,
+      "position": "0",
+      "scope": "event",
+      "code": "sounding_pitch.unavailable",
+      "priority": "P2"
+    },
+    {
+      "part": "P1",
+      "measure": 4,
+      "position": "1",
+      "scope": "event",
+      "code": "sounding_pitch.unavailable",
+      "priority": "P2"
+    },
+    {
+      "part": "P1",
+      "measure": 4,
+      "position": "3",
+      "scope": "event",
+      "code": "sounding_pitch.unavailable",
+      "priority": "P2"
+    }
+  ],
+  "matches_exact": [
+    [
+      "P1",
+      1,
+      1
+    ],
+    [
+      "P1",
+      2,
+      2
+    ],
+    [
+      "P1",
+      3,
+      3
+    ],
+    [
+      "P1",
+      4,
+      4
+    ]
+  ],
+  "axes": [
+    {
+      "part": "P1",
+      "measure": 1,
+      "position": "0",
+      "axis": "written_pitch",
+      "status": "equal"
+    },
+    {
+      "part": "P1",
+      "measure": 1,
+      "position": "1",
+      "axis": "written_pitch",
+      "status": "equal"
+    },
+    {
+      "part": "P1",
+      "measure": 1,
+      "position": "3",
+      "axis": "composition",
+      "status": "equal"
+    },
+    {
+      "part": "P1",
+      "measure": 2,
+      "position": "0",
+      "axis": "written_pitch",
+      "status": "equal"
+    },
+    {
+      "part": "P1",
+      "measure": 2,
+      "position": "1",
+      "axis": "written_pitch",
+      "status": "equal"
+    },
+    {
+      "part": "P1",
+      "measure": 2,
+      "position": "3",
+      "axis": "composition",
+      "status": "equal"
+    },
+    {
+      "part": "P1",
+      "measure": 3,
+      "position": "0",
+      "axis": "written_pitch",
+      "status": "equal"
+    },
+    {
+      "part": "P1",
+      "measure": 3,
+      "position": "1",
+      "axis": "written_pitch",
+      "status": "equal"
+    },
+    {
+      "part": "P1",
+      "measure": 3,
+      "position": "3",
+      "axis": "composition",
+      "status": "equal"
+    },
+    {
+      "part": "P1",
+      "measure": 4,
+      "position": "0",
+      "axis": "written_pitch",
+      "status": "equal"
+    },
+    {
+      "part": "P1",
+      "measure": 4,
+      "position": "1",
+      "axis": "written_pitch",
+      "status": "equal"
+    },
+    {
+      "part": "P1",
+      "measure": 4,
+      "position": "3",
+      "axis": "composition",
+      "status": "equal"
+    }
+  ],
+  "presence_required": [],
+  "forbid_extra_reasons": true,
+  "review_groups": 12
+}

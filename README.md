@@ -8,7 +8,7 @@ Document Information（文書情報）
 | Item（項目） | Value（値） |
 |---|---|
 | Document ID（文書ID） | README-001 |
-| Version（バージョン） | 0.4.9 |
+| Version（バージョン） | 0.4.10 |
 | Status（ステータス） | Draft |
 | Created Date（作成日） | 2026-06-09 |
 | Last Updated（最終更新日） | 2026-11-01 |
@@ -25,7 +25,7 @@ OMR で楽譜 PDF を MusicXML 化し、MuseScore 等で確認・修正する人
 
 ### 1.1 Current Status（現状）
 
-> **Current Status（現状）**: 現行プロトタイプ（`prototype/src/verify_score.py`）はコード凍結中です。本リポジトリでは設計文書の検証・更新を継続しています。
+> **Current Status（現状）**: 現行プロトタイプ（`prototype/src/verify_score.py`）はコード凍結中です。別配置の初回2入力比較を実装しました。共通の自作15ケースで動作検証します。実 OMR の精度・確認時間の効果検証は未実施です。
 
 ## 2. Background and Issues（背景・課題）
 
@@ -57,9 +57,9 @@ OMR を利用して楽譜 PDF を MusicXML 化し、MuseScore 等で確認・修
 - 和音音数・パート間小節数の検査
 - テキスト / JSON 出力
 
-### 3.2 Production Implementation（今後の本実装）
+### 3.2 Production Implementation（初回本実装）
 
-複数 MusicXML を比較し、人間が確認すべき箇所を絞り込む機能を、本実装として設計しています。現行プロトタイプには未実装です。
+`src/score_reader/` が2つのMusicXMLの音高・音価・音符/休符・和音を比較し、差分と比較不能箇所を確認順位付きで報告します。移調情報がない場合は実音だけを保留し、記音等の比較結果を残します。
 
 機能要件・非機能要件、および本実装の範囲は [02_REQUIREMENTS_DEFINITION.md](docs/design/02_REQUIREMENTS_DEFINITION.md) を参照してください。
 
@@ -71,7 +71,7 @@ score-reader は、検出できることと人間が判断することを分け�
 - 原本 PDF との最終確認は、人間が行います。
 - 入力 MusicXML を、破壊的に上書きしません。
 - 構造検査で異常が 0 件でも、完全無欠とは判断しません。
-- 単一の OMR 結果だけに依存せず、将来は複数 OMR 結果を比較します。
+- 単一の OMR 結果だけに依存せず、2つのMusicXMLを比較します。
 - 機械が検出できる範囲と、人間の判断が必要な範囲を分離します。
 
 判断の根拠は次を参照してください。
@@ -86,10 +86,10 @@ score-reader は、検出できることと人間が判断することを分け�
 
 リポジトリ上で確認できる構成は次のとおりです。
 
-- Python
-- music21 `10.3.0`（`prototype/requirements.txt` で固定）
+- Python（初回本実装は標準ライブラリのみ。macOS/Python 3.14.3で検証）
+- プロトタイプのみ music21 `10.3.0`（`prototype/requirements.txt` で固定）
 
-### 5.2 Execution Method（実行方法）
+### 5.2 Frozen Prototype（凍結プロトタイプの実行方法）
 
 リポジトリルートで実行します。
 
@@ -99,6 +99,32 @@ python3 prototype/src/verify_score.py prototype/tests/<file>.musicxml --json
 ```
 
 操作フローの詳細は [04_UI_AND_FLOW_DESIGN.md](docs/design/04_UI_AND_FLOW_DESIGN.md) を参照してください。
+
+### 5.3 Two-input Comparison（初回比較の実行方法）
+
+リポジトリルートで実行します。追加ライブラリのインストールは不要です。
+
+```bash
+PYTHONPATH=src python3 -m score_reader tests/fixtures/comparison/bases/BASIC-4M/v001/base.musicxml tests/fixtures/comparison/cases/SYN-002/v001/variant.musicxml
+PYTHONPATH=src python3 -m score_reader tests/fixtures/comparison/bases/BASIC-4M/v001/base.musicxml tests/fixtures/comparison/cases/SYN-002/v001/variant.musicxml --json
+```
+
+対象は非圧縮score-partwiseで、対応可能な各パート1譜表・1声部です。開始位置を分数で比較し、音価の単位差と和音内の順序を正規化します。小節対応が崩れたパートはその位置以降を保留し、他パートは続けます。場所・差分・理由・確認順位・原本で確認する事項と検査限界を出力します。低優先の対象も消しません。
+
+タイ結合・連符・装飾音・多声部等の意味的な同一視は初回対象外です。移調量を楽器名から推測せず、PDFページ位置も補完しません。3入力以上、圧縮MusicXML、score-timewise、DTD/entity宣言は対応しません。結果一致や終了コード0は原本に対する正確性の保証ではありません。
+
+終了コードはレポート作成0（差分・部分的比較不能を含む）、読取不能1、引数不正2。JSONも不能理由を保持します。製品は入力を読んで標準出力へ報告するだけで、入力の変更やファイルの自動保存は行いません。具体的な出力形式は設計03 §5.9・04 §5.8を参照してください。
+
+### 5.4 Repeatable Verification（共通データでの再実行）
+
+```bash
+python3 -m unittest discover -s tests -p 'test_*.py' -v
+python3 tools/verify_comparison.py --suite v003 --output tests/results/comparison/my-run --compare-run tests/results/comparison/initial-20261101/result.json
+```
+
+`my-run`は未作成の名前に変えてください。結果の上書きは拒否します。[共通データ](tests/fixtures/comparison/README.md)と[変更理由](tests/fixtures/comparison/CHANGELOG.md)を版ごとに保存し、旧版を保持します。SYN-012の記載不整合と参照パスを修正した現行スイートはv003で、全15ケースの期待結果はv001のままです。
+
+検証結果にはデータの版・内容識別値、実装commit、未commit差分と未追跡ファイルの復元用アーカイブが付きます。共通ケースと追加・変更ケースを分離し、見逃し・不要な理由・誤対応を照合します。警告件数の減少だけで改善と判断しません。初回基準と同一実装の再実行は再現性確認であり、実OMR効果の実証ではありません。詳細は設計06 §5.9を参照してください。
 
 ## 6. Documentation and Repository（文書・リポジトリ構成）
 
@@ -137,6 +163,10 @@ score-reader/
 │   │   └── 06_OPERATION_AND_HANDOFF.md
 │   └── reviews/
 │       └── 過去のレビュー記録
+├── src/score_reader/（初回本実装）
+├── tests/fixtures/comparison/（版管理する共通自作データ）
+├── tests/results/comparison/（検証結果・実装復元記録）
+├── tools/verify_comparison.py
 └── prototype/
     ├── src/
     │   └── verify_score.py
@@ -144,7 +174,7 @@ score-reader/
     └── requirements.txt
 ```
 
-`docs/reviews/` には過去のレビュー記録があります。テスト用 MusicXML は `prototype/tests/` にあります。
+`docs/reviews/` には過去のレビュー記録があります。凍結プロトタイプの素材は `prototype/tests/`、本実装の共通自作データは `tests/fixtures/comparison/` です。
 
 ### 6.3 License（ライセンス）
 
@@ -187,3 +217,4 @@ score-reader/
 | 0.4.7 | 2026-10-02 | AI利用範囲とOwnerの責任範囲を明確化。仕様変更なし | Takashi Oikawa |
 | 0.4.8 | 2026-10-02 | READMEの見出し階層を整理し、大項目・中項目の構造を統一。仕様変更なし | Takashi Oikawa |
 | 0.4.9 | 2026-11-01 | 作業ルールの現行参照を AGENTS.md へ移行し、実装・文書更新担当を Work に更新。旧 SKILL.md は移行案内として保持。仕様変更なし | Work |
+| 0.4.10 | 2026-11-01 | 初回2入力比較の実行方法・対応範囲・制約、共通データと再現可能な動作検証手順を記載。 | Work |

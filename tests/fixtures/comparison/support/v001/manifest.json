@@ -1,0 +1,16 @@
+{
+  "version": "v001",
+  "files": {
+    "README.md": "e068db7666fa873695c05cfe9990e85f86f691a8469cdfb3cd6b7558e39f1189",
+    "aggregation.json": "e9b3810995eb3a2a01b7bd2c90eac4b10482533908f64d7af4062f8a9d998272",
+    "doctype.xml": "9b4aedd0c07b6fdc40ddbe090c76ba383d7b4b1173d4827a302997758f04087a",
+    "grace.musicxml": "953f1aa27bfd9f797e968b3f2324a399b6575fcf5c9db7509425e323b9dd9d46",
+    "invalid-duration.musicxml": "ea638ca0b2afa129868da20e6060c1cb616a536156dc1c758be7e745b416c743",
+    "invalid.xml": "f90c7382c04e82d09d95fce7992b33dcf403abe526abb535d7978cc7d5180298",
+    "microtone.musicxml": "c2da1d48ab623c1299c892475da1ca177b9dffbb0eeb21b56b55f7e7c6a54ed5",
+    "multivoice.musicxml": "62d2115f189d0a8d3191cd9cd5850e16bfa0914f79c5f27aab1f4b2838d8970d",
+    "other-part-continues.musicxml": "e7401bf49b8b63eb388dbcc7f42c11f26f167954cc9eb054caddb6b834e739c2",
+    "timewise.xml": "eaa504c9552f193d7af6a61250b21e37f271108b55caf1f7118b7c418f74f009",
+    "tuplet.musicxml": "3c231b540e4b86a0bfcaface40bce0881942cccc79120aa2421bb182f2e2d456"
+  }
+}

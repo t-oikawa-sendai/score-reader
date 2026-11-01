@@ -1,0 +1,17 @@
+test_approved_cases (test_comparison.ComparisonTests.test_approved_cases) ... ok
+test_cli_and_text_json_equivalence (test_comparison.ComparisonTests.test_cli_and_text_json_equivalence) ... ok
+test_invalid_xml_and_doctype (test_comparison.ComparisonTests.test_invalid_xml_and_doctype) ... ok
+test_no_forced_multivoice_match (test_comparison.ComparisonTests.test_no_forced_multivoice_match) ... ok
+test_pitch_error_retains_duration_and_kind (test_comparison.ComparisonTests.test_pitch_error_retains_duration_and_kind) ... ok
+test_repeated_execution_and_voice_source (test_comparison.ComparisonTests.test_repeated_execution_and_voice_source) ... ok
+test_run_comparison_separates_changed_added_removed (test_comparison.ComparisonTests.test_run_comparison_separates_changed_added_removed) ... ok
+test_same_name_ids_and_other_part_continue (test_comparison.ComparisonTests.test_same_name_ids_and_other_part_continue) ... ok
+test_support_integrity (test_comparison.ComparisonTests.test_support_integrity) ... ok
+test_time_failure_does_not_hide_following_measure (test_comparison.ComparisonTests.test_time_failure_does_not_hide_following_measure) ... ok
+test_tuplet_and_grace_are_explicit (test_comparison.ComparisonTests.test_tuplet_and_grace_are_explicit) ... ok
+test_unknown_priority_and_scope (test_comparison.ComparisonTests.test_unknown_priority_and_scope) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 1.564s
+
+OK

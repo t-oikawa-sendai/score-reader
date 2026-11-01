@@ -1,0 +1,40 @@
+{
+  "version": "v001",
+  "approval_date": "2026-11-01",
+  "design": "06_OPERATION_AND_HANDOFF.md §5.8.1",
+  "issues_exact": [],
+  "matches_exact": [
+    [
+      "P1",
+      1,
+      1
+    ],
+    [
+      "P1",
+      2,
+      2
+    ],
+    [
+      "P1",
+      3,
+      3
+    ],
+    [
+      "P1",
+      4,
+      4
+    ]
+  ],
+  "axes": [
+    {
+      "part": "P1",
+      "measure": 1,
+      "position": "0",
+      "axis": "kind",
+      "status": "equal"
+    }
+  ],
+  "presence_required": [],
+  "forbid_extra_reasons": true,
+  "review_groups": 0
+}

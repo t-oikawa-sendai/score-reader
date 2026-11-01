@@ -1,0 +1,15 @@
+{
+  "id": "SYN-006",
+  "version": "v001",
+  "base_version": "v001",
+  "expected_version": "v001",
+  "inputs": [
+    "bases/BASIC-4M/v001/base.musicxml",
+    "cases/SYN-006/v001/variant.musicxml"
+  ],
+  "change": "小節2を除去。残存番号1,3,4を保持",
+  "locations": "P1 / staff 1 / voice 1 / 1-based measure occurrence; position in quarter-note units. Cases 8/9 override part/voice as described.",
+  "reason": "2026-11-01 承認の独立した人工差分。既存譜面からの転用なし。",
+  "expected": "expected.json",
+  "status": "approved"
+}

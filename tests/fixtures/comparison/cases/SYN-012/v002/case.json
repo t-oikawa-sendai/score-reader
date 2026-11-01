@@ -1,0 +1,15 @@
+{
+  "id": "SYN-012",
+  "version": "v002",
+  "base_version": "v001",
+  "expected_version": "v001",
+  "inputs": [
+    "bases/TRANSPOSE/v001/base.musicxml",
+    "cases/SYN-012/v002/variant.musicxml"
+  ],
+  "change": "移調-2の基準に対して、B記音を2半音下げ移調0",
+  "locations": "P1 / staff 1 / voice 1 / 1-based measure occurrence; position in quarter-note units. Cases 8/9 override part/voice as described.",
+  "reason": "v001の変種はB♭の臨時記号表示が欠け、調号文脈と不整合だった。設計の意図どおりflatを明示。期待結果v001は変更しない。",
+  "expected": "../../v001/expected.json",
+  "status": "approved"
+}

@@ -1,0 +1,44 @@
+{
+  "version": "v001",
+  "approval_date": "2026-11-01",
+  "design": "06_OPERATION_AND_HANDOFF.md §5.8.1",
+  "issues_exact": [
+    {
+      "part": "P1",
+      "measure": null,
+      "position": null,
+      "scope": "part",
+      "code": "alignment.part",
+      "priority": "P1"
+    },
+    {
+      "part": "P2",
+      "measure": null,
+      "position": null,
+      "scope": "part",
+      "code": "alignment.part",
+      "priority": "P1"
+    },
+    {
+      "part": "X1",
+      "measure": null,
+      "position": null,
+      "scope": "part",
+      "code": "alignment.part",
+      "priority": "P1"
+    },
+    {
+      "part": "X2",
+      "measure": null,
+      "position": null,
+      "scope": "part",
+      "code": "alignment.part",
+      "priority": "P1"
+    }
+  ],
+  "matches_exact": [],
+  "axes": [],
+  "presence_required": [],
+  "forbid_extra_reasons": true,
+  "review_groups": 4
+}

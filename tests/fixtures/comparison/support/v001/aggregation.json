@@ -1,0 +1,33 @@
+{
+  "location": {
+    "input": "A",
+    "part": "P1",
+    "part_order": 1,
+    "measure": 1,
+    "measure_number": "1",
+    "position": "0",
+    "staff": "1",
+    "voice": "1",
+    "elements": [
+      1
+    ]
+  },
+  "cases": [
+    {
+      "priorities": [
+        "P2",
+        "U"
+      ],
+      "representative": "P2",
+      "display": "U"
+    },
+    {
+      "priorities": [
+        "P2",
+        "P1"
+      ],
+      "representative": "P1",
+      "display": "P1"
+    }
+  ]
+}
